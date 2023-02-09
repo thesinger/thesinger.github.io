@@ -22,9 +22,9 @@
 
   <meta name="description" content="Seven times have I despised my soul">
 <meta property="og:type" content="website">
-<meta property="og:title" content="我的电子收纳箱">
+<meta property="og:title" content="nobody的电子收纳箱">
 <meta property="og:url" content="https://thesinger.github.io/tags/%E6%B5%8B%E8%AF%95/index.html">
-<meta property="og:site_name" content="我的电子收纳箱">
+<meta property="og:site_name" content="nobody的电子收纳箱">
 <meta property="og:description" content="Seven times have I despised my soul">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="nobody">
@@ -43,7 +43,7 @@
   };
 </script>
 
-  <title>标签: 测试 | 我的电子收纳箱</title>
+  <title>标签: 测试 | nobody的电子收纳箱</title>
   
 
 
@@ -94,7 +94,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">我的电子收纳箱</h1>
+      <h1 class="site-title">nobody的电子收纳箱</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -312,6 +312,39 @@
   </span>
   <span class="author" itemprop="copyrightHolder">nobody</span>
 </div>
+
+<!--《添加网站运行时间 -->
+<!--<br/>-->
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+
+    function createtime() {
+        var grt = new Date("02/08/2023 12:00:00"); //此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if (String(hnum).length == 1) {
+            hnum = "0" + hnum;
+        }
+        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if (String(mnum).length == 1) {
+            mnum = "0" + mnum;
+        }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if (String(snum).length == 1) {
+            snum = "0" + snum;
+        }
+        document.getElementById("timeDate").innerHTML = " | 本站已安全运行 " + dnum + " 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()", 250);
+</script>
+<!-- 添加网站运行时间》 -->
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
