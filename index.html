@@ -193,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-12 00:05:54" itemprop="dateModified" datetime="2023-02-12T00:05:54+08:00">2023-02-12</time>
+                <time title="修改时间：2023-02-12 00:30:24" itemprop="dateModified" datetime="2023-02-12T00:30:24+08:00">2023-02-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -225,7 +225,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>932</span>
+              <span>1.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -244,7 +244,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Next主题配置文件修改"><a href="#Next主题配置文件修改" class="headerlink" title="Next主题配置文件修改"></a>Next主题配置文件修改</h1><p>参考<a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/DATA-FILES.md">官方的修改意见</a>，不要直接修改next原始配置文件，避免更新主题时文件冲突</p>
+          <h1 id="Next主题配置文件修改"><a href="#Next主题配置文件修改" class="headerlink" title="Next主题配置文件修改"></a>Next主题配置文件修改</h1><p>参考<a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/DATA-FILES.md">官方的修改意见</a>，不要直接修改next原始配置文件，避免更新主题时文件冲突。本博客新建了source&#x2F;_data&#x2F;next.yml，并将next.yml的override字段改为true，之后所有修改都在该文件进行，修改会覆盖原始配置文件。</p>
 <h1 id="图片插入"><a href="#图片插入" class="headerlink" title="图片插入"></a>图片插入</h1><p>不需要下载hexo-asset-image,将hexo<code>_config.yml</code>配置文件中post_asset_folder的值改为true。输入指令<code>hexo new &quot;My New Post&quot;</code>，新建md文件及同名文件夹，将图片放入该文件夹内。文章中插入<code>&#123;% asset_img example.jpg %&#125;</code>,即可正常显示图片。</p>
           <!--noindex-->
             <div class="post-button">
@@ -645,7 +645,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     new Valine({
       el         : '#valine-comments',
       verify     : false,
-      notify     : true,
+      notify     : false,
       appId      : 'vXf6tPpOJHmmCIHQpCxiwQBK-gzGzoHsz',
       appKey     : 'if29cHbMXf80WhuGZU3ENwFL',
       placeholder: "欢迎留下你的评论，支持md语法",
