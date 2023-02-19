@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>能够复原大多数魔方的解法</title>
+    <url>/2023/02/19/cuda_solution/</url>
+    <content><![CDATA[<p>多年前看到过一个视频，讲述了对于结构对称的魔方的通用解法。在此结合原视频和魔方吧里的帖子记录一下以作存档。</p>
+<p>以3阶魔方为例，只要会复原一层，就可以用这个解法复原整个魔方。复原魔方在于将棱块和角块移到正确的位置，并且色向也正确。如果会复原一层的话，那自然可以任意地移动角块棱块的位置，改变其色向。现在可以构造一个公式，用于某个棱块朝向的翻转。翻转后顶层的其他棱角不受影响，下面两层被打乱了。把翻转公式逆着做一遍，魔方又可以复原到原来的状态。<br><img src="/images/cube.png" height="500" width="500" /><br>假如我在翻转完棱块后，将顶层转90度，再逆做翻转公式，那么最后我的顶层将会有两个棱块色向翻转了，而下面二层是复原的。因此，我就可以构造一个翻棱公式，这个公式可以同时将两个棱块的色向改变。同理，我也可以构造出翻角公式，一次性将两个角块的色向翻转。构造完换色向的公式后，也可以构造出换位置的公式，构造一个公式，同时交换两个棱块或者角块的位置。将这个公式做两遍，可以达到3轮换的效果。</p>
+<p>于是，四个公式便可以完成3阶魔方的复原，即棱块转向、角块转向、棱块位置轮换、色块位置轮换。</p>
+<p>上述复原的基础在于结构对称的魔方可以构造出一个正向操作，和对应的逆向操作，使得做完正向再做逆向后，魔方可以恢复到初始转态。用一个公式来描述就是<code>ABA&#39;B&#39;</code>。若魔方经过该公式后状态不变，则称A操作和B操作遵循交律。大多数魔方公式可以基于这个模式进行构造。</p>
+<p>采用这个方法复原魔方，若最后角块位置正确（不管色向），但出现了棱块的2轮换，那么再做一次2轮换，将棱块状态变为3轮换，进行复原。若棱块位置正确，角块出现2轮换也是同理。</p>
+]]></content>
+      <categories>
+        <category>兴趣爱好</category>
+      </categories>
+      <tags>
+        <tag>魔方</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/02/08/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>博客美化</title>
+    <url>/2023/02/09/hexo%E7%BE%8E%E5%8C%96/</url>
+    <content><![CDATA[<h1 id="Next主题配置文件修改"><a href="#Next主题配置文件修改" class="headerlink" title="Next主题配置文件修改"></a>Next主题配置文件修改</h1><p>参考<a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/DATA-FILES.md">官方的修改意见</a>，不要直接修改next原始配置文件，避免更新主题时文件冲突。本博客新建了<code>source/_data/next.yml</code>，并将next.yml的override字段改为true，之后所有修改都在该文件进行，修改会覆盖原始配置文件。</p>
+<h1 id="图片插入"><a href="#图片插入" class="headerlink" title="图片插入"></a>图片插入</h1><p>不需要下载hexo-asset-image,将hexo<code>_config.yml</code>配置文件中post_asset_folder的值改为true。输入指令<code>hexo new &quot;My New Post&quot;</code>，新建md文件及同名文件夹，将图片放入该文件夹内。文章中插入<code>&#123;% asset_img example.jpg %&#125;</code>,即可正常显示图片。</p>
+<p>或者将post_asset_folder改为false，在source目录下新建images文件夹，图片放在这个文件夹内。<code>![](/images/test.png)</code>引用图片，也可以用HTML标签<code>&lt;img src=&quot;/images/test.png&quot; height=&quot;500&quot; width=&quot;500&quot; /&gt;</code>。</p>
+<h1 id="统计网站运行时间-字数-访客"><a href="#统计网站运行时间-字数-访客" class="headerlink" title="统计网站运行时间,字数,访客"></a>统计网站运行时间,字数,访客</h1><h2 id="运行时间"><a href="#运行时间" class="headerlink" title="运行时间"></a>运行时间</h2><p>修改<code>\themes\next\layout\_partials\footer.swig</code>,添加以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!--《添加网站运行时间 --&gt;</span><br><span class="line">&lt;!--&lt;br/&gt;--&gt;</span><br><span class="line">&lt;span id=&quot;timeDate&quot;&gt;载入天数...&lt;/span&gt;&lt;span id=&quot;times&quot;&gt;载入时分秒...&lt;/span&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var now = new Date();</span><br><span class="line"></span><br><span class="line">    function createtime() &#123;</span><br><span class="line">        var grt = new Date(&quot;02/08/2023 18:42:36&quot;); //此处修改你的建站时间或者网站上线时间 </span><br><span class="line">        now.setTime(now.getTime() + 250);</span><br><span class="line">        days = (now - grt) / 1000 / 60 / 60 / 24;</span><br><span class="line">        dnum = Math.floor(days);</span><br><span class="line">        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);</span><br><span class="line">        hnum = Math.floor(hours);</span><br><span class="line">        if (String(hnum).length == 1) &#123;</span><br><span class="line">            hnum = &quot;0&quot; + hnum;</span><br><span class="line">        &#125;</span><br><span class="line">        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);</span><br><span class="line">        mnum = Math.floor(minutes);</span><br><span class="line">        if (String(mnum).length == 1) &#123;</span><br><span class="line">            mnum = &quot;0&quot; + mnum;</span><br><span class="line">        &#125;</span><br><span class="line">        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);</span><br><span class="line">        snum = Math.round(seconds);</span><br><span class="line">        if (String(snum).length == 1) &#123;</span><br><span class="line">            snum = &quot;0&quot; + snum;</span><br><span class="line">        &#125;</span><br><span class="line">        document.getElementById(&quot;timeDate&quot;).innerHTML = &quot; | 本站已安全运行 &quot; + dnum + &quot; 天 &quot;;</span><br><span class="line">        document.getElementById(&quot;times&quot;).innerHTML = hnum + &quot; 小时 &quot; + mnum + &quot; 分 &quot; + snum + &quot; 秒&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    setInterval(&quot;createtime()&quot;, 250);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;!-- 添加网站运行时间》 --&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="字数"><a href="#字数" class="headerlink" title="字数"></a>字数</h2><p>安装插件<code>npm install hexo-symbols-count-time --save</code>,修改hexo<code>_config.yml</code>配置文件中以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">symbols_count_time:</span><br><span class="line">  symbols: true                # 文章字数统计</span><br><span class="line">  time: true                   # 文章阅读时长</span><br><span class="line">  total_symbols: true          # 站点总字数统计</span><br><span class="line">  total_time: true             # 站点总阅读时长</span><br><span class="line">  exclude_codeblock: true     # 排除代码字数统计</span><br></pre></td></tr></table></figure>
+<p>修改主题配置文件<code>_config.yml</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">symbols_count_time:</span><br><span class="line">  separated_meta: true    # 是否另起一行（true的话不和发表时间等同一行）</span><br><span class="line">  item_text_post: true    # 首页文章统计数量前是否显示文字描述（本文字数、阅读时长）</span><br><span class="line">  item_text_total: true   # 页面底部统计数量前是否显示文字描述（站点总字数、站点阅读时长</span><br></pre></td></tr></table></figure>
+<h2 id="访客"><a href="#访客" class="headerlink" title="访客"></a>访客</h2><p>打开主题配置文件即themes\next下的_config.yml，找到busuanzi_count，改为true</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">busuanzi_count:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
+<p>打开\themes\next\layout_partials\footer.swig，添加如下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if theme.busuanzi_count.enable %&#125;</span><br><span class="line">    &lt;script async src=&quot;//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">    &lt;span id=&quot;busuanzi_container_site_pv&quot;&gt;总访问量&lt;span id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;次&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">    &lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;总访客数&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;人&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&lt;!-- 不蒜子计数初始值纠正 --&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(document).ready(function() &#123;</span><br><span class="line"></span><br><span class="line">    var int = setInterval(fixCount, 50);  // 50ms周期检测函数</span><br><span class="line">    var countOffset = 0;  // 初始化首次数据</span><br><span class="line"></span><br><span class="line">    function fixCount() &#123;            </span><br><span class="line">       if (document.getElementById(&quot;busuanzi_container_site_pv&quot;).style.display != &quot;none&quot;)</span><br><span class="line">        &#123;</span><br><span class="line">            $(&quot;#busuanzi_value_site_pv&quot;).html(parseInt($(&quot;#busuanzi_value_site_pv&quot;).html()) + countOffset); </span><br><span class="line">            clearInterval(int);</span><br><span class="line">        &#125;                  </span><br><span class="line">        if ($(&quot;#busuanzi_container_site_pv&quot;).css(&quot;display&quot;) != &quot;none&quot;)</span><br><span class="line">        &#123;</span><br><span class="line">            $(&quot;#busuanzi_value_site_uv&quot;).html(parseInt($(&quot;#busuanzi_value_site_uv&quot;).html()) + countOffset); // 加上初始数据 </span><br><span class="line">            clearInterval(int); // 停止检测</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">       	</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt; </span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+<p>删除themes\next\layout_third-party\statistics\busuanzi-counter.swig文件的<code>&lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</code>,否则访客统计下会多出一条竖线。</p>
+<h1 id="设置网站背景图片"><a href="#设置网站背景图片" class="headerlink" title="设置网站背景图片"></a>设置网站背景图片</h1><p>打开主题配置文件即themes\next下的_config.yml，将 <code>style: source/_data/styles.styl</code> 取消注释：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">custom_file_path:</span><br><span class="line">  style: source/_data/styles.styl</span><br></pre></td></tr></table></figure>
+<p>打开根目录Blog\source创建文件_data\styles.styl，添加以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">      background: url(images/background.png);//自己喜欢的图片地址</span><br><span class="line">      background-size: cover;</span><br><span class="line">      background-repeat: no-repeat;</span><br><span class="line">      background-attachment: fixed;</span><br><span class="line">      background-position: 50% 50%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将图片改名为background.png，保存到\themes\next\source\images文件夹下。</p>
+<h1 id="评论留言"><a href="#评论留言" class="headerlink" title="评论留言"></a>评论留言</h1><p>本博客使用了基于<a href="https://www.leancloud.cn/">LeanCould</a>的Valine评论系统，首先在LeanCloud官网注册账号并创建应用。修改next主题配置文件中Valine部分代码,enable改为true，复制appid和appkey填入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">valine:</span><br><span class="line">  enable: false</span><br><span class="line">  appid: # Your leancloud application appid</span><br><span class="line">  appkey: # Your leancloud application appkey</span><br><span class="line">  notify: false # Mail notifier</span><br><span class="line">  verify: false # Verification code</span><br><span class="line">  placeholder: Just go go # Comment box placeholder</span><br><span class="line">  avatar: mm # Gravatar style</span><br><span class="line">  guest_info: nick,mail,link # Custom comment header</span><br><span class="line">  pageSize: 10 # Pagination size</span><br><span class="line">  language: # Language, available values: en, zh-cn</span><br><span class="line">  visitor: false # Article reading statistic</span><br><span class="line">  comment_count: true # If false, comment count will only be displayed in post page, not in home page</span><br><span class="line">  recordIP: false # Whether to record the commenter IP</span><br><span class="line">  serverURLs: # When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)</span><br><span class="line">  #post_meta_order: 0</span><br></pre></td></tr></table></figure>
+<p>hexo默认在所有页面开启评论，可通过修改md文件中<code>comments: false</code>属性值关闭或开启评论。</p>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>next</tag>
+      </tags>
+  </entry>
+</search>
