@@ -73,6 +73,60 @@
       </tags>
   </entry>
   <entry>
+    <title>tmux常用指令</title>
+    <url>/2023/03/09/tmux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="启动与退出"><a href="#启动与退出" class="headerlink" title="启动与退出"></a>启动与退出</h1><p>输入<code>tmux</code>，进入tmux,按<code>Ctlr + d</code>或者输入<code>exit</code>，退出tmux窗口。退出后该对话将不存在。</p>
+<h1 id="查看tmux窗口历史输出"><a href="#查看tmux窗口历史输出" class="headerlink" title="查看tmux窗口历史输出"></a>查看tmux窗口历史输出</h1><p>先进入tmux会话，然后按<code>Ctlr + b</code>，接着按<code>[</code>，即可进入查看模式，方向键滚动显示。按<code>q</code>退出查看模式。</p>
+<h1 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h1><h2 id="新建会话"><a href="#新建会话" class="headerlink" title="新建会话"></a>新建会话</h2><p>第一个启动的 Tmux 窗口，编号是0，第二个窗口的编号是1，以此类推。以下指令可新建会话并为会话起名。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tmux new -s &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h2 id="分离会话"><a href="#分离会话" class="headerlink" title="分离会话"></a>分离会话</h2><p>在 Tmux 窗口中，按下<code>Ctrl+b d</code>或者输入<code>tmux detach</code>命令，就会将当前会话与窗口分离。命令执行后，就会退出当前 Tmux 窗口，但是会话和里面的进程仍然在后台运行。<br><code>tmux ls</code>命令可以查看当前所有的 Tmux 会话。</p>
+<h2 id="接入会话"><a href="#接入会话" class="headerlink" title="接入会话"></a>接入会话</h2><p><code>tmux attach</code>命令用于重新接入某个已存在的会话。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux attach -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux attach -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="杀死会话"><a href="#杀死会话" class="headerlink" title="杀死会话"></a>杀死会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux kill-session -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux kill-session -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="切换会话"><a href="#切换会话" class="headerlink" title="切换会话"></a>切换会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux switch -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">$ tmux switch -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="重命名会话"><a href="#重命名会话" class="headerlink" title="重命名会话"></a>重命名会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将0号会话重命名</span><br><span class="line">tmux rename-session -t 0 &lt;new-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="https://www.ruanyifeng.com/blog/2019/10/tmux.html">https://www.ruanyifeng.com/blog/2019/10/tmux.html</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>tmux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博物馆--钢琴博物馆</title>
+    <url>/2023/02/26/%E5%8D%9A%E7%89%A9%E9%A6%86-%E9%92%A2%E7%90%B4%E5%8D%9A%E7%89%A9%E9%A6%86/</url>
+    <content><![CDATA[<p>打算记录整理一下以前去过的有特色的一些博物馆。一直以来都很喜欢去博物馆，每每看到藏品，我都不禁会想这件藏品后有着怎么的故事，藏品曾经的主人有什么样的人生。一件物品跨越时空呈现在我眼前，让我觉得很不可思议，想想这中间几百上千年要经历多少事。历经岁月后它被我看到，透过它我觉得我与千百年前的人、时代产生了联系，这对我来说就像奇迹一般，我被这种沧桑感，宏大感所吸引。</p>
+<p>去过的大多中国博物馆，大都千篇一律，从建筑上看基本都是一个风格，展品上来说也都是遵循时间循序进行陈列，从石器时代一直到近现代。感觉缺乏特色没有新意，除了馆里的一些珍品外，可以说博物馆间几乎没有区分度了。我将陆续写写去过的一些与众不同的博物馆，可能以后也会补上一些常规的博物馆，以后再说吧，比较有特色的一定要记录一下。第一篇是重庆的钢琴博物馆，据说是亚洲最大的钢琴博物馆。重庆还有一个小提琴博物馆，可惜当时一直没去，希望以后有机会的话去看看。</p>
+<span id="more"></span>
+<p>馆内收藏了各个时代的钢琴，可以看出从钢琴制作起始到现在的演变。也有一些作曲家的手稿。</p>
+<p>这是鲁宾斯坦演奏过的钢琴，19世纪的琴和现在的已经很像了，比起现在的琴少了一个踏板。<br><img src="\images\piano\Rubinstein.jpg"/></p>
+<p>这是李斯特演奏过的钢琴，能感觉到音箱的形状和琴键布局和现在不太一样。琴键数看起来没有88个。<br><img src="\images\piano\李斯特演奏1.jpg"/><br><img src="\images\piano\李斯特演奏.jpg"/></p>
+<p>这是贝多芬演奏过的。<br><img src="\images\piano\贝多芬演奏.jpg"/></p>
+<p>这是舒曼定制的钢琴，保存状态很好，看起来还蛮新的。<br><img src="\images\piano\舒曼定制.jpg"/></p>
+<p>馆里还有一个中国风的钢琴，我记得似乎是为某位中国小姐定制的。<br><img src="\images\piano\中国风.jpg"/></p>
+<p>这是一台连体钢琴，可以两个人同时演奏，在这之前不晓得还有这种钢琴，好想听听一起演奏是什么效果。<br><img src="\images\piano\双子星.jpg"/></p>
+<p>这台琴带了几个旋钮还是拉栓，看起来有点管风琴那味哈哈哈。<br><img src="\images\piano\带旋钮.jpg"/></p>
+<p>这是一台长的很高的钢琴，不知道为啥这样设计。<br><img src="\images\piano\长得很高.jpg"/></p>
+<p>这个钢琴博物馆里头钢琴很多，大厅和走廊都是琴。<br><img src="\images\piano\大厅.jpg"/><br><img src="\images\piano\走廊.jpg"/></p>
+<p>舒伯特的手稿，魔王的最初版本，与最后出版的不太一样。<br><img src="\images\piano\舒伯特手稿.jpg"/></p>
+]]></content>
+      <categories>
+        <category>博物馆</category>
+      </categories>
+      <tags>
+        <tag>钢琴</tag>
+        <tag>古典音乐</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>跑步训练与提高</title>
     <url>/2023/02/19/%E8%B7%91%E6%AD%A5%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8F%90%E9%AB%98/</url>
     <content><![CDATA[<h1 id="力量训练"><a href="#力量训练" class="headerlink" title="力量训练"></a>力量训练</h1><h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><h3 id="基础核心训练"><a href="#基础核心训练" class="headerlink" title="基础核心训练"></a>基础核心训练</h3><h4 id="核心力量训练"><a href="#核心力量训练" class="headerlink" title="核心力量训练"></a>核心力量训练</h4><p>上腹肌（即六块腹肌中靠上的部分）：卷腹。<br>下腹肌：仰卧举腿、仰卧踩单车。<br>躯干侧前方（腹内外斜肌）：侧卷腹、卷腹摸脚踝、曲腿刮雨器。<br>躯干两侧（腰方肌：控制骨盆）：侧卧起、曲腿侧卧起、侧卧并腿。<br>躯干后方肌肉（竖脊肌：保持躯干挺直，防止腰痛）：仰卧挺身。</p>
@@ -101,32 +155,6 @@
       <tags>
         <tag>跑步</tag>
         <tag>腿部训练</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博物馆--钢琴博物馆</title>
-    <url>/2023/02/26/%E5%8D%9A%E7%89%A9%E9%A6%86-%E9%92%A2%E7%90%B4%E5%8D%9A%E7%89%A9%E9%A6%86/</url>
-    <content><![CDATA[<p>打算记录整理一下以前去过的有特色的一些博物馆。一直以来都很喜欢去博物馆，每每看到藏品，我都不禁会想这件藏品后有着怎么的故事，藏品曾经的主人有什么样的人生。一件物品跨越时空呈现在我眼前，让我觉得很不可思议，想想这中间几百上千年要经历多少事。历经岁月后它被我看到，透过它我觉得我与千百年前的人、时代产生了联系，这对我来说就像奇迹一般，我被这种沧桑感，宏大感所吸引。</p>
-<p>去过的大多中国博物馆，大都千篇一律，从建筑上看基本都是一个风格，展品上来说也都是遵循时间循序进行陈列，从石器时代一直到近现代。感觉缺乏特色没有新意，除了馆里的一些珍品外，可以说博物馆间几乎没有区分度了。我将陆续写写去过的一些与众不同的博物馆，可能以后也会补上一些常规的博物馆，以后再说吧，比较有特色的一定要记录一下。第一篇是重庆的钢琴博物馆，据说是亚洲最大的钢琴博物馆。重庆还有一个小提琴博物馆，可惜当时一直没去，希望以后有机会的话去看看。</p>
-<span id="more"></span>
-<p>馆内收藏了各个时代的钢琴，可以看出从钢琴制作起始到现在的演变。也有一些作曲家的手稿。</p>
-<p>这是鲁宾斯坦演奏过的钢琴，19世纪的琴和现在的已经很像了，比起现在的琴少了一个踏板。<br><img src="\images\piano\Rubinstein.jpg"/></p>
-<p>这是李斯特演奏过的钢琴，能感觉到音箱的形状和琴键布局和现在不太一样。琴键数看起来没有88个。<br><img src="\images\piano\李斯特演奏1.jpg"/><br><img src="\images\piano\李斯特演奏.jpg"/></p>
-<p>这是贝多芬演奏过的。<br><img src="\images\piano\贝多芬演奏.jpg"/></p>
-<p>这是舒曼定制的钢琴，保存状态很好，看起来还蛮新的。<br><img src="\images\piano\舒曼定制.jpg"/></p>
-<p>馆里还有一个中国风的钢琴，我记得似乎是为某位中国小姐定制的。<br><img src="\images\piano\中国风.jpg"/></p>
-<p>这是一台连体钢琴，可以两个人同时演奏，在这之前不晓得还有这种钢琴，好想听听一起演奏是什么效果。<br><img src="\images\piano\双子星.jpg"/></p>
-<p>这台琴带了几个旋钮还是拉栓，看起来有点管风琴那味哈哈哈。<br><img src="\images\piano\带旋钮.jpg"/></p>
-<p>这是一台长的很高的钢琴，不知道为啥这样设计。<br><img src="\images\piano\长得很高.jpg"/></p>
-<p>这个钢琴博物馆里头钢琴很多，大厅和走廊都是琴。<br><img src="\images\piano\大厅.jpg"/><br><img src="\images\piano\走廊.jpg"/></p>
-<p>舒伯特的手稿，魔王的最初版本，与最后出版的不太一样。<br><img src="\images\piano\舒伯特手稿.jpg"/></p>
-]]></content>
-      <categories>
-        <category>博物馆</category>
-      </categories>
-      <tags>
-        <tag>钢琴</tag>
-        <tag>古典音乐</tag>
       </tags>
   </entry>
 </search>
