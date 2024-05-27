@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2023/02/08/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>能够复原大多数魔方的解法</title>
     <url>/2023/02/19/cube_solution/</url>
     <content><![CDATA[<p>多年前看到过一个视频，讲述了对于结构对称的魔方的通用解法。在此结合原视频和魔方吧里的帖子记录一下以作存档。</p>
@@ -35,6 +17,24 @@
       <tags>
         <tag>魔方</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/02/08/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
   <entry>
     <title>博客美化</title>
@@ -73,31 +73,72 @@
       </tags>
   </entry>
   <entry>
-    <title>tmux常用指令</title>
-    <url>/2023/03/09/tmux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="启动与退出"><a href="#启动与退出" class="headerlink" title="启动与退出"></a>启动与退出</h1><p>输入<code>tmux</code>，进入tmux,按<code>Ctlr + d</code>或者输入<code>exit</code>，退出tmux窗口。退出后该对话将不存在。</p>
-<h1 id="查看tmux窗口历史输出"><a href="#查看tmux窗口历史输出" class="headerlink" title="查看tmux窗口历史输出"></a>查看tmux窗口历史输出</h1><p>先进入tmux会话，然后按<code>Ctlr + b</code>，接着按<code>[</code>，即可进入查看模式，方向键滚动显示。按<code>q</code>退出查看模式。</p>
-<h1 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h1><h2 id="新建会话"><a href="#新建会话" class="headerlink" title="新建会话"></a>新建会话</h2><p>第一个启动的 Tmux 窗口，编号是0，第二个窗口的编号是1，以此类推。以下指令可新建会话并为会话起名。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tmux new -s &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+    <title>东北之旅</title>
+    <url>/2023/07/28/%E4%B8%9C%E5%8C%97%E4%B9%8B%E6%97%85/</url>
+    <content><![CDATA[<p>前几天去东北找同学玩了一趟，体验了东北搓澡和烧烤。在沈阳的几天去了大帅府，在商业区逛了逛，还是挺繁华的。不过某些区域也比较破败了。总体生活成本比南方低多了。</p>
 <span id="more"></span>
-<h2 id="分离会话"><a href="#分离会话" class="headerlink" title="分离会话"></a>分离会话</h2><p>在 Tmux 窗口中，按下<code>Ctrl+b d</code>或者输入<code>tmux detach</code>命令，就会将当前会话与窗口分离。命令执行后，就会退出当前 Tmux 窗口，但是会话和里面的进程仍然在后台运行。<br><code>tmux ls</code>命令可以查看当前所有的 Tmux 会话。</p>
-<h2 id="接入会话"><a href="#接入会话" class="headerlink" title="接入会话"></a>接入会话</h2><p><code>tmux attach</code>命令用于重新接入某个已存在的会话。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux attach -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux attach -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+<div>
+  <img src="\images\东北\IMG_6287.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6290.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6291.jpg" style="max-width: 70%; max-height: 70%;">
+</div>
 
-<h2 id="杀死会话"><a href="#杀死会话" class="headerlink" title="杀死会话"></a>杀死会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux kill-session -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux kill-session -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+<p>从沈阳出发先去了延吉，吃了冷面，逛了下朝鲜民俗风情园。这个园子完全被拍照的女士们占领了，延吉那么热的天，她们还穿长袖裙子拍照，真是佩服。摄影师一个个也都是黢黑黢黑的，没少晒。</p>
+<div>
+  <img src="\images\东北\yanji.png" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6298.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6299.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6301.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6302.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6304.jpg" style="max-width: 70%; max-height: 70%;">
+</div>
 
-<h2 id="切换会话"><a href="#切换会话" class="headerlink" title="切换会话"></a>切换会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux switch -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">$ tmux switch -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+<p>延吉吃了午饭和晚饭后就动身前往长白山，山下一个小镇的居民，都把自己家改造成了旅店饭店。第二天上长白山，运气非常好，遇上了晴天，看到了天池，在这前几天和几天后，都是有雨的日子。美中不足的是没有赶上上长白山的第一班大巴，这导致了我们北坡有个景点（谷底森林）没看，其余景点除了天池，看的比较急。 </p>
+<div>
+  <img src="\images\东北\IMG_6321.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6322.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6335.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6336.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6341.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6342.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6349.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6351.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6352.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6355.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6360.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6363.jpg" style="max-width: 70%; max-height: 70%;">
+</div>
 
-<h2 id="重命名会话"><a href="#重命名会话" class="headerlink" title="重命名会话"></a>重命名会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将0号会话重命名</span><br><span class="line">tmux rename-session -t 0 &lt;new-name&gt;</span><br></pre></td></tr></table></figure>
+<p>当天下了长白山就坐火车去大连了，中途在长春换乘，这是比较痛苦的时候。白天爬了山，晚上凌晨2点的火车，在火车站按摩椅上躺了会。晚上9:30左右到的长春，我们在市区吃了饭，顺便走了走，真是非常破旧，完全不像市区的样子，仿佛还在上个世纪。</p>
+<p>我们在大连待了两天，这两天主要吃了不少东西，喜鼎的海胆水饺真是非常不错，很香。还尝试了海星，很难吃，绿色的看着也没有食欲，吃了几口就扔了，晚饭尝试了生腌，生腌螃蟹挺好吃，其他一些海螺鲍鱼比较一般，还吃了凉拌象拔蚌。大连感觉比沈阳啊，长春要新，更加热闹繁华。第二天去了旅顺博物馆，晚上吃了海鲜，吃的真爽，我们两个人点了3到4人套餐，最后没吃完，实在是太多了。另外可能是这些天饮食不规律，没休息好，再加上吃的太多了。我搞的上吐下泻，无福享受更多美食，不过好在旅行也进行了尾声。</p>
+<div>
+  <img src="\images\东北\IMG_6388.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6389.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6396.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6401.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6402.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6404.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6408.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6409.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6410.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6415.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6416.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6417.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6418.jpg" style="max-width: 70%; max-height: 70%;">
+  <img src="\images\东北\IMG_6419.jpg" style="max-width: 70%; max-height: 70%;">
+</div>
 
-<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="https://www.ruanyifeng.com/blog/2019/10/tmux.html">https://www.ruanyifeng.com/blog/2019/10/tmux.html</a></p>
+<p>最后一天回到了沈阳，看了长安三万里，真是很棒，特别是李白将进酒那一段，画面意象俱佳。由于肠胃问题，中午去吃了潮汕牛肉火锅，还不错。晚上去按摩，结束后发现开店的只有火锅烧烤了，于是不得不去吃了烧烤，按理是不应该吃这样的。</p>
+<p>在东北的这一周体验很不错，吃到了很多美食，东北菜就是量大管饱非常适合我哈哈。这次从北坡上的长白山，基本全程坐车，此外还有南坡和西坡两条路线，以后要是有机会再去。大连海鲜不错，比较便宜，不过住宿挺贵。</p>
 ]]></content>
       <categories>
-        <category>指令</category>
+        <category>旅行</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
-        <tag>tmux</tag>
+        <tag>大连</tag>
+        <tag>沈阳</tag>
+        <tag>延吉</tag>
+        <tag>长白山</tag>
       </tags>
   </entry>
   <entry>
@@ -150,6 +191,11 @@
         <tag>澳门</tag>
         <tag>跑步</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>test.md</title>
+    <url>/2024/05/27/test-md/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>澳门路环徒步</title>
@@ -241,72 +287,31 @@
       </tags>
   </entry>
   <entry>
-    <title>东北之旅</title>
-    <url>/2023/07/28/%E4%B8%9C%E5%8C%97%E4%B9%8B%E6%97%85/</url>
-    <content><![CDATA[<p>前几天去东北找同学玩了一趟，体验了东北搓澡和烧烤。在沈阳的几天去了大帅府，在商业区逛了逛，还是挺繁华的。不过某些区域也比较破败了。总体生活成本比南方低多了。</p>
+    <title>tmux常用指令</title>
+    <url>/2023/03/09/tmux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="启动与退出"><a href="#启动与退出" class="headerlink" title="启动与退出"></a>启动与退出</h1><p>输入<code>tmux</code>，进入tmux,按<code>Ctlr + d</code>或者输入<code>exit</code>，退出tmux窗口。退出后该对话将不存在。</p>
+<h1 id="查看tmux窗口历史输出"><a href="#查看tmux窗口历史输出" class="headerlink" title="查看tmux窗口历史输出"></a>查看tmux窗口历史输出</h1><p>先进入tmux会话，然后按<code>Ctlr + b</code>，接着按<code>[</code>，即可进入查看模式，方向键滚动显示。按<code>q</code>退出查看模式。</p>
+<h1 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h1><h2 id="新建会话"><a href="#新建会话" class="headerlink" title="新建会话"></a>新建会话</h2><p>第一个启动的 Tmux 窗口，编号是0，第二个窗口的编号是1，以此类推。以下指令可新建会话并为会话起名。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tmux new -s &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
-<div>
-  <img src="\images\东北\IMG_6287.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6290.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6291.jpg" style="max-width: 70%; max-height: 70%;">
-</div>
+<h2 id="分离会话"><a href="#分离会话" class="headerlink" title="分离会话"></a>分离会话</h2><p>在 Tmux 窗口中，按下<code>Ctrl+b d</code>或者输入<code>tmux detach</code>命令，就会将当前会话与窗口分离。命令执行后，就会退出当前 Tmux 窗口，但是会话和里面的进程仍然在后台运行。<br><code>tmux ls</code>命令可以查看当前所有的 Tmux 会话。</p>
+<h2 id="接入会话"><a href="#接入会话" class="headerlink" title="接入会话"></a>接入会话</h2><p><code>tmux attach</code>命令用于重新接入某个已存在的会话。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux attach -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux attach -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
 
-<p>从沈阳出发先去了延吉，吃了冷面，逛了下朝鲜民俗风情园。这个园子完全被拍照的女士们占领了，延吉那么热的天，她们还穿长袖裙子拍照，真是佩服。摄影师一个个也都是黢黑黢黑的，没少晒。</p>
-<div>
-  <img src="\images\东北\yanji.png" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6298.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6299.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6301.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6302.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6304.jpg" style="max-width: 70%; max-height: 70%;">
-</div>
+<h2 id="杀死会话"><a href="#杀死会话" class="headerlink" title="杀死会话"></a>杀死会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux kill-session -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux kill-session -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
 
-<p>延吉吃了午饭和晚饭后就动身前往长白山，山下一个小镇的居民，都把自己家改造成了旅店饭店。第二天上长白山，运气非常好，遇上了晴天，看到了天池，在这前几天和几天后，都是有雨的日子。美中不足的是没有赶上上长白山的第一班大巴，这导致了我们北坡有个景点（谷底森林）没看，其余景点除了天池，看的比较急。 </p>
-<div>
-  <img src="\images\东北\IMG_6321.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6322.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6335.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6336.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6341.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6342.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6349.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6351.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6352.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6355.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6360.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6363.jpg" style="max-width: 70%; max-height: 70%;">
-</div>
+<h2 id="切换会话"><a href="#切换会话" class="headerlink" title="切换会话"></a>切换会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux switch -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">$ tmux switch -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
 
-<p>当天下了长白山就坐火车去大连了，中途在长春换乘，这是比较痛苦的时候。白天爬了山，晚上凌晨2点的火车，在火车站按摩椅上躺了会。晚上9:30左右到的长春，我们在市区吃了饭，顺便走了走，真是非常破旧，完全不像市区的样子，仿佛还在上个世纪。</p>
-<p>我们在大连待了两天，这两天主要吃了不少东西，喜鼎的海胆水饺真是非常不错，很香。还尝试了海星，很难吃，绿色的看着也没有食欲，吃了几口就扔了，晚饭尝试了生腌，生腌螃蟹挺好吃，其他一些海螺鲍鱼比较一般，还吃了凉拌象拔蚌。大连感觉比沈阳啊，长春要新，更加热闹繁华。第二天去了旅顺博物馆，晚上吃了海鲜，吃的真爽，我们两个人点了3到4人套餐，最后没吃完，实在是太多了。另外可能是这些天饮食不规律，没休息好，再加上吃的太多了。我搞的上吐下泻，无福享受更多美食，不过好在旅行也进行了尾声。</p>
-<div>
-  <img src="\images\东北\IMG_6388.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6389.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6396.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6401.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6402.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6404.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6408.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6409.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6410.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6415.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6416.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6417.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6418.jpg" style="max-width: 70%; max-height: 70%;">
-  <img src="\images\东北\IMG_6419.jpg" style="max-width: 70%; max-height: 70%;">
-</div>
+<h2 id="重命名会话"><a href="#重命名会话" class="headerlink" title="重命名会话"></a>重命名会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将0号会话重命名</span><br><span class="line">tmux rename-session -t 0 &lt;new-name&gt;</span><br></pre></td></tr></table></figure>
 
-<p>最后一天回到了沈阳，看了长安三万里，真是很棒，特别是李白将进酒那一段，画面意象俱佳。由于肠胃问题，中午去吃了潮汕牛肉火锅，还不错。晚上去按摩，结束后发现开店的只有火锅烧烤了，于是不得不去吃了烧烤，按理是不应该吃这样的。</p>
-<p>在东北的这一周体验很不错，吃到了很多美食，东北菜就是量大管饱非常适合我哈哈。这次从北坡上的长白山，基本全程坐车，此外还有南坡和西坡两条路线，以后要是有机会再去。大连海鲜不错，比较便宜，不过住宿挺贵。</p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="https://www.ruanyifeng.com/blog/2019/10/tmux.html">https://www.ruanyifeng.com/blog/2019/10/tmux.html</a></p>
 ]]></content>
       <categories>
-        <category>旅行</category>
+        <category>指令</category>
       </categories>
       <tags>
-        <tag>大连</tag>
-        <tag>沈阳</tag>
-        <tag>延吉</tag>
-        <tag>长白山</tag>
+        <tag>Linux</tag>
+        <tag>tmux</tag>
       </tags>
   </entry>
 </search>
