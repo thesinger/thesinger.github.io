@@ -19,6 +19,24 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2024/09/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>博客美化</title>
     <url>/2023/02/09/hexo%E7%BE%8E%E5%8C%96/</url>
     <content><![CDATA[<h1 id="Next主题配置文件修改"><a href="#Next主题配置文件修改" class="headerlink" title="Next主题配置文件修改"></a>Next主题配置文件修改</h1><p>参考<a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/DATA-FILES.md">官方的修改意见</a>，不要直接修改next原始配置文件，避免更新主题时文件冲突。本博客新建了<code>source/_data/next.yml</code>，并将next.yml的override字段改为true，之后所有修改都在该文件进行，修改会覆盖原始配置文件。</p>
@@ -55,22 +73,141 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2024/09/14/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+    <title>tmux常用指令</title>
+    <url>/2023/03/09/tmux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="启动与退出"><a href="#启动与退出" class="headerlink" title="启动与退出"></a>启动与退出</h1><p>输入<code>tmux</code>，进入tmux,按<code>Ctlr + d</code>或者输入<code>exit</code>，退出tmux窗口。退出后该对话将不存在。</p>
+<h1 id="查看tmux窗口历史输出"><a href="#查看tmux窗口历史输出" class="headerlink" title="查看tmux窗口历史输出"></a>查看tmux窗口历史输出</h1><p>先进入tmux会话，然后按<code>Ctlr + b</code>，接着按<code>[</code>，即可进入查看模式，方向键滚动显示。按<code>q</code>退出查看模式。</p>
+<h1 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h1><h2 id="新建会话"><a href="#新建会话" class="headerlink" title="新建会话"></a>新建会话</h2><p>第一个启动的 Tmux 窗口，编号是0，第二个窗口的编号是1，以此类推。以下指令可新建会话并为会话起名。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tmux new -s &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h2 id="分离会话"><a href="#分离会话" class="headerlink" title="分离会话"></a>分离会话</h2><p>在 Tmux 窗口中，按下<code>Ctrl+b d</code>或者输入<code>tmux detach</code>命令，就会将当前会话与窗口分离。命令执行后，就会退出当前 Tmux 窗口，但是会话和里面的进程仍然在后台运行。<br><code>tmux ls</code>命令可以查看当前所有的 Tmux 会话。</p>
+<h2 id="接入会话"><a href="#接入会话" class="headerlink" title="接入会话"></a>接入会话</h2><p><code>tmux attach</code>命令用于重新接入某个已存在的会话。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux attach -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux attach -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="杀死会话"><a href="#杀死会话" class="headerlink" title="杀死会话"></a>杀死会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux kill-session -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux kill-session -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h2 id="切换会话"><a href="#切换会话" class="headerlink" title="切换会话"></a>切换会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux switch -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">$ tmux switch -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="重命名会话"><a href="#重命名会话" class="headerlink" title="重命名会话"></a>重命名会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将0号会话重命名</span><br><span class="line">tmux rename-session -t 0 &lt;new-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="https://www.ruanyifeng.com/blog/2019/10/tmux.html">https://www.ruanyifeng.com/blog/2019/10/tmux.html</a></p>
 ]]></content>
+      <categories>
+        <category>指令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>tmux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博物馆--钢琴博物馆</title>
+    <url>/2023/02/26/%E5%8D%9A%E7%89%A9%E9%A6%86-%E9%92%A2%E7%90%B4%E5%8D%9A%E7%89%A9%E9%A6%86/</url>
+    <content><![CDATA[<p>打算记录整理一下以前去过的有特色的一些博物馆。一直以来都很喜欢去博物馆，每每看到藏品，我都不禁会想这件藏品后有着怎么的故事，藏品曾经的主人有什么样的人生。一件物品跨越时空呈现在我眼前，让我觉得很不可思议，想想这中间几百上千年要经历多少事。历经岁月后它被我看到，透过它我觉得我与千百年前的人、时代产生了联系，这对我来说就像奇迹一般，我被这种沧桑感，宏大感所吸引。</p>
+<p>去过的大多中国博物馆，大都千篇一律，从建筑上看基本都是一个风格，展品上来说也都是遵循时间循序进行陈列，从石器时代一直到近现代。感觉缺乏特色没有新意，除了馆里的一些珍品外，可以说博物馆间几乎没有区分度了。我将陆续写写去过的一些与众不同的博物馆，可能以后也会补上一些常规的博物馆，以后再说吧，比较有特色的一定要记录一下。第一篇是重庆的钢琴博物馆，据说是亚洲最大的钢琴博物馆。重庆还有一个小提琴博物馆，可惜当时一直没去，希望以后有机会的话去看看。</p>
+<span id="more"></span>
+<p>馆内收藏了各个时代的钢琴，可以看出从钢琴制作起始到现在的演变。也有一些作曲家的手稿。</p>
+<p>这是鲁宾斯坦演奏过的钢琴，19世纪的琴和现在的已经很像了，比起现在的琴少了一个踏板。<br><img src="\images\piano\Rubinstein.jpg"/></p>
+<p>这是李斯特演奏过的钢琴，能感觉到音箱的形状和琴键布局和现在不太一样。琴键数看起来没有88个。<br><img src="\images\piano\李斯特演奏1.jpg"/><br><img src="\images\piano\李斯特演奏.jpg"/></p>
+<p>这是贝多芬演奏过的。<br><img src="\images\piano\贝多芬演奏.jpg"/></p>
+<p>这是舒曼定制的钢琴，保存状态很好，看起来还蛮新的。<br><img src="\images\piano\舒曼定制.jpg"/></p>
+<p>馆里还有一个中国风的钢琴，我记得似乎是为某位中国小姐定制的。<br><img src="\images\piano\中国风.jpg"/></p>
+<p>这是一台连体钢琴，可以两个人同时演奏，在这之前不晓得还有这种钢琴，好想听听一起演奏是什么效果。<br><img src="\images\piano\双子星.jpg"/></p>
+<p>这台琴带了几个旋钮还是拉栓，看起来有点管风琴那味哈哈哈。<br><img src="\images\piano\带旋钮.jpg"/></p>
+<p>这是一台长的很高的钢琴，不知道为啥这样设计。<br><img src="\images\piano\长得很高.jpg"/></p>
+<p>这个钢琴博物馆里头钢琴很多，大厅和走廊都是琴。<br><img src="\images\piano\大厅.jpg"/><br><img src="\images\piano\走廊.jpg"/></p>
+<p>舒伯特的手稿，魔王的最初版本，与最后出版的不太一样。<br><img src="\images\piano\舒伯特手稿.jpg"/></p>
+]]></content>
+      <categories>
+        <category>博物馆</category>
+      </categories>
+      <tags>
+        <tag>钢琴</tag>
+        <tag>古典音乐</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>澳门路环徒步</title>
+    <url>/2023/05/17/%E6%BE%B3%E9%97%A8%E8%B7%AF%E7%8E%AF%E5%BE%92%E6%AD%A5/</url>
+    <content><![CDATA[<p>昨天天气不错，临时起意不去学校了。决定去路环逛逛，一直没有去过，最想去的就是龙爪角，看到别人发，觉得风景不错。</p>
+<p>到了路环，先去安德鲁蛋挞那买了两个蛋挞。路环这个店还是很原始的样子，没有过多装换，没啥游客，几乎都是本地人在购买，店里非常朴素，做蛋挞蛋糕的地方都是开放的，没有隔档。</p>
+<span id="more"></span>
+<div>
+  <img src="\images\路环徒步\IMG_5627.jpg" style="max-width: 50%; max-height: 50%;">
+</div>
+
+<p>安德鲁蛋挞对面是卫生站，一个粉色的房子，看起来很温馨。</p>
+<div>
+  <img src="\images\路环徒步\IMG_5629.jpg" style="max-width: 50%; max-height: 50%;">
+</div>
+
+<p>从卫生站往左边走，可以走到码头，非常近，靠海的那一侧房子都是用瓦楞搭起来的，不少人家往海的方向对房子进行了扩展，在陆地上的只有很小一部分。码头附近还有几家卖海鲜干货的。午餐选了一家海景不错的，也是比较大的一家店。</p>
+<div>
+  <img src="\images\路环徒步\IMG_5636.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5638.jpg" style="max-width: 50%; max-height: 50%;">
+</div>
+
+<p>吃完饭走到十月初五马路，发现这边吃的更多哈哈哈，有一家人特别多，后来搜了路环美食，发现这家叫雅憩，做葡国菜的，中午我从那路过，看外面的桌子都坐满了。十月初五马路很多房子彩色的，很适合拍照。</p>
+<div>
+  <img src="\images\路环徒步\IMG_5645.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5647.jpg" style="max-width: 50%; max-height: 50%;">
+</div>
+
+<p>沿着十月初五马路一直走就走到山上去了，有些路段没有人行道，就只能走马路，不过车辆不多，山上是警察的射击训练营。走在这个山路上，都感觉不到这是澳门，脱离了往日繁华热闹的印象。</p>
+<div>
+  <img src="\images\路环徒步\IMG_5651.jpg" style="max-width: 50%; max-height: 50%;">
+</div>
+
+<p>走到竹湾海滩那边，可以在海里游泳，沙滩上有人躺着晒太阳，澳门冬泳协会也在这，广东这带的冬天那么短，感觉都游不了几天冬泳。从十月初五马路上山到乡村马路后，沿途都有巴士站，不想走路还可以坐巴士，蛮方便的。美中不足的就是有些马路没有人行道，还是不太安全。</p>
+<p>到了龙爪角，有很多人翻出护栏钓鱼。这个海滨步道依托原始的地形修建，几乎没有太多改动，就加了一些石梯，铺筑了路面，在比较平整的地方就没有人工改动，直接走在山体的石头上。有些路段还有山上的泉水留下。大概中途的位置有一个观海亭，风还挺大的。</p>
+<div>
+  <img src="\images\路环徒步\IMG_5658.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5663.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5678.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5682.jpg" style="max-width: 50%; max-height: 50%;">
+</div>
+
+<p>从龙爪角出来就是黑沙海滩，之后我就前往石排湾郊野公园，走的山上的步道，上去的时候倒是挺累人的，好在山不是很高，在山里几乎都是平路。山里岔路很多，很容易走错方向。到了公园，有个地形图，发现这个路环这些山都是连着的。公园养了一些动物，熊猫馆里人挺多，两只熊猫活动空间很大。</p>
+<div>
+  <img src="\images\路环徒步\IMG_5690.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5697.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5698.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5700.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5704.jpg" style="max-width: 50%; max-height: 50%;">
+</div>
+]]></content>
+      <categories>
+        <category>运动</category>
+      </categories>
+      <tags>
+        <tag>澳门</tag>
+        <tag>徒步</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>澳门10公里</title>
+    <url>/2023/03/20/%E6%BE%B3%E9%97%A810%E5%85%AC%E9%87%8C/</url>
+    <content><![CDATA[<p>昨天参加了澳门金沙的10公里比赛，这是我第一次正儿八经地跑10公里，阳康后训练了一个多月，感觉跑的不错，比较轻松地完成了比赛。一些老爷爷老太太真有活力，也很热情。比赛途中我就看到了那位拿假蛋挞的女士，当时好想问她那个能不能吃，笑死。</p>
+<span id="more"></span>
+<div>
+  <img src="\images\macau_10k\1.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\macau_10k\2.jpg" style="max-width: 50%; max-height: 50%;"/>
+  <img src="\images\macau_10k\3.jpg" style="max-width: 50%; max-height: 50%;"/>
+  <img src="\images\macau_10k\4.jpg" style="max-width: 50%; max-height: 50%;"/>
+  <img src="\images\macau_10k\6.jpg" style="max-width: 50%; max-height: 50%;"/>
+  <img src="\images\macau_10k\5.jpg" style="max-width: 50%; max-height: 50%;"/>
+</div>
+
+
+
+]]></content>
+      <categories>
+        <category>运动</category>
+      </categories>
+      <tags>
+        <tag>澳门</tag>
+        <tag>跑步</tag>
+      </tags>
   </entry>
   <entry>
     <title>东北之旅</title>
@@ -139,143 +276,6 @@
         <tag>沈阳</tag>
         <tag>延吉</tag>
         <tag>长白山</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>tmux常用指令</title>
-    <url>/2023/03/09/tmux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="启动与退出"><a href="#启动与退出" class="headerlink" title="启动与退出"></a>启动与退出</h1><p>输入<code>tmux</code>，进入tmux,按<code>Ctlr + d</code>或者输入<code>exit</code>，退出tmux窗口。退出后该对话将不存在。</p>
-<h1 id="查看tmux窗口历史输出"><a href="#查看tmux窗口历史输出" class="headerlink" title="查看tmux窗口历史输出"></a>查看tmux窗口历史输出</h1><p>先进入tmux会话，然后按<code>Ctlr + b</code>，接着按<code>[</code>，即可进入查看模式，方向键滚动显示。按<code>q</code>退出查看模式。</p>
-<h1 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h1><h2 id="新建会话"><a href="#新建会话" class="headerlink" title="新建会话"></a>新建会话</h2><p>第一个启动的 Tmux 窗口，编号是0，第二个窗口的编号是1，以此类推。以下指令可新建会话并为会话起名。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tmux new -s &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<h2 id="分离会话"><a href="#分离会话" class="headerlink" title="分离会话"></a>分离会话</h2><p>在 Tmux 窗口中，按下<code>Ctrl+b d</code>或者输入<code>tmux detach</code>命令，就会将当前会话与窗口分离。命令执行后，就会退出当前 Tmux 窗口，但是会话和里面的进程仍然在后台运行。<br><code>tmux ls</code>命令可以查看当前所有的 Tmux 会话。</p>
-<h2 id="接入会话"><a href="#接入会话" class="headerlink" title="接入会话"></a>接入会话</h2><p><code>tmux attach</code>命令用于重新接入某个已存在的会话。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux attach -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux attach -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="杀死会话"><a href="#杀死会话" class="headerlink" title="杀死会话"></a>杀死会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux kill-session -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux kill-session -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="切换会话"><a href="#切换会话" class="headerlink" title="切换会话"></a>切换会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux switch -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">$ tmux switch -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="重命名会话"><a href="#重命名会话" class="headerlink" title="重命名会话"></a>重命名会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将0号会话重命名</span><br><span class="line">tmux rename-session -t 0 &lt;new-name&gt;</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="https://www.ruanyifeng.com/blog/2019/10/tmux.html">https://www.ruanyifeng.com/blog/2019/10/tmux.html</a></p>
-]]></content>
-      <categories>
-        <category>指令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>tmux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博物馆--钢琴博物馆</title>
-    <url>/2023/02/26/%E5%8D%9A%E7%89%A9%E9%A6%86-%E9%92%A2%E7%90%B4%E5%8D%9A%E7%89%A9%E9%A6%86/</url>
-    <content><![CDATA[<p>打算记录整理一下以前去过的有特色的一些博物馆。一直以来都很喜欢去博物馆，每每看到藏品，我都不禁会想这件藏品后有着怎么的故事，藏品曾经的主人有什么样的人生。一件物品跨越时空呈现在我眼前，让我觉得很不可思议，想想这中间几百上千年要经历多少事。历经岁月后它被我看到，透过它我觉得我与千百年前的人、时代产生了联系，这对我来说就像奇迹一般，我被这种沧桑感，宏大感所吸引。</p>
-<p>去过的大多中国博物馆，大都千篇一律，从建筑上看基本都是一个风格，展品上来说也都是遵循时间循序进行陈列，从石器时代一直到近现代。感觉缺乏特色没有新意，除了馆里的一些珍品外，可以说博物馆间几乎没有区分度了。我将陆续写写去过的一些与众不同的博物馆，可能以后也会补上一些常规的博物馆，以后再说吧，比较有特色的一定要记录一下。第一篇是重庆的钢琴博物馆，据说是亚洲最大的钢琴博物馆。重庆还有一个小提琴博物馆，可惜当时一直没去，希望以后有机会的话去看看。</p>
-<span id="more"></span>
-<p>馆内收藏了各个时代的钢琴，可以看出从钢琴制作起始到现在的演变。也有一些作曲家的手稿。</p>
-<p>这是鲁宾斯坦演奏过的钢琴，19世纪的琴和现在的已经很像了，比起现在的琴少了一个踏板。<br><img src="\images\piano\Rubinstein.jpg"/></p>
-<p>这是李斯特演奏过的钢琴，能感觉到音箱的形状和琴键布局和现在不太一样。琴键数看起来没有88个。<br><img src="\images\piano\李斯特演奏1.jpg"/><br><img src="\images\piano\李斯特演奏.jpg"/></p>
-<p>这是贝多芬演奏过的。<br><img src="\images\piano\贝多芬演奏.jpg"/></p>
-<p>这是舒曼定制的钢琴，保存状态很好，看起来还蛮新的。<br><img src="\images\piano\舒曼定制.jpg"/></p>
-<p>馆里还有一个中国风的钢琴，我记得似乎是为某位中国小姐定制的。<br><img src="\images\piano\中国风.jpg"/></p>
-<p>这是一台连体钢琴，可以两个人同时演奏，在这之前不晓得还有这种钢琴，好想听听一起演奏是什么效果。<br><img src="\images\piano\双子星.jpg"/></p>
-<p>这台琴带了几个旋钮还是拉栓，看起来有点管风琴那味哈哈哈。<br><img src="\images\piano\带旋钮.jpg"/></p>
-<p>这是一台长的很高的钢琴，不知道为啥这样设计。<br><img src="\images\piano\长得很高.jpg"/></p>
-<p>这个钢琴博物馆里头钢琴很多，大厅和走廊都是琴。<br><img src="\images\piano\大厅.jpg"/><br><img src="\images\piano\走廊.jpg"/></p>
-<p>舒伯特的手稿，魔王的最初版本，与最后出版的不太一样。<br><img src="\images\piano\舒伯特手稿.jpg"/></p>
-]]></content>
-      <categories>
-        <category>博物馆</category>
-      </categories>
-      <tags>
-        <tag>钢琴</tag>
-        <tag>古典音乐</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>澳门10公里</title>
-    <url>/2023/03/20/%E6%BE%B3%E9%97%A810%E5%85%AC%E9%87%8C/</url>
-    <content><![CDATA[<p>昨天参加了澳门金沙的10公里比赛，这是我第一次正儿八经地跑10公里，阳康后训练了一个多月，感觉跑的不错，比较轻松地完成了比赛。一些老爷爷老太太真有活力，也很热情。比赛途中我就看到了那位拿假蛋挞的女士，当时好想问她那个能不能吃，笑死。</p>
-<span id="more"></span>
-<div>
-  <img src="\images\macau_10k\1.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\macau_10k\2.jpg" style="max-width: 50%; max-height: 50%;"/>
-  <img src="\images\macau_10k\3.jpg" style="max-width: 50%; max-height: 50%;"/>
-  <img src="\images\macau_10k\4.jpg" style="max-width: 50%; max-height: 50%;"/>
-  <img src="\images\macau_10k\6.jpg" style="max-width: 50%; max-height: 50%;"/>
-  <img src="\images\macau_10k\5.jpg" style="max-width: 50%; max-height: 50%;"/>
-</div>
-
-
-
-]]></content>
-      <categories>
-        <category>运动</category>
-      </categories>
-      <tags>
-        <tag>澳门</tag>
-        <tag>跑步</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>澳门路环徒步</title>
-    <url>/2023/05/17/%E6%BE%B3%E9%97%A8%E8%B7%AF%E7%8E%AF%E5%BE%92%E6%AD%A5/</url>
-    <content><![CDATA[<p>昨天天气不错，临时起意不去学校了。决定去路环逛逛，一直没有去过，最想去的就是龙爪角，看到别人发，觉得风景不错。</p>
-<p>到了路环，先去安德鲁蛋挞那买了两个蛋挞。路环这个店还是很原始的样子，没有过多装换，没啥游客，几乎都是本地人在购买，店里非常朴素，做蛋挞蛋糕的地方都是开放的，没有隔档。</p>
-<span id="more"></span>
-<div>
-  <img src="\images\路环徒步\IMG_5627.jpg" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>安德鲁蛋挞对面是卫生站，一个粉色的房子，看起来很温馨。</p>
-<div>
-  <img src="\images\路环徒步\IMG_5629.jpg" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>从卫生站往左边走，可以走到码头，非常近，靠海的那一侧房子都是用瓦楞搭起来的，不少人家往海的方向对房子进行了扩展，在陆地上的只有很小一部分。码头附近还有几家卖海鲜干货的。午餐选了一家海景不错的，也是比较大的一家店。</p>
-<div>
-  <img src="\images\路环徒步\IMG_5636.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5638.jpg" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>吃完饭走到十月初五马路，发现这边吃的更多哈哈哈，有一家人特别多，后来搜了路环美食，发现这家叫雅憩，做葡国菜的，中午我从那路过，看外面的桌子都坐满了。十月初五马路很多房子彩色的，很适合拍照。</p>
-<div>
-  <img src="\images\路环徒步\IMG_5645.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5647.jpg" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>沿着十月初五马路一直走就走到山上去了，有些路段没有人行道，就只能走马路，不过车辆不多，山上是警察的射击训练营。走在这个山路上，都感觉不到这是澳门，脱离了往日繁华热闹的印象。</p>
-<div>
-  <img src="\images\路环徒步\IMG_5651.jpg" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>走到竹湾海滩那边，可以在海里游泳，沙滩上有人躺着晒太阳，澳门冬泳协会也在这，广东这带的冬天那么短，感觉都游不了几天冬泳。从十月初五马路上山到乡村马路后，沿途都有巴士站，不想走路还可以坐巴士，蛮方便的。美中不足的就是有些马路没有人行道，还是不太安全。</p>
-<p>到了龙爪角，有很多人翻出护栏钓鱼。这个海滨步道依托原始的地形修建，几乎没有太多改动，就加了一些石梯，铺筑了路面，在比较平整的地方就没有人工改动，直接走在山体的石头上。有些路段还有山上的泉水留下。大概中途的位置有一个观海亭，风还挺大的。</p>
-<div>
-  <img src="\images\路环徒步\IMG_5658.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5663.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5678.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5682.jpg" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>从龙爪角出来就是黑沙海滩，之后我就前往石排湾郊野公园，走的山上的步道，上去的时候倒是挺累人的，好在山不是很高，在山里几乎都是平路。山里岔路很多，很容易走错方向。到了公园，有个地形图，发现这个路环这些山都是连着的。公园养了一些动物，熊猫馆里人挺多，两只熊猫活动空间很大。</p>
-<div>
-  <img src="\images\路环徒步\IMG_5690.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5697.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5698.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5700.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5704.jpg" style="max-width: 50%; max-height: 50%;">
-</div>
-]]></content>
-      <categories>
-        <category>运动</category>
-      </categories>
-      <tags>
-        <tag>澳门</tag>
-        <tag>徒步</tag>
       </tags>
   </entry>
   <entry>
