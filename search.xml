@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2024/09/14/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>能够复原大多数魔方的解法</title>
     <url>/2023/02/19/cube_solution/</url>
     <content><![CDATA[<p>多年前看到过一个视频，讲述了对于结构对称的魔方的通用解法。在此结合原视频和魔方吧里的帖子记录一下以作存档。</p>
@@ -35,6 +17,24 @@
       <tags>
         <tag>魔方</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2024/09/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
   <entry>
     <title>博客美化</title>
@@ -221,37 +221,6 @@
       </tags>
   </entry>
   <entry>
-    <title>跑步训练与提高</title>
-    <url>/2023/02/19/%E8%B7%91%E6%AD%A5%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8F%90%E9%AB%98/</url>
-    <content><![CDATA[<h1 id="力量训练"><a href="#力量训练" class="headerlink" title="力量训练"></a>力量训练</h1><h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><h3 id="基础核心训练"><a href="#基础核心训练" class="headerlink" title="基础核心训练"></a>基础核心训练</h3><h4 id="核心力量训练"><a href="#核心力量训练" class="headerlink" title="核心力量训练"></a>核心力量训练</h4><p>上腹肌（即六块腹肌中靠上的部分）：卷腹。<br>下腹肌：仰卧举腿、仰卧踩单车。<br>躯干侧前方（腹内外斜肌）：侧卷腹、卷腹摸脚踝、曲腿刮雨器。<br>躯干两侧（腰方肌：控制骨盆）：侧卧起、曲腿侧卧起、侧卧并腿。<br>躯干后方肌肉（竖脊肌：保持躯干挺直，防止腰痛）：仰卧挺身。</p>
-<span id="more"></span>
-<h4 id="核心稳定性训练（锻炼深层肌肉）"><a href="#核心稳定性训练（锻炼深层肌肉）" class="headerlink" title="核心稳定性训练（锻炼深层肌肉）"></a>核心稳定性训练（锻炼深层肌肉）</h4><p>俯桥（平板支撑）、侧桥、仰桥（臀桥）。</p>
-<h3 id="专项核心训练"><a href="#专项核心训练" class="headerlink" title="专项核心训练"></a>专项核心训练</h3><p>平板支撑体位交替曲腿、俯桥提膝后摆腿、侧桥位单侧模拟跑步、单腿臀桥、臀桥接提膝。完成上述动作时应注意保持核心稳定。</p>
-<h2 id="臀部和大腿"><a href="#臀部和大腿" class="headerlink" title="臀部和大腿"></a>臀部和大腿</h2><h3 id="中级（提高力量）"><a href="#中级（提高力量）" class="headerlink" title="中级（提高力量）"></a>中级（提高力量）</h3><p>弓箭步、单腿上训练凳、保加尼亚剪蹲、单腿硬拉、单腿臀桥、弓箭步跳（爆发力训练）。</p>
-<h3 id="高级（增加神经肌肉协调性、进一步强化关键肌肉）"><a href="#高级（增加神经肌肉协调性、进一步强化关键肌肉）" class="headerlink" title="高级（增加神经肌肉协调性、进一步强化关键肌肉）"></a>高级（增加神经肌肉协调性、进一步强化关键肌肉）</h3><p>单腿上训练凳接高抬腿、平板支撑体位交替曲腿、侧桥位单侧模拟跑步、单腿硬拉接提膝、弓箭步接高抬腿跳起（爆发力训练）。</p>
-<h2 id="臀中肌（保持跑步稳定的关键肌肉、保持骨盆和膝关节稳定）"><a href="#臀中肌（保持跑步稳定的关键肌肉、保持骨盆和膝关节稳定）" class="headerlink" title="臀中肌（保持跑步稳定的关键肌肉、保持骨盆和膝关节稳定）"></a>臀中肌（保持跑步稳定的关键肌肉、保持骨盆和膝关节稳定）</h2><p>髋部提拉、单腿外摆、单腿浅蹲后外摆、侧卧腿外摆、侧卧贝壳式（下落时双腿膝盖不相碰）、跪姿侧桥接上摆腿、俯卧四点支撑腿外摆。练习时注意骨盆稳定，不要翻转。</p>
-<h2 id="小腿（提供缓冲和支撑）"><a href="#小腿（提供缓冲和支撑）" class="headerlink" title="小腿（提供缓冲和支撑）"></a>小腿（提供缓冲和支撑）</h2><h3 id="力量练习"><a href="#力量练习" class="headerlink" title="力量练习"></a>力量练习</h3><p>勾脚尖练习（前侧肌肉）、提踵（单腿站立练习）。</p>
-<h3 id="稳定性练习（提高脚踝稳定性）"><a href="#稳定性练习（提高脚踝稳定性）" class="headerlink" title="稳定性练习（提高脚踝稳定性）"></a>稳定性练习（提高脚踝稳定性）</h3><p>（闭眼）抱胸单腿站立。</p>
-<h3 id="缓冲练习"><a href="#缓冲练习" class="headerlink" title="缓冲练习"></a>缓冲练习</h3><p>单腿下落缓冲（前脚掌落地、落地声越轻越好）。</p>
-<h3 id="爆发力训练"><a href="#爆发力训练" class="headerlink" title="爆发力训练"></a>爆发力训练</h3><p>单脚原地跳（落地后迅速跳起，缩短触地时间）、双脚前后跳（脚跟尽量不要触地，减少触地时间）、单脚前后跳。</p>
-<h2 id="深层小肌肉（让动作更加精准）"><a href="#深层小肌肉（让动作更加精准）" class="headerlink" title="深层小肌肉（让动作更加精准）"></a>深层小肌肉（让动作更加精准）</h2><p>所有动作都用训练带辅助。贝壳式（臀中肌）、臀桥（臀大肌、臀中肌）、下蹲（臀大肌、臀中肌）、横向跨步（臀中肌）、前后跨步（训练膝盖正对脚尖的能力，减少膝盖内扣）、单腿后外展（臀中肌）、侧卧直腿抬高（要点是上腿的后撤，臀中肌）、单腿提膝（髂腰肌）。</p>
-<h1 id="跑法训练（训练强度8-1-1，一切以心率为准）"><a href="#跑法训练（训练强度8-1-1，一切以心率为准）" class="headerlink" title="跑法训练（训练强度8:1:1，一切以心率为准）"></a>跑法训练（训练强度8:1:1，一切以心率为准）</h1><p>轻松跑占8，中等和高强度跑各占1，以跑步里程计算。一个简单测算心率的方法<code>最大心率 = 220 - 年龄</code>，想更精确地知道自己的最大运动心率需要在实际运动中测量。</p>
-<h2 id="LSD"><a href="#LSD" class="headerlink" title="LSD"></a>LSD</h2><p>增强心脏功能、提高肌肉利用氧气能力、让身体适应脂肪供能。LSD控制在1小时左右，心率区间应为最大心率的65% ~ 78%。若以半马为目标，则2小时左右，全马控制在最长2.5小时。在LSD跑末加几组冲刺跑保持肌肉快速收缩能力和无氧系统素质。冲刺跑可重复多组，一周3 ~ 6次，冲刺与间歇时间比1:2 ~ 3。<br><img src="\images\LSD1.png" /><br><img src="\images\LSD2.png" /></p>
-<h2 id="抗乳酸跑"><a href="#抗乳酸跑" class="headerlink" title="抗乳酸跑"></a>抗乳酸跑</h2><p>提升身体耐受乳酸和排出乳酸的能力、提升有氧耐力空间（使得更不容易达到乳酸阀的拐点）、让身体在临界速度下维持更长时间，心率区间应为最大心率的88% ~ 90%。进行该训练时要把握好速度，太快会很快力竭，太慢会处于有氧区间。每周2 ~ 3次，一次跑量不超过周跑量的10%，一般累计奔跑20分钟，训练休息时间比为5:1。<br><img src="\images\乳酸跑.png" /></p>
-<h2 id="间歇跑"><a href="#间歇跑" class="headerlink" title="间歇跑"></a>间歇跑</h2><p>提高最大摄氧量，增强心肺功能、提升跑步经济性、提升机体抗乳酸能力，心率区间应为最大心率的91% ~ 100%。每组训练时间在3 ~ 5分钟，训练间歇时间比1:1，每次跑控制在20 ~ 30分钟。<br><img src="\images\间歇跑.png" /></p>
-<h2 id="MAF180"><a href="#MAF180" class="headerlink" title="MAF180"></a>MAF180</h2><p>训练强度低，适合减肥和LSD训练。</p>
-<h2 id="亚索800（成为精英的必备训练）"><a href="#亚索800（成为精英的必备训练）" class="headerlink" title="亚索800（成为精英的必备训练）"></a>亚索800（成为精英的必备训练）</h2><p>提升最大摄氧量、提升身体耐受乳酸和排出乳酸的能力。一组800米，心率保持在最大心率的95% ~ 100%，每组时间3 ~ 4分钟。训练间歇时间比1:1，一般训练4 ~ 8组，精英可提高到10组。若强度不够则将每组距离增加。</p>
-<h2 id="法特莱克跑"><a href="#法特莱克跑" class="headerlink" title="法特莱克跑"></a>法特莱克跑</h2><p>就是变速跑，可消解跑步的单调乏味。</p>
-]]></content>
-      <categories>
-        <category>运动</category>
-      </categories>
-      <tags>
-        <tag>跑步</tag>
-        <tag>腿部训练</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>澳门路环徒步</title>
     <url>/2023/05/17/%E6%BE%B3%E9%97%A8%E8%B7%AF%E7%8E%AF%E5%BE%92%E6%AD%A5/</url>
     <content><![CDATA[<p>昨天天气不错，临时起意不去学校了。决定去路环逛逛，一直没有去过，最想去的就是龙爪角，看到别人发，觉得风景不错。</p>
@@ -307,6 +276,37 @@
       <tags>
         <tag>澳门</tag>
         <tag>徒步</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>跑步训练与提高</title>
+    <url>/2023/02/19/%E8%B7%91%E6%AD%A5%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8F%90%E9%AB%98/</url>
+    <content><![CDATA[<h1 id="力量训练"><a href="#力量训练" class="headerlink" title="力量训练"></a>力量训练</h1><h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><h3 id="基础核心训练"><a href="#基础核心训练" class="headerlink" title="基础核心训练"></a>基础核心训练</h3><h4 id="核心力量训练"><a href="#核心力量训练" class="headerlink" title="核心力量训练"></a>核心力量训练</h4><p>上腹肌（即六块腹肌中靠上的部分）：卷腹。<br>下腹肌：仰卧举腿、仰卧踩单车。<br>躯干侧前方（腹内外斜肌）：侧卷腹、卷腹摸脚踝、曲腿刮雨器。<br>躯干两侧（腰方肌：控制骨盆）：侧卧起、曲腿侧卧起、侧卧并腿。<br>躯干后方肌肉（竖脊肌：保持躯干挺直，防止腰痛）：仰卧挺身。</p>
+<span id="more"></span>
+<h4 id="核心稳定性训练（锻炼深层肌肉）"><a href="#核心稳定性训练（锻炼深层肌肉）" class="headerlink" title="核心稳定性训练（锻炼深层肌肉）"></a>核心稳定性训练（锻炼深层肌肉）</h4><p>俯桥（平板支撑）、侧桥、仰桥（臀桥）。</p>
+<h3 id="专项核心训练"><a href="#专项核心训练" class="headerlink" title="专项核心训练"></a>专项核心训练</h3><p>平板支撑体位交替曲腿、俯桥提膝后摆腿、侧桥位单侧模拟跑步、单腿臀桥、臀桥接提膝。完成上述动作时应注意保持核心稳定。</p>
+<h2 id="臀部和大腿"><a href="#臀部和大腿" class="headerlink" title="臀部和大腿"></a>臀部和大腿</h2><h3 id="中级（提高力量）"><a href="#中级（提高力量）" class="headerlink" title="中级（提高力量）"></a>中级（提高力量）</h3><p>弓箭步、单腿上训练凳、保加尼亚剪蹲、单腿硬拉、单腿臀桥、弓箭步跳（爆发力训练）。</p>
+<h3 id="高级（增加神经肌肉协调性、进一步强化关键肌肉）"><a href="#高级（增加神经肌肉协调性、进一步强化关键肌肉）" class="headerlink" title="高级（增加神经肌肉协调性、进一步强化关键肌肉）"></a>高级（增加神经肌肉协调性、进一步强化关键肌肉）</h3><p>单腿上训练凳接高抬腿、平板支撑体位交替曲腿、侧桥位单侧模拟跑步、单腿硬拉接提膝、弓箭步接高抬腿跳起（爆发力训练）。</p>
+<h2 id="臀中肌（保持跑步稳定的关键肌肉、保持骨盆和膝关节稳定）"><a href="#臀中肌（保持跑步稳定的关键肌肉、保持骨盆和膝关节稳定）" class="headerlink" title="臀中肌（保持跑步稳定的关键肌肉、保持骨盆和膝关节稳定）"></a>臀中肌（保持跑步稳定的关键肌肉、保持骨盆和膝关节稳定）</h2><p>髋部提拉、单腿外摆、单腿浅蹲后外摆、侧卧腿外摆、侧卧贝壳式（下落时双腿膝盖不相碰）、跪姿侧桥接上摆腿、俯卧四点支撑腿外摆。练习时注意骨盆稳定，不要翻转。</p>
+<h2 id="小腿（提供缓冲和支撑）"><a href="#小腿（提供缓冲和支撑）" class="headerlink" title="小腿（提供缓冲和支撑）"></a>小腿（提供缓冲和支撑）</h2><h3 id="力量练习"><a href="#力量练习" class="headerlink" title="力量练习"></a>力量练习</h3><p>勾脚尖练习（前侧肌肉）、提踵（单腿站立练习）。</p>
+<h3 id="稳定性练习（提高脚踝稳定性）"><a href="#稳定性练习（提高脚踝稳定性）" class="headerlink" title="稳定性练习（提高脚踝稳定性）"></a>稳定性练习（提高脚踝稳定性）</h3><p>（闭眼）抱胸单腿站立。</p>
+<h3 id="缓冲练习"><a href="#缓冲练习" class="headerlink" title="缓冲练习"></a>缓冲练习</h3><p>单腿下落缓冲（前脚掌落地、落地声越轻越好）。</p>
+<h3 id="爆发力训练"><a href="#爆发力训练" class="headerlink" title="爆发力训练"></a>爆发力训练</h3><p>单脚原地跳（落地后迅速跳起，缩短触地时间）、双脚前后跳（脚跟尽量不要触地，减少触地时间）、单脚前后跳。</p>
+<h2 id="深层小肌肉（让动作更加精准）"><a href="#深层小肌肉（让动作更加精准）" class="headerlink" title="深层小肌肉（让动作更加精准）"></a>深层小肌肉（让动作更加精准）</h2><p>所有动作都用训练带辅助。贝壳式（臀中肌）、臀桥（臀大肌、臀中肌）、下蹲（臀大肌、臀中肌）、横向跨步（臀中肌）、前后跨步（训练膝盖正对脚尖的能力，减少膝盖内扣）、单腿后外展（臀中肌）、侧卧直腿抬高（要点是上腿的后撤，臀中肌）、单腿提膝（髂腰肌）。</p>
+<h1 id="跑法训练（训练强度8-1-1，一切以心率为准）"><a href="#跑法训练（训练强度8-1-1，一切以心率为准）" class="headerlink" title="跑法训练（训练强度8:1:1，一切以心率为准）"></a>跑法训练（训练强度8:1:1，一切以心率为准）</h1><p>轻松跑占8，中等和高强度跑各占1，以跑步里程计算。一个简单测算心率的方法<code>最大心率 = 220 - 年龄</code>，想更精确地知道自己的最大运动心率需要在实际运动中测量。</p>
+<h2 id="LSD"><a href="#LSD" class="headerlink" title="LSD"></a>LSD</h2><p>增强心脏功能、提高肌肉利用氧气能力、让身体适应脂肪供能。LSD控制在1小时左右，心率区间应为最大心率的65% ~ 78%。若以半马为目标，则2小时左右，全马控制在最长2.5小时。在LSD跑末加几组冲刺跑保持肌肉快速收缩能力和无氧系统素质。冲刺跑可重复多组，一周3 ~ 6次，冲刺与间歇时间比1:2 ~ 3。<br><img src="\images\LSD1.png" /><br><img src="\images\LSD2.png" /></p>
+<h2 id="抗乳酸跑"><a href="#抗乳酸跑" class="headerlink" title="抗乳酸跑"></a>抗乳酸跑</h2><p>提升身体耐受乳酸和排出乳酸的能力、提升有氧耐力空间（使得更不容易达到乳酸阀的拐点）、让身体在临界速度下维持更长时间，心率区间应为最大心率的88% ~ 90%。进行该训练时要把握好速度，太快会很快力竭，太慢会处于有氧区间。每周2 ~ 3次，一次跑量不超过周跑量的10%，一般累计奔跑20分钟，训练休息时间比为5:1。<br><img src="\images\乳酸跑.png" /></p>
+<h2 id="间歇跑"><a href="#间歇跑" class="headerlink" title="间歇跑"></a>间歇跑</h2><p>提高最大摄氧量，增强心肺功能、提升跑步经济性、提升机体抗乳酸能力，心率区间应为最大心率的91% ~ 100%。每组训练时间在3 ~ 5分钟，训练间歇时间比1:1，每次跑控制在20 ~ 30分钟。<br><img src="\images\间歇跑.png" /></p>
+<h2 id="MAF180"><a href="#MAF180" class="headerlink" title="MAF180"></a>MAF180</h2><p>训练强度低，适合减肥和LSD训练。</p>
+<h2 id="亚索800（成为精英的必备训练）"><a href="#亚索800（成为精英的必备训练）" class="headerlink" title="亚索800（成为精英的必备训练）"></a>亚索800（成为精英的必备训练）</h2><p>提升最大摄氧量、提升身体耐受乳酸和排出乳酸的能力。一组800米，心率保持在最大心率的95% ~ 100%，每组时间3 ~ 4分钟。训练间歇时间比1:1，一般训练4 ~ 8组，精英可提高到10组。若强度不够则将每组距离增加。</p>
+<h2 id="法特莱克跑"><a href="#法特莱克跑" class="headerlink" title="法特莱克跑"></a>法特莱克跑</h2><p>就是变速跑，可消解跑步的单调乏味。</p>
+]]></content>
+      <categories>
+        <category>运动</category>
+      </categories>
+      <tags>
+        <tag>跑步</tag>
+        <tag>腿部训练</tag>
       </tags>
   </entry>
 </search>
