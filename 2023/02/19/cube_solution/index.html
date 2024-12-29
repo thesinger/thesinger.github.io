@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"thesinger.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"thesinger.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="多年前看到过一个视频，讲述了对于结构对称的魔方的通用解法。在此结合原视频和魔方吧里的帖子记录一下以作存档。 以3阶魔方为例，只要会复原一层，就可以用这个解法复原整个魔方。复原魔方在于将棱块和角块移到正确的位置，并且色向也正确。如果会复原一层的话，那自然可以任意地移动角块棱块的位置，改变其色向。现在可以构造一个公式，用于某个棱块朝向的翻转。翻转后顶层的其他棱角不受影响，下面两层被打乱了。把翻转公式逆">
@@ -106,6 +106,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -120,16 +121,63 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-关于本站">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于本站</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/message_board/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -156,7 +204,7 @@
     <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2023/02/19/cube_solution/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="nobody">
       <meta itemprop="description" content="邮箱：1633748848@qq.com，记录生活和成长的点滴">
     </span>
@@ -216,7 +264,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>670</span>
+              <span>662</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -236,11 +284,12 @@
 
       
         <p>多年前看到过一个视频，讲述了对于结构对称的魔方的通用解法。在此结合原视频和魔方吧里的帖子记录一下以作存档。</p>
-<p>以3阶魔方为例，只要会复原一层，就可以用这个解法复原整个魔方。复原魔方在于将棱块和角块移到正确的位置，并且色向也正确。如果会复原一层的话，那自然可以任意地移动角块棱块的位置，改变其色向。现在可以构造一个公式，用于某个棱块朝向的翻转。翻转后顶层的其他棱角不受影响，下面两层被打乱了。把翻转公式逆着做一遍，魔方又可以复原到原来的状态。<br><img src="/images/魔方.png" height="500" width="500" /></p>
+<p>以3阶魔方为例，只要会复原一层，就可以用这个解法复原整个魔方。复原魔方在于将棱块和角块移到正确的位置，并且色向也正确。如果会复原一层的话，那自然可以任意地移动角块棱块的位置，改变其色向。现在可以构造一个公式，用于某个棱块朝向的翻转。翻转后顶层的其他棱角不受影响，下面两层被打乱了。把翻转公式逆着做一遍，魔方又可以复原到原来的状态。<br>
+<img src="/images/魔方.png" height="500" width="500" /></p>
 <span id="more"></span>
 <p>假如我在翻转完棱块后，将顶层转90度，再逆做翻转公式，那么最后我的顶层将会有两个棱块色向翻转了，而下面二层是复原的。因此，我就可以构造一个翻棱公式，这个公式可以同时将两个棱块的色向改变。同理，我也可以构造出翻角公式，一次性将两个角块的色向翻转。构造完换色向的公式后，也可以构造出换位置的公式，构造一个公式，同时交换两个棱块或者角块的位置。将这个公式做两遍，可以达到3轮换的效果。</p>
 <p>于是，四个公式便可以完成3阶魔方的复原，即棱块转向、角块转向、棱块位置轮换、色块位置轮换。</p>
-<p>上述复原的基础在于结构对称的魔方可以构造出一个正向操作，和对应的逆向操作，使得做完正向再做逆向后，魔方可以恢复到初始转态。用一个公式来描述就是<code>ABA&#39;B&#39;</code>。若魔方经过该公式后状态不变，则称A操作和B操作遵循交律。大多数魔方公式可以基于这个模式进行构造。</p>
+<p>上述复原的基础在于结构对称的魔方可以构造出一个正向操作，和对应的逆向操作，使得做完正向再做逆向后，魔方可以恢复到初始转态。用一个公式来描述就是<code>ABA'B'</code>。若魔方经过该公式后状态不变，则称A操作和B操作遵循交律。大多数魔方公式可以基于这个模式进行构造。</p>
 <p>采用这个方法复原魔方，若最后角块位置正确（不管色向），但出现了棱块的2轮换，那么再做一次2轮换，将棱块状态变为3轮换，进行复原。若棱块位置正确，角块出现2轮换也是同理。</p>
 
     </div>
@@ -248,6 +297,23 @@
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>nobody
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://thesinger.github.io/2023/02/19/cube_solution/" title="能够复原大多数魔方的解法">https://thesinger.github.io/2023/02/19/cube_solution/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
@@ -331,6 +397,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="nobody"
+      src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">nobody</p>
   <div class="site-description" itemprop="description">邮箱：1633748848@qq.com，记录生活和成长的点滴</div>
 </div>
@@ -345,11 +413,13 @@
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
+          
         <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
+          
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
@@ -386,14 +456,16 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
+      <span class="post-meta-item-text">站点总字数：</span>
     <span title="站点总字数">7k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">6 分钟</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
 <!--《添加网站运行时间 -->
@@ -501,7 +573,7 @@ $(document).ready(function() {
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
@@ -512,6 +584,10 @@ $(document).ready(function() {
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -534,7 +610,7 @@ $(document).ready(function() {
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
+    var guest = 'nick,mail';
     guest = guest.split(',').filter(item => {
       return GUEST.includes(item);
     });
@@ -544,14 +620,14 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       notify     : false,
       appId      : 'vXf6tPpOJHmmCIHQpCxiwQBK-gzGzoHsz',
       appKey     : 'if29cHbMXf80WhuGZU3ENwFL',
-      placeholder: "Just go go",
+      placeholder: "欢迎留下你的评论",
       avatar     : 'mm',
       meta       : guest,
       pageSize   : '10' || 10,
       visitor    : false,
       lang       : '' || 'zh-cn',
       path       : location.pathname,
-      recordIP   : false,
+      recordIP   : true,
       serverURLs : ''
     });
   }, window.Valine);

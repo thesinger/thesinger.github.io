@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"thesinger.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"thesinger.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="昨天天气不错，临时起意不去学校了。决定去路环逛逛，一直没有去过，最想去的就是龙爪角，看到别人发，觉得风景不错。 到了路环，先去安德鲁蛋挞那买了两个蛋挞。路环这个店还是很原始的样子，没有过多装换，没啥游客，几乎都是本地人在购买，店里非常朴素，做蛋挞蛋糕的地方都是开放的，没有隔档。">
@@ -122,6 +122,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -136,16 +137,63 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-关于本站">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于本站</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/message_board/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -172,7 +220,7 @@
     <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2023/05/17/%E6%BE%B3%E9%97%A8%E8%B7%AF%E7%8E%AF%E5%BE%92%E6%AD%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="nobody">
       <meta itemprop="description" content="邮箱：1633748848@qq.com，记录生活和成长的点滴">
     </span>
@@ -257,29 +305,24 @@
 <div>
   <img src="\images\路环徒步\IMG_5627.jpg" style="max-width: 50%; max-height: 50%;">
 </div>
-
 <p>安德鲁蛋挞对面是卫生站，一个粉色的房子，看起来很温馨。</p>
 <div>
   <img src="\images\路环徒步\IMG_5629.jpg" style="max-width: 50%; max-height: 50%;">
 </div>
-
 <p>从卫生站往左边走，可以走到码头，非常近，靠海的那一侧房子都是用瓦楞搭起来的，不少人家往海的方向对房子进行了扩展，在陆地上的只有很小一部分。码头附近还有几家卖海鲜干货的。午餐选了一家海景不错的，也是比较大的一家店。</p>
 <div>
   <img src="\images\路环徒步\IMG_5636.jpg" style="max-width: 50%; max-height: 50%;">
   <img src="\images\路环徒步\IMG_5638.jpg" style="max-width: 50%; max-height: 50%;">
 </div>
-
 <p>吃完饭走到十月初五马路，发现这边吃的更多哈哈哈，有一家人特别多，后来搜了路环美食，发现这家叫雅憩，做葡国菜的，中午我从那路过，看外面的桌子都坐满了。十月初五马路很多房子彩色的，很适合拍照。</p>
 <div>
   <img src="\images\路环徒步\IMG_5645.jpg" style="max-width: 50%; max-height: 50%;">
   <img src="\images\路环徒步\IMG_5647.jpg" style="max-width: 50%; max-height: 50%;">
 </div>
-
 <p>沿着十月初五马路一直走就走到山上去了，有些路段没有人行道，就只能走马路，不过车辆不多，山上是警察的射击训练营。走在这个山路上，都感觉不到这是澳门，脱离了往日繁华热闹的印象。</p>
 <div>
   <img src="\images\路环徒步\IMG_5651.jpg" style="max-width: 50%; max-height: 50%;">
 </div>
-
 <p>走到竹湾海滩那边，可以在海里游泳，沙滩上有人躺着晒太阳，澳门冬泳协会也在这，广东这带的冬天那么短，感觉都游不了几天冬泳。从十月初五马路上山到乡村马路后，沿途都有巴士站，不想走路还可以坐巴士，蛮方便的。美中不足的就是有些马路没有人行道，还是不太安全。</p>
 <p>到了龙爪角，有很多人翻出护栏钓鱼。这个海滨步道依托原始的地形修建，几乎没有太多改动，就加了一些石梯，铺筑了路面，在比较平整的地方就没有人工改动，直接走在山体的石头上。有些路段还有山上的泉水留下。大概中途的位置有一个观海亭，风还挺大的。</p>
 <div>
@@ -288,7 +331,6 @@
   <img src="\images\路环徒步\IMG_5678.jpg" style="max-width: 50%; max-height: 50%;">
   <img src="\images\路环徒步\IMG_5682.jpg" style="max-width: 50%; max-height: 50%;">
 </div>
-
 <p>从龙爪角出来就是黑沙海滩，之后我就前往石排湾郊野公园，走的山上的步道，上去的时候倒是挺累人的，好在山不是很高，在山里几乎都是平路。山里岔路很多，很容易走错方向。到了公园，有个地形图，发现这个路环这些山都是连着的。公园养了一些动物，熊猫馆里人挺多，两只熊猫活动空间很大。</p>
 <div>
   <img src="\images\路环徒步\IMG_5690.jpg" style="max-width: 50%; max-height: 50%;">
@@ -303,6 +345,23 @@
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>nobody
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://thesinger.github.io/2023/05/17/%E6%BE%B3%E9%97%A8%E8%B7%AF%E7%8E%AF%E5%BE%92%E6%AD%A5/" title="澳门路环徒步">https://thesinger.github.io/2023/05/17/澳门路环徒步/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
@@ -387,6 +446,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="nobody"
+      src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">nobody</p>
   <div class="site-description" itemprop="description">邮箱：1633748848@qq.com，记录生活和成长的点滴</div>
 </div>
@@ -401,11 +462,13 @@
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
+          
         <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
+          
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
@@ -442,14 +505,16 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
+      <span class="post-meta-item-text">站点总字数：</span>
     <span title="站点总字数">7k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">6 分钟</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
 <!--《添加网站运行时间 -->
@@ -557,7 +622,7 @@ $(document).ready(function() {
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
@@ -568,6 +633,10 @@ $(document).ready(function() {
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -590,7 +659,7 @@ $(document).ready(function() {
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
+    var guest = 'nick,mail';
     guest = guest.split(',').filter(item => {
       return GUEST.includes(item);
     });
@@ -600,14 +669,14 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       notify     : false,
       appId      : 'vXf6tPpOJHmmCIHQpCxiwQBK-gzGzoHsz',
       appKey     : 'if29cHbMXf80WhuGZU3ENwFL',
-      placeholder: "Just go go",
+      placeholder: "欢迎留下你的评论",
       avatar     : 'mm',
       meta       : guest,
       pageSize   : '10' || 10,
       visitor    : false,
       lang       : '' || 'zh-cn',
       path       : location.pathname,
-      recordIP   : false,
+      recordIP   : true,
       serverURLs : ''
     });
   }, window.Valine);

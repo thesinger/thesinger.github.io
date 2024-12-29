@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"thesinger.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"thesinger.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="打算记录整理一下以前去过的有特色的一些博物馆。一直以来都很喜欢去博物馆，每每看到藏品，我都不禁会想这件藏品后有着怎么的故事，藏品曾经的主人有什么样的人生。一件物品跨越时空呈现在我眼前，让我觉得很不可思议，想想这中间几百上千年要经历多少事。历经岁月后它被我看到，透过它我觉得我与千百年前的人、时代产生了联系，这对我来说就像奇迹一般，我被这种沧桑感，宏大感所吸引。 去过的大多中国博物馆，大都千篇一律，从">
@@ -118,6 +118,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -132,16 +133,63 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-关于本站">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于本站</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/message_board/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -168,7 +216,7 @@
     <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2023/02/26/%E5%8D%9A%E7%89%A9%E9%A6%86-%E9%92%A2%E7%90%B4%E5%8D%9A%E7%89%A9%E9%A6%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="nobody">
       <meta itemprop="description" content="邮箱：1633748848@qq.com，记录生活和成长的点滴">
     </span>
@@ -251,22 +299,51 @@
 <p>去过的大多中国博物馆，大都千篇一律，从建筑上看基本都是一个风格，展品上来说也都是遵循时间循序进行陈列，从石器时代一直到近现代。感觉缺乏特色没有新意，除了馆里的一些珍品外，可以说博物馆间几乎没有区分度了。我将陆续写写去过的一些与众不同的博物馆，可能以后也会补上一些常规的博物馆，以后再说吧，比较有特色的一定要记录一下。第一篇是重庆的钢琴博物馆，据说是亚洲最大的钢琴博物馆。重庆还有一个小提琴博物馆，可惜当时一直没去，希望以后有机会的话去看看。</p>
 <span id="more"></span>
 <p>馆内收藏了各个时代的钢琴，可以看出从钢琴制作起始到现在的演变。也有一些作曲家的手稿。</p>
-<p>这是鲁宾斯坦演奏过的钢琴，19世纪的琴和现在的已经很像了，比起现在的琴少了一个踏板。<br><img src="\images\piano\Rubinstein.jpg"/></p>
-<p>这是李斯特演奏过的钢琴，能感觉到音箱的形状和琴键布局和现在不太一样。琴键数看起来没有88个。<br><img src="\images\piano\李斯特演奏1.jpg"/><br><img src="\images\piano\李斯特演奏.jpg"/></p>
-<p>这是贝多芬演奏过的。<br><img src="\images\piano\贝多芬演奏.jpg"/></p>
-<p>这是舒曼定制的钢琴，保存状态很好，看起来还蛮新的。<br><img src="\images\piano\舒曼定制.jpg"/></p>
-<p>馆里还有一个中国风的钢琴，我记得似乎是为某位中国小姐定制的。<br><img src="\images\piano\中国风.jpg"/></p>
-<p>这是一台连体钢琴，可以两个人同时演奏，在这之前不晓得还有这种钢琴，好想听听一起演奏是什么效果。<br><img src="\images\piano\双子星.jpg"/></p>
-<p>这台琴带了几个旋钮还是拉栓，看起来有点管风琴那味哈哈哈。<br><img src="\images\piano\带旋钮.jpg"/></p>
-<p>这是一台长的很高的钢琴，不知道为啥这样设计。<br><img src="\images\piano\长得很高.jpg"/></p>
-<p>这个钢琴博物馆里头钢琴很多，大厅和走廊都是琴。<br><img src="\images\piano\大厅.jpg"/><br><img src="\images\piano\走廊.jpg"/></p>
-<p>舒伯特的手稿，魔王的最初版本，与最后出版的不太一样。<br><img src="\images\piano\舒伯特手稿.jpg"/></p>
+<p>这是鲁宾斯坦演奏过的钢琴，19世纪的琴和现在的已经很像了，比起现在的琴少了一个踏板。<br>
+<img src="\images\piano\Rubinstein.jpg"/></p>
+<p>这是李斯特演奏过的钢琴，能感觉到音箱的形状和琴键布局和现在不太一样。琴键数看起来没有88个。<br>
+<img src="\images\piano\李斯特演奏1.jpg"/><br>
+<img src="\images\piano\李斯特演奏.jpg"/></p>
+<p>这是贝多芬演奏过的。<br>
+<img src="\images\piano\贝多芬演奏.jpg"/></p>
+<p>这是舒曼定制的钢琴，保存状态很好，看起来还蛮新的。<br>
+<img src="\images\piano\舒曼定制.jpg"/></p>
+<p>馆里还有一个中国风的钢琴，我记得似乎是为某位中国小姐定制的。<br>
+<img src="\images\piano\中国风.jpg"/></p>
+<p>这是一台连体钢琴，可以两个人同时演奏，在这之前不晓得还有这种钢琴，好想听听一起演奏是什么效果。<br>
+<img src="\images\piano\双子星.jpg"/></p>
+<p>这台琴带了几个旋钮还是拉栓，看起来有点管风琴那味哈哈哈。<br>
+<img src="\images\piano\带旋钮.jpg"/></p>
+<p>这是一台长的很高的钢琴，不知道为啥这样设计。<br>
+<img src="\images\piano\长得很高.jpg"/></p>
+<p>这个钢琴博物馆里头钢琴很多，大厅和走廊都是琴。<br>
+<img src="\images\piano\大厅.jpg"/><br>
+<img src="\images\piano\走廊.jpg"/></p>
+<p>舒伯特的手稿，魔王的最初版本，与最后出版的不太一样。<br>
+<img src="\images\piano\舒伯特手稿.jpg"/></p>
 
     </div>
 
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>nobody
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://thesinger.github.io/2023/02/26/%E5%8D%9A%E7%89%A9%E9%A6%86-%E9%92%A2%E7%90%B4%E5%8D%9A%E7%89%A9%E9%A6%86/" title="博物馆--钢琴博物馆">https://thesinger.github.io/2023/02/26/博物馆-钢琴博物馆/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
@@ -351,6 +428,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="nobody"
+      src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">nobody</p>
   <div class="site-description" itemprop="description">邮箱：1633748848@qq.com，记录生活和成长的点滴</div>
 </div>
@@ -365,11 +444,13 @@
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
+          
         <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
+          
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
@@ -406,14 +487,16 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
+      <span class="post-meta-item-text">站点总字数：</span>
     <span title="站点总字数">7k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">6 分钟</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
 <!--《添加网站运行时间 -->
@@ -521,7 +604,7 @@ $(document).ready(function() {
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
@@ -532,6 +615,10 @@ $(document).ready(function() {
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -554,7 +641,7 @@ $(document).ready(function() {
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
+    var guest = 'nick,mail';
     guest = guest.split(',').filter(item => {
       return GUEST.includes(item);
     });
@@ -564,14 +651,14 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       notify     : false,
       appId      : 'vXf6tPpOJHmmCIHQpCxiwQBK-gzGzoHsz',
       appKey     : 'if29cHbMXf80WhuGZU3ENwFL',
-      placeholder: "Just go go",
+      placeholder: "欢迎留下你的评论",
       avatar     : 'mm',
       meta       : guest,
       pageSize   : '10' || 10,
       visitor    : false,
       lang       : '' || 'zh-cn',
       path       : location.pathname,
-      recordIP   : false,
+      recordIP   : true,
       serverURLs : ''
     });
   }, window.Valine);

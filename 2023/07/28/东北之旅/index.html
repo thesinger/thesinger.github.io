@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"thesinger.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"thesinger.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="前几天去东北找同学玩了一趟，体验了东北搓澡和烧烤。在沈阳的几天去了大帅府，在商业区逛了逛，还是挺繁华的。不过某些区域也比较破败了。总体生活成本比南方低多了。">
@@ -143,6 +143,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -157,16 +158,63 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-关于本站">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于本站</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/message_board/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -193,7 +241,7 @@
     <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2023/07/28/%E4%B8%9C%E5%8C%97%E4%B9%8B%E6%97%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="nobody">
       <meta itemprop="description" content="邮箱：1633748848@qq.com，记录生活和成长的点滴">
     </span>
@@ -253,7 +301,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>940</span>
+              <span>939</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -279,7 +327,6 @@
   <img src="\images\东北\IMG_6290.jpg" style="max-width: 70%; max-height: 70%;">
   <img src="\images\东北\IMG_6291.jpg" style="max-width: 70%; max-height: 70%;">
 </div>
-
 <p>从沈阳出发先去了延吉，吃了冷面，逛了下朝鲜民俗风情园。这个园子完全被拍照的女士们占领了，延吉那么热的天，她们还穿长袖裙子拍照，真是佩服。摄影师一个个也都是黢黑黢黑的，没少晒。</p>
 <div>
   <img src="\images\东北\yanji.png" style="max-width: 70%; max-height: 70%;">
@@ -289,8 +336,7 @@
   <img src="\images\东北\IMG_6302.jpg" style="max-width: 70%; max-height: 70%;">
   <img src="\images\东北\IMG_6304.jpg" style="max-width: 70%; max-height: 70%;">
 </div>
-
-<p>延吉吃了午饭和晚饭后就动身前往长白山，山下一个小镇的居民，都把自己家改造成了旅店饭店。第二天上长白山，运气非常好，遇上了晴天，看到了天池，在这前几天和几天后，都是有雨的日子。美中不足的是没有赶上上长白山的第一班大巴，这导致了我们北坡有个景点（谷底森林）没看，其余景点除了天池，看的比较急。 </p>
+<p>延吉吃了午饭和晚饭后就动身前往长白山，山下一个小镇的居民，都把自己家改造成了旅店饭店。第二天上长白山，运气非常好，遇上了晴天，看到了天池，在这前几天和几天后，都是有雨的日子。美中不足的是没有赶上上长白山的第一班大巴，这导致了我们北坡有个景点（谷底森林）没看，其余景点除了天池，看的比较急。</p>
 <div>
   <img src="\images\东北\IMG_6321.jpg" style="max-width: 70%; max-height: 70%;">
   <img src="\images\东北\IMG_6322.jpg" style="max-width: 70%; max-height: 70%;">
@@ -305,7 +351,6 @@
   <img src="\images\东北\IMG_6360.jpg" style="max-width: 70%; max-height: 70%;">
   <img src="\images\东北\IMG_6363.jpg" style="max-width: 70%; max-height: 70%;">
 </div>
-
 <p>当天下了长白山就坐火车去大连了，中途在长春换乘，这是比较痛苦的时候。白天爬了山，晚上凌晨2点的火车，在火车站按摩椅上躺了会。晚上9:30左右到的长春，我们在市区吃了饭，顺便走了走，真是非常破旧，完全不像市区的样子，仿佛还在上个世纪。</p>
 <p>我们在大连待了两天，这两天主要吃了不少东西，喜鼎的海胆水饺真是非常不错，很香。还尝试了海星，很难吃，绿色的看着也没有食欲，吃了几口就扔了，晚饭尝试了生腌，生腌螃蟹挺好吃，其他一些海螺鲍鱼比较一般，还吃了凉拌象拔蚌。大连感觉比沈阳啊，长春要新，更加热闹繁华。第二天去了旅顺博物馆，晚上吃了海鲜，吃的真爽，我们两个人点了3到4人套餐，最后没吃完，实在是太多了。另外可能是这些天饮食不规律，没休息好，再加上吃的太多了。我搞的上吐下泻，无福享受更多美食，不过好在旅行也进行了尾声。</p>
 <div>
@@ -324,7 +369,6 @@
   <img src="\images\东北\IMG_6418.jpg" style="max-width: 70%; max-height: 70%;">
   <img src="\images\东北\IMG_6419.jpg" style="max-width: 70%; max-height: 70%;">
 </div>
-
 <p>最后一天回到了沈阳，看了长安三万里，真是很棒，特别是李白将进酒那一段，画面意象俱佳。由于肠胃问题，中午去吃了潮汕牛肉火锅，还不错。晚上去按摩，结束后发现开店的只有火锅烧烤了，于是不得不去吃了烧烤，按理是不应该吃这样的。</p>
 <p>在东北的这一周体验很不错，吃到了很多美食，东北菜就是量大管饱非常适合我哈哈。这次从北坡上的长白山，基本全程坐车，此外还有南坡和西坡两条路线，以后要是有机会再去。大连海鲜不错，比较便宜，不过住宿挺贵。</p>
 
@@ -333,6 +377,23 @@
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>nobody
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://thesinger.github.io/2023/07/28/%E4%B8%9C%E5%8C%97%E4%B9%8B%E6%97%85/" title="东北之旅">https://thesinger.github.io/2023/07/28/东北之旅/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
@@ -419,6 +480,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="nobody"
+      src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">nobody</p>
   <div class="site-description" itemprop="description">邮箱：1633748848@qq.com，记录生活和成长的点滴</div>
 </div>
@@ -433,11 +496,13 @@
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
+          
         <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
+          
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
@@ -474,14 +539,16 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
+      <span class="post-meta-item-text">站点总字数：</span>
     <span title="站点总字数">7k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">6 分钟</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
 <!--《添加网站运行时间 -->
@@ -589,7 +656,7 @@ $(document).ready(function() {
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
@@ -600,6 +667,10 @@ $(document).ready(function() {
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -622,7 +693,7 @@ $(document).ready(function() {
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
+    var guest = 'nick,mail';
     guest = guest.split(',').filter(item => {
       return GUEST.includes(item);
     });
@@ -632,14 +703,14 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       notify     : false,
       appId      : 'vXf6tPpOJHmmCIHQpCxiwQBK-gzGzoHsz',
       appKey     : 'if29cHbMXf80WhuGZU3ENwFL',
-      placeholder: "Just go go",
+      placeholder: "欢迎留下你的评论",
       avatar     : 'mm',
       meta       : guest,
       pageSize   : '10' || 10,
       visitor    : false,
       lang       : '' || 'zh-cn',
       path       : location.pathname,
-      recordIP   : false,
+      recordIP   : true,
       serverURLs : ''
     });
   }, window.Valine);
