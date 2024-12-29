@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hello World</title>
+    <url>/2024/09/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start">Quick Start</h2>
+<h3 id="Create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>能够复原大多数魔方的解法</title>
     <url>/2023/02/19/cube_solution/</url>
     <content><![CDATA[<p>多年前看到过一个视频，讲述了对于结构对称的魔方的通用解法。在此结合原视频和魔方吧里的帖子记录一下以作存档。</p>
-<p>以3阶魔方为例，只要会复原一层，就可以用这个解法复原整个魔方。复原魔方在于将棱块和角块移到正确的位置，并且色向也正确。如果会复原一层的话，那自然可以任意地移动角块棱块的位置，改变其色向。现在可以构造一个公式，用于某个棱块朝向的翻转。翻转后顶层的其他棱角不受影响，下面两层被打乱了。把翻转公式逆着做一遍，魔方又可以复原到原来的状态。<br><img src="/images/魔方.png" height="500" width="500" /></p>
+<p>以3阶魔方为例，只要会复原一层，就可以用这个解法复原整个魔方。复原魔方在于将棱块和角块移到正确的位置，并且色向也正确。如果会复原一层的话，那自然可以任意地移动角块棱块的位置，改变其色向。现在可以构造一个公式，用于某个棱块朝向的翻转。翻转后顶层的其他棱角不受影响，下面两层被打乱了。把翻转公式逆着做一遍，魔方又可以复原到原来的状态。<br>
+<img src="/images/魔方.png" height="500" width="500" /></p>
 <span id="more"></span>
 <p>假如我在翻转完棱块后，将顶层转90度，再逆做翻转公式，那么最后我的顶层将会有两个棱块色向翻转了，而下面二层是复原的。因此，我就可以构造一个翻棱公式，这个公式可以同时将两个棱块的色向改变。同理，我也可以构造出翻角公式，一次性将两个角块的色向翻转。构造完换色向的公式后，也可以构造出换位置的公式，构造一个公式，同时交换两个棱块或者角块的位置。将这个公式做两遍，可以达到3轮换的效果。</p>
 <p>于是，四个公式便可以完成3阶魔方的复原，即棱块转向、角块转向、棱块位置轮换、色块位置轮换。</p>
-<p>上述复原的基础在于结构对称的魔方可以构造出一个正向操作，和对应的逆向操作，使得做完正向再做逆向后，魔方可以恢复到初始转态。用一个公式来描述就是<code>ABA&#39;B&#39;</code>。若魔方经过该公式后状态不变，则称A操作和B操作遵循交律。大多数魔方公式可以基于这个模式进行构造。</p>
+<p>上述复原的基础在于结构对称的魔方可以构造出一个正向操作，和对应的逆向操作，使得做完正向再做逆向后，魔方可以恢复到初始转态。用一个公式来描述就是<code>ABA'B'</code>。若魔方经过该公式后状态不变，则称A操作和B操作遵循交律。大多数魔方公式可以基于这个模式进行构造。</p>
 <p>采用这个方法复原魔方，若最后角块位置正确（不管色向），但出现了棱块的2轮换，那么再做一次2轮换，将棱块状态变为3轮换，进行复原。若棱块位置正确，角块出现2轮换也是同理。</p>
 ]]></content>
       <categories>
@@ -19,78 +40,31 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2024/09/14/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>博客美化</title>
-    <url>/2023/02/09/hexo%E7%BE%8E%E5%8C%96/</url>
-    <content><![CDATA[<h1 id="Next主题配置文件修改"><a href="#Next主题配置文件修改" class="headerlink" title="Next主题配置文件修改"></a>Next主题配置文件修改</h1><p>参考<a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/DATA-FILES.md">官方的修改意见</a>，不要直接修改next原始配置文件，避免更新主题时文件冲突。本博客新建了<code>source/_data/next.yml</code>，并将next.yml的override字段改为true，之后所有修改都在该文件进行，修改会覆盖原始配置文件。</p>
-<h1 id="图片插入"><a href="#图片插入" class="headerlink" title="图片插入"></a>图片插入</h1><p>不需要下载hexo-asset-image,将hexo<code>_config.yml</code>配置文件中post_asset_folder的值改为true。输入指令<code>hexo new &quot;My New Post&quot;</code>，新建md文件及同名文件夹，将图片放入该文件夹内。文章中插入<code>&#123;% asset_img example.jpg %&#125;</code>,即可正常显示图片。</p>
-<span id="more"></span>
-<p>或者将post_asset_folder改为false，在source目录下新建images文件夹，图片放在这个文件夹内。<code>![](/images/test.png)</code>引用图片，也可以用HTML标签<code>&lt;img src=&quot;/images/test.png&quot; height=&quot;500&quot; width=&quot;500&quot; /&gt;</code>。</p>
-<h1 id="统计网站运行时间-字数-访客"><a href="#统计网站运行时间-字数-访客" class="headerlink" title="统计网站运行时间,字数,访客"></a>统计网站运行时间,字数,访客</h1><h2 id="运行时间"><a href="#运行时间" class="headerlink" title="运行时间"></a>运行时间</h2><p>修改<code>\themes\next\layout\_partials\footer.swig</code>,添加以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!--《添加网站运行时间 --&gt;</span><br><span class="line">&lt;!--&lt;br/&gt;--&gt;</span><br><span class="line">&lt;span id=&quot;timeDate&quot;&gt;载入天数...&lt;/span&gt;&lt;span id=&quot;times&quot;&gt;载入时分秒...&lt;/span&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var now = new Date();</span><br><span class="line"></span><br><span class="line">    function createtime() &#123;</span><br><span class="line">        var grt = new Date(&quot;02/08/2023 18:42:36&quot;); //此处修改你的建站时间或者网站上线时间 </span><br><span class="line">        now.setTime(now.getTime() + 250);</span><br><span class="line">        days = (now - grt) / 1000 / 60 / 60 / 24;</span><br><span class="line">        dnum = Math.floor(days);</span><br><span class="line">        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);</span><br><span class="line">        hnum = Math.floor(hours);</span><br><span class="line">        if (String(hnum).length == 1) &#123;</span><br><span class="line">            hnum = &quot;0&quot; + hnum;</span><br><span class="line">        &#125;</span><br><span class="line">        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);</span><br><span class="line">        mnum = Math.floor(minutes);</span><br><span class="line">        if (String(mnum).length == 1) &#123;</span><br><span class="line">            mnum = &quot;0&quot; + mnum;</span><br><span class="line">        &#125;</span><br><span class="line">        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);</span><br><span class="line">        snum = Math.round(seconds);</span><br><span class="line">        if (String(snum).length == 1) &#123;</span><br><span class="line">            snum = &quot;0&quot; + snum;</span><br><span class="line">        &#125;</span><br><span class="line">        document.getElementById(&quot;timeDate&quot;).innerHTML = &quot; | 本站已安全运行 &quot; + dnum + &quot; 天 &quot;;</span><br><span class="line">        document.getElementById(&quot;times&quot;).innerHTML = hnum + &quot; 小时 &quot; + mnum + &quot; 分 &quot; + snum + &quot; 秒&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    setInterval(&quot;createtime()&quot;, 250);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;!-- 添加网站运行时间》 --&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="字数"><a href="#字数" class="headerlink" title="字数"></a>字数</h2><p>安装插件<code>npm install hexo-symbols-count-time --save</code>,修改hexo<code>_config.yml</code>配置文件中以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">symbols_count_time:</span><br><span class="line">  symbols: true                # 文章字数统计</span><br><span class="line">  time: true                   # 文章阅读时长</span><br><span class="line">  total_symbols: true          # 站点总字数统计</span><br><span class="line">  total_time: true             # 站点总阅读时长</span><br><span class="line">  exclude_codeblock: true     # 排除代码字数统计</span><br></pre></td></tr></table></figure>
-<p>修改主题配置文件<code>_config.yml</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">symbols_count_time:</span><br><span class="line">  separated_meta: true    # 是否另起一行（true的话不和发表时间等同一行）</span><br><span class="line">  item_text_post: true    # 首页文章统计数量前是否显示文字描述（本文字数、阅读时长）</span><br><span class="line">  item_text_total: true   # 页面底部统计数量前是否显示文字描述（站点总字数、站点阅读时长</span><br></pre></td></tr></table></figure>
-<h2 id="访客"><a href="#访客" class="headerlink" title="访客"></a>访客</h2><p>打开主题配置文件即themes\next下的_config.yml，找到busuanzi_count，改为true</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">busuanzi_count:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
-<p>打开\themes\next\layout_partials\footer.swig，添加如下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if theme.busuanzi_count.enable %&#125;</span><br><span class="line">    &lt;script async src=&quot;//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">    &lt;span id=&quot;busuanzi_container_site_pv&quot;&gt;总访问量&lt;span id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;次&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">    &lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;总访客数&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;人&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&lt;!-- 不蒜子计数初始值纠正 --&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(document).ready(function() &#123;</span><br><span class="line"></span><br><span class="line">    var int = setInterval(fixCount, 50);  // 50ms周期检测函数</span><br><span class="line">    var countOffset = 0;  // 初始化首次数据</span><br><span class="line"></span><br><span class="line">    function fixCount() &#123;            </span><br><span class="line">       if (document.getElementById(&quot;busuanzi_container_site_pv&quot;).style.display != &quot;none&quot;)</span><br><span class="line">        &#123;</span><br><span class="line">            $(&quot;#busuanzi_value_site_pv&quot;).html(parseInt($(&quot;#busuanzi_value_site_pv&quot;).html()) + countOffset); </span><br><span class="line">            clearInterval(int);</span><br><span class="line">        &#125;                  </span><br><span class="line">        if ($(&quot;#busuanzi_container_site_pv&quot;).css(&quot;display&quot;) != &quot;none&quot;)</span><br><span class="line">        &#123;</span><br><span class="line">            $(&quot;#busuanzi_value_site_uv&quot;).html(parseInt($(&quot;#busuanzi_value_site_uv&quot;).html()) + countOffset); // 加上初始数据 </span><br><span class="line">            clearInterval(int); // 停止检测</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">       	</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt; </span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
-<p>删除themes\next\layout_third-party\statistics\busuanzi-counter.swig文件的<code>&lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</code>,否则访客统计下会多出一条竖线。</p>
-<h1 id="设置网站背景图片"><a href="#设置网站背景图片" class="headerlink" title="设置网站背景图片"></a>设置网站背景图片</h1><p>打开主题配置文件即themes\next下的_config.yml，将 <code>style: source/_data/styles.styl</code> 取消注释：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">custom_file_path:</span><br><span class="line">  style: source/_data/styles.styl</span><br></pre></td></tr></table></figure>
-<p>打开根目录Blog\source创建文件_data\styles.styl，添加以下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">      background: url(images/background.png);//自己喜欢的图片地址</span><br><span class="line">      background-size: cover;</span><br><span class="line">      background-repeat: no-repeat;</span><br><span class="line">      background-attachment: fixed;</span><br><span class="line">      background-position: 50% 50%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>将图片改名为background.png，保存到\themes\next\source\images文件夹下。</p>
-<h1 id="评论留言"><a href="#评论留言" class="headerlink" title="评论留言"></a>评论留言</h1><p>本博客使用了基于<a href="https://www.leancloud.cn/">LeanCould</a>的Valine评论系统，首先在LeanCloud官网注册账号并创建应用。修改next主题配置文件中Valine部分代码,enable改为true，复制appid和appkey填入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">valine:</span><br><span class="line">  enable: false</span><br><span class="line">  appid: # Your leancloud application appid</span><br><span class="line">  appkey: # Your leancloud application appkey</span><br><span class="line">  notify: false # Mail notifier</span><br><span class="line">  verify: false # Verification code</span><br><span class="line">  placeholder: Just go go # Comment box placeholder</span><br><span class="line">  avatar: mm # Gravatar style</span><br><span class="line">  guest_info: nick,mail,link # Custom comment header</span><br><span class="line">  pageSize: 10 # Pagination size</span><br><span class="line">  language: # Language, available values: en, zh-cn</span><br><span class="line">  visitor: false # Article reading statistic</span><br><span class="line">  comment_count: true # If false, comment count will only be displayed in post page, not in home page</span><br><span class="line">  recordIP: false # Whether to record the commenter IP</span><br><span class="line">  serverURLs: # When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)</span><br><span class="line">  #post_meta_order: 0</span><br></pre></td></tr></table></figure>
-<p>hexo默认在所有页面开启评论，可通过修改md文件中<code>comments: false</code>属性值关闭或开启评论。</p>
-<h1 id="设置博文内链接为蓝色"><a href="#设置博文内链接为蓝色" class="headerlink" title="设置博文内链接为蓝色"></a>设置博文内链接为蓝色</h1><p>打开themes&#x2F;next&#x2F;source&#x2F;css&#x2F;_common&#x2F;components&#x2F;post&#x2F;post.styl文件，将下面的代码复制到文件最后：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.post-body p a&#123;</span><br><span class="line">    color: #0593d3;</span><br><span class="line">    border-bottom: none;</span><br><span class="line">    &amp;:hover &#123;</span><br><span class="line">      color: #0477ab;</span><br><span class="line">      text-decoration: underline;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>next</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>tmux常用指令</title>
     <url>/2023/03/09/tmux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="启动与退出"><a href="#启动与退出" class="headerlink" title="启动与退出"></a>启动与退出</h1><p>输入<code>tmux</code>，进入tmux,按<code>Ctlr + d</code>或者输入<code>exit</code>，退出tmux窗口。退出后该对话将不存在。</p>
-<h1 id="查看tmux窗口历史输出"><a href="#查看tmux窗口历史输出" class="headerlink" title="查看tmux窗口历史输出"></a>查看tmux窗口历史输出</h1><p>先进入tmux会话，然后按<code>Ctlr + b</code>，接着按<code>[</code>，即可进入查看模式，方向键滚动显示。按<code>q</code>退出查看模式。</p>
-<h1 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h1><h2 id="新建会话"><a href="#新建会话" class="headerlink" title="新建会话"></a>新建会话</h2><p>第一个启动的 Tmux 窗口，编号是0，第二个窗口的编号是1，以此类推。以下指令可新建会话并为会话起名。</p>
+    <content><![CDATA[<h1>启动与退出</h1>
+<p>输入<code>tmux</code>，进入tmux,按<code>Ctlr + d</code>或者输入<code>exit</code>，退出tmux窗口。退出后该对话将不存在。</p>
+<h1>查看tmux窗口历史输出</h1>
+<p>先进入tmux会话，然后按<code>Ctlr + b</code>，接着按<code>[</code>，即可进入查看模式，方向键滚动显示。按<code>q</code>退出查看模式。</p>
+<h1>会话管理</h1>
+<h2 id="新建会话">新建会话</h2>
+<p>第一个启动的 Tmux 窗口，编号是0，第二个窗口的编号是1，以此类推。以下指令可新建会话并为会话起名。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tmux new -s &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
-<h2 id="分离会话"><a href="#分离会话" class="headerlink" title="分离会话"></a>分离会话</h2><p>在 Tmux 窗口中，按下<code>Ctrl+b d</code>或者输入<code>tmux detach</code>命令，就会将当前会话与窗口分离。命令执行后，就会退出当前 Tmux 窗口，但是会话和里面的进程仍然在后台运行。<br><code>tmux ls</code>命令可以查看当前所有的 Tmux 会话。</p>
-<h2 id="接入会话"><a href="#接入会话" class="headerlink" title="接入会话"></a>接入会话</h2><p><code>tmux attach</code>命令用于重新接入某个已存在的会话。</p>
+<h2 id="分离会话">分离会话</h2>
+<p>在 Tmux 窗口中，按下<code>Ctrl+b d</code>或者输入<code>tmux detach</code>命令，就会将当前会话与窗口分离。命令执行后，就会退出当前 Tmux 窗口，但是会话和里面的进程仍然在后台运行。<br>
+<code>tmux ls</code>命令可以查看当前所有的 Tmux 会话。</p>
+<h2 id="接入会话">接入会话</h2>
+<p><code>tmux attach</code>命令用于重新接入某个已存在的会话。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux attach -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux attach -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="杀死会话"><a href="#杀死会话" class="headerlink" title="杀死会话"></a>杀死会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux kill-session -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux kill-session -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="切换会话"><a href="#切换会话" class="headerlink" title="切换会话"></a>切换会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux switch -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">$ tmux switch -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="重命名会话"><a href="#重命名会话" class="headerlink" title="重命名会话"></a>重命名会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将0号会话重命名</span><br><span class="line">tmux rename-session -t 0 &lt;new-name&gt;</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="https://www.ruanyifeng.com/blog/2019/10/tmux.html">https://www.ruanyifeng.com/blog/2019/10/tmux.html</a></p>
+<h2 id="杀死会话">杀死会话</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux kill-session -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux kill-session -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="切换会话">切换会话</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux switch -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">$ tmux switch -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="重命名会话">重命名会话</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将0号会话重命名</span><br><span class="line">tmux rename-session -t 0 &lt;new-name&gt;</span><br></pre></td></tr></table></figure>
+<h1>参考链接</h1>
+<p><a href="https://www.ruanyifeng.com/blog/2019/10/tmux.html">https://www.ruanyifeng.com/blog/2019/10/tmux.html</a></p>
 ]]></content>
       <categories>
         <category>指令</category>
@@ -101,22 +75,79 @@
       </tags>
   </entry>
   <entry>
+    <title>博客美化</title>
+    <url>/2023/02/09/hexo%E7%BE%8E%E5%8C%96/</url>
+    <content><![CDATA[<h1>Next主题配置文件修改</h1>
+<p>参考<a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/DATA-FILES.md">官方的修改意见</a>，不要直接修改next原始配置文件，避免更新主题时文件冲突。本博客新建了<code>source/_data/next.yml</code>，并将next.yml的override字段改为true，之后所有修改都在该文件进行，修改会覆盖原始配置文件。</p>
+<h1>图片插入</h1>
+<p>不需要下载hexo-asset-image,将hexo<code>_config.yml</code>配置文件中post_asset_folder的值改为true。输入指令<code>hexo new &quot;My New Post&quot;</code>，新建md文件及同名文件夹，将图片放入该文件夹内。文章中插入<code>&#123;% asset_img example.jpg %&#125;</code>,即可正常显示图片。</p>
+<span id="more"></span>
+<p>或者将post_asset_folder改为false，在source目录下新建images文件夹，图片放在这个文件夹内。<code>![](/images/test.png)</code>引用图片，也可以用HTML标签<code>&lt;img src=&quot;/images/test.png&quot; height=&quot;500&quot; width=&quot;500&quot; /&gt;</code>。</p>
+<h1>统计网站运行时间,字数,访客</h1>
+<h2 id="运行时间">运行时间</h2>
+<p>修改<code>\themes\next\layout\_partials\footer.swig</code>,添加以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!--《添加网站运行时间 --&gt;</span><br><span class="line">&lt;!--&lt;br/&gt;--&gt;</span><br><span class="line">&lt;span id=&quot;timeDate&quot;&gt;载入天数...&lt;/span&gt;&lt;span id=&quot;times&quot;&gt;载入时分秒...&lt;/span&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var now = new Date();</span><br><span class="line"></span><br><span class="line">    function createtime() &#123;</span><br><span class="line">        var grt = new Date(&quot;02/08/2023 18:42:36&quot;); //此处修改你的建站时间或者网站上线时间 </span><br><span class="line">        now.setTime(now.getTime() + 250);</span><br><span class="line">        days = (now - grt) / 1000 / 60 / 60 / 24;</span><br><span class="line">        dnum = Math.floor(days);</span><br><span class="line">        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);</span><br><span class="line">        hnum = Math.floor(hours);</span><br><span class="line">        if (String(hnum).length == 1) &#123;</span><br><span class="line">            hnum = &quot;0&quot; + hnum;</span><br><span class="line">        &#125;</span><br><span class="line">        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);</span><br><span class="line">        mnum = Math.floor(minutes);</span><br><span class="line">        if (String(mnum).length == 1) &#123;</span><br><span class="line">            mnum = &quot;0&quot; + mnum;</span><br><span class="line">        &#125;</span><br><span class="line">        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);</span><br><span class="line">        snum = Math.round(seconds);</span><br><span class="line">        if (String(snum).length == 1) &#123;</span><br><span class="line">            snum = &quot;0&quot; + snum;</span><br><span class="line">        &#125;</span><br><span class="line">        document.getElementById(&quot;timeDate&quot;).innerHTML = &quot; | 本站已安全运行 &quot; + dnum + &quot; 天 &quot;;</span><br><span class="line">        document.getElementById(&quot;times&quot;).innerHTML = hnum + &quot; 小时 &quot; + mnum + &quot; 分 &quot; + snum + &quot; 秒&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    setInterval(&quot;createtime()&quot;, 250);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;!-- 添加网站运行时间》 --&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="字数">字数</h2>
+<p>安装插件<code>npm install hexo-symbols-count-time --save</code>,修改hexo<code>_config.yml</code>配置文件中以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">symbols_count_time:</span><br><span class="line">  symbols: true                # 文章字数统计</span><br><span class="line">  time: true                   # 文章阅读时长</span><br><span class="line">  total_symbols: true          # 站点总字数统计</span><br><span class="line">  total_time: true             # 站点总阅读时长</span><br><span class="line">  exclude_codeblock: true     # 排除代码字数统计</span><br></pre></td></tr></table></figure>
+<p>修改主题配置文件<code>_config.yml</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">symbols_count_time:</span><br><span class="line">  separated_meta: true    # 是否另起一行（true的话不和发表时间等同一行）</span><br><span class="line">  item_text_post: true    # 首页文章统计数量前是否显示文字描述（本文字数、阅读时长）</span><br><span class="line">  item_text_total: true   # 页面底部统计数量前是否显示文字描述（站点总字数、站点阅读时长</span><br></pre></td></tr></table></figure>
+<h2 id="访客">访客</h2>
+<p>打开主题配置文件即themes\next下的_config.yml，找到busuanzi_count，改为true</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">busuanzi_count:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
+<p>打开\themes\next\layout_partials\footer.swig，添加如下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if theme.busuanzi_count.enable %&#125;</span><br><span class="line">    &lt;script async src=&quot;//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">    &lt;span id=&quot;busuanzi_container_site_pv&quot;&gt;总访问量&lt;span id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;次&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">    &lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;总访客数&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;人&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&lt;!-- 不蒜子计数初始值纠正 --&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(document).ready(function() &#123;</span><br><span class="line"></span><br><span class="line">    var int = setInterval(fixCount, 50);  // 50ms周期检测函数</span><br><span class="line">    var countOffset = 0;  // 初始化首次数据</span><br><span class="line"></span><br><span class="line">    function fixCount() &#123;            </span><br><span class="line">       if (document.getElementById(&quot;busuanzi_container_site_pv&quot;).style.display != &quot;none&quot;)</span><br><span class="line">        &#123;</span><br><span class="line">            $(&quot;#busuanzi_value_site_pv&quot;).html(parseInt($(&quot;#busuanzi_value_site_pv&quot;).html()) + countOffset); </span><br><span class="line">            clearInterval(int);</span><br><span class="line">        &#125;                  </span><br><span class="line">        if ($(&quot;#busuanzi_container_site_pv&quot;).css(&quot;display&quot;) != &quot;none&quot;)</span><br><span class="line">        &#123;</span><br><span class="line">            $(&quot;#busuanzi_value_site_uv&quot;).html(parseInt($(&quot;#busuanzi_value_site_uv&quot;).html()) + countOffset); // 加上初始数据 </span><br><span class="line">            clearInterval(int); // 停止检测</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">       	</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt; </span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+<p>删除themes\next\layout_third-party\statistics\busuanzi-counter.swig文件的<code>&lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</code>,否则访客统计下会多出一条竖线。</p>
+<h1>设置网站背景图片</h1>
+<p>打开主题配置文件即themes\next下的_config.yml，将 <code>style: source/_data/styles.styl</code> 取消注释：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">custom_file_path:</span><br><span class="line">  style: source/_data/styles.styl</span><br></pre></td></tr></table></figure>
+<p>打开根目录Blog\source创建文件_data\styles.styl，添加以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">      background: url(images/background.png);//自己喜欢的图片地址</span><br><span class="line">      background-size: cover;</span><br><span class="line">      background-repeat: no-repeat;</span><br><span class="line">      background-attachment: fixed;</span><br><span class="line">      background-position: 50% 50%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将图片改名为background.png，保存到\themes\next\source\images文件夹下。</p>
+<h1>评论留言</h1>
+<p>本博客使用了基于<a href="https://www.leancloud.cn/">LeanCould</a>的Valine评论系统，首先在LeanCloud官网注册账号并创建应用。修改next主题配置文件中Valine部分代码,enable改为true，复制appid和appkey填入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">valine:</span><br><span class="line">  enable: false</span><br><span class="line">  appid: # Your leancloud application appid</span><br><span class="line">  appkey: # Your leancloud application appkey</span><br><span class="line">  notify: false # Mail notifier</span><br><span class="line">  verify: false # Verification code</span><br><span class="line">  placeholder: Just go go # Comment box placeholder</span><br><span class="line">  avatar: mm # Gravatar style</span><br><span class="line">  guest_info: nick,mail,link # Custom comment header</span><br><span class="line">  pageSize: 10 # Pagination size</span><br><span class="line">  language: # Language, available values: en, zh-cn</span><br><span class="line">  visitor: false # Article reading statistic</span><br><span class="line">  comment_count: true # If false, comment count will only be displayed in post page, not in home page</span><br><span class="line">  recordIP: false # Whether to record the commenter IP</span><br><span class="line">  serverURLs: # When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)</span><br><span class="line">  #post_meta_order: 0</span><br></pre></td></tr></table></figure>
+<p>hexo默认在所有页面开启评论，可通过修改md文件中<code>comments: false</code>属性值关闭或开启评论。</p>
+<h1>设置博文内链接为蓝色</h1>
+<p>打开themes/next/source/css/_common/components/post/post.styl文件，将下面的代码复制到文件最后：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.post-body p a&#123;</span><br><span class="line">    color: #0593d3;</span><br><span class="line">    border-bottom: none;</span><br><span class="line">    &amp;:hover &#123;</span><br><span class="line">      color: #0477ab;</span><br><span class="line">      text-decoration: underline;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>next</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>博物馆--钢琴博物馆</title>
     <url>/2023/02/26/%E5%8D%9A%E7%89%A9%E9%A6%86-%E9%92%A2%E7%90%B4%E5%8D%9A%E7%89%A9%E9%A6%86/</url>
     <content><![CDATA[<p>打算记录整理一下以前去过的有特色的一些博物馆。一直以来都很喜欢去博物馆，每每看到藏品，我都不禁会想这件藏品后有着怎么的故事，藏品曾经的主人有什么样的人生。一件物品跨越时空呈现在我眼前，让我觉得很不可思议，想想这中间几百上千年要经历多少事。历经岁月后它被我看到，透过它我觉得我与千百年前的人、时代产生了联系，这对我来说就像奇迹一般，我被这种沧桑感，宏大感所吸引。</p>
 <p>去过的大多中国博物馆，大都千篇一律，从建筑上看基本都是一个风格，展品上来说也都是遵循时间循序进行陈列，从石器时代一直到近现代。感觉缺乏特色没有新意，除了馆里的一些珍品外，可以说博物馆间几乎没有区分度了。我将陆续写写去过的一些与众不同的博物馆，可能以后也会补上一些常规的博物馆，以后再说吧，比较有特色的一定要记录一下。第一篇是重庆的钢琴博物馆，据说是亚洲最大的钢琴博物馆。重庆还有一个小提琴博物馆，可惜当时一直没去，希望以后有机会的话去看看。</p>
 <span id="more"></span>
 <p>馆内收藏了各个时代的钢琴，可以看出从钢琴制作起始到现在的演变。也有一些作曲家的手稿。</p>
-<p>这是鲁宾斯坦演奏过的钢琴，19世纪的琴和现在的已经很像了，比起现在的琴少了一个踏板。<br><img src="\images\piano\Rubinstein.jpg"/></p>
-<p>这是李斯特演奏过的钢琴，能感觉到音箱的形状和琴键布局和现在不太一样。琴键数看起来没有88个。<br><img src="\images\piano\李斯特演奏1.jpg"/><br><img src="\images\piano\李斯特演奏.jpg"/></p>
-<p>这是贝多芬演奏过的。<br><img src="\images\piano\贝多芬演奏.jpg"/></p>
-<p>这是舒曼定制的钢琴，保存状态很好，看起来还蛮新的。<br><img src="\images\piano\舒曼定制.jpg"/></p>
-<p>馆里还有一个中国风的钢琴，我记得似乎是为某位中国小姐定制的。<br><img src="\images\piano\中国风.jpg"/></p>
-<p>这是一台连体钢琴，可以两个人同时演奏，在这之前不晓得还有这种钢琴，好想听听一起演奏是什么效果。<br><img src="\images\piano\双子星.jpg"/></p>
-<p>这台琴带了几个旋钮还是拉栓，看起来有点管风琴那味哈哈哈。<br><img src="\images\piano\带旋钮.jpg"/></p>
-<p>这是一台长的很高的钢琴，不知道为啥这样设计。<br><img src="\images\piano\长得很高.jpg"/></p>
-<p>这个钢琴博物馆里头钢琴很多，大厅和走廊都是琴。<br><img src="\images\piano\大厅.jpg"/><br><img src="\images\piano\走廊.jpg"/></p>
-<p>舒伯特的手稿，魔王的最初版本，与最后出版的不太一样。<br><img src="\images\piano\舒伯特手稿.jpg"/></p>
+<p>这是鲁宾斯坦演奏过的钢琴，19世纪的琴和现在的已经很像了，比起现在的琴少了一个踏板。<br>
+<img src="\images\piano\Rubinstein.jpg"/></p>
+<p>这是李斯特演奏过的钢琴，能感觉到音箱的形状和琴键布局和现在不太一样。琴键数看起来没有88个。<br>
+<img src="\images\piano\李斯特演奏1.jpg"/><br>
+<img src="\images\piano\李斯特演奏.jpg"/></p>
+<p>这是贝多芬演奏过的。<br>
+<img src="\images\piano\贝多芬演奏.jpg"/></p>
+<p>这是舒曼定制的钢琴，保存状态很好，看起来还蛮新的。<br>
+<img src="\images\piano\舒曼定制.jpg"/></p>
+<p>馆里还有一个中国风的钢琴，我记得似乎是为某位中国小姐定制的。<br>
+<img src="\images\piano\中国风.jpg"/></p>
+<p>这是一台连体钢琴，可以两个人同时演奏，在这之前不晓得还有这种钢琴，好想听听一起演奏是什么效果。<br>
+<img src="\images\piano\双子星.jpg"/></p>
+<p>这台琴带了几个旋钮还是拉栓，看起来有点管风琴那味哈哈哈。<br>
+<img src="\images\piano\带旋钮.jpg"/></p>
+<p>这是一台长的很高的钢琴，不知道为啥这样设计。<br>
+<img src="\images\piano\长得很高.jpg"/></p>
+<p>这个钢琴博物馆里头钢琴很多，大厅和走廊都是琴。<br>
+<img src="\images\piano\大厅.jpg"/><br>
+<img src="\images\piano\走廊.jpg"/></p>
+<p>舒伯特的手稿，魔王的最初版本，与最后出版的不太一样。<br>
+<img src="\images\piano\舒伯特手稿.jpg"/></p>
 ]]></content>
       <categories>
         <category>博物馆</category>
@@ -124,89 +155,6 @@
       <tags>
         <tag>钢琴</tag>
         <tag>古典音乐</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>澳门路环徒步</title>
-    <url>/2023/05/17/%E6%BE%B3%E9%97%A8%E8%B7%AF%E7%8E%AF%E5%BE%92%E6%AD%A5/</url>
-    <content><![CDATA[<p>昨天天气不错，临时起意不去学校了。决定去路环逛逛，一直没有去过，最想去的就是龙爪角，看到别人发，觉得风景不错。</p>
-<p>到了路环，先去安德鲁蛋挞那买了两个蛋挞。路环这个店还是很原始的样子，没有过多装换，没啥游客，几乎都是本地人在购买，店里非常朴素，做蛋挞蛋糕的地方都是开放的，没有隔档。</p>
-<span id="more"></span>
-<div>
-  <img src="\images\路环徒步\IMG_5627.jpg" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>安德鲁蛋挞对面是卫生站，一个粉色的房子，看起来很温馨。</p>
-<div>
-  <img src="\images\路环徒步\IMG_5629.jpg" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>从卫生站往左边走，可以走到码头，非常近，靠海的那一侧房子都是用瓦楞搭起来的，不少人家往海的方向对房子进行了扩展，在陆地上的只有很小一部分。码头附近还有几家卖海鲜干货的。午餐选了一家海景不错的，也是比较大的一家店。</p>
-<div>
-  <img src="\images\路环徒步\IMG_5636.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5638.jpg" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>吃完饭走到十月初五马路，发现这边吃的更多哈哈哈，有一家人特别多，后来搜了路环美食，发现这家叫雅憩，做葡国菜的，中午我从那路过，看外面的桌子都坐满了。十月初五马路很多房子彩色的，很适合拍照。</p>
-<div>
-  <img src="\images\路环徒步\IMG_5645.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5647.jpg" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>沿着十月初五马路一直走就走到山上去了，有些路段没有人行道，就只能走马路，不过车辆不多，山上是警察的射击训练营。走在这个山路上，都感觉不到这是澳门，脱离了往日繁华热闹的印象。</p>
-<div>
-  <img src="\images\路环徒步\IMG_5651.jpg" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>走到竹湾海滩那边，可以在海里游泳，沙滩上有人躺着晒太阳，澳门冬泳协会也在这，广东这带的冬天那么短，感觉都游不了几天冬泳。从十月初五马路上山到乡村马路后，沿途都有巴士站，不想走路还可以坐巴士，蛮方便的。美中不足的就是有些马路没有人行道，还是不太安全。</p>
-<p>到了龙爪角，有很多人翻出护栏钓鱼。这个海滨步道依托原始的地形修建，几乎没有太多改动，就加了一些石梯，铺筑了路面，在比较平整的地方就没有人工改动，直接走在山体的石头上。有些路段还有山上的泉水留下。大概中途的位置有一个观海亭，风还挺大的。</p>
-<div>
-  <img src="\images\路环徒步\IMG_5658.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5663.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5678.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5682.jpg" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>从龙爪角出来就是黑沙海滩，之后我就前往石排湾郊野公园，走的山上的步道，上去的时候倒是挺累人的，好在山不是很高，在山里几乎都是平路。山里岔路很多，很容易走错方向。到了公园，有个地形图，发现这个路环这些山都是连着的。公园养了一些动物，熊猫馆里人挺多，两只熊猫活动空间很大。</p>
-<div>
-  <img src="\images\路环徒步\IMG_5690.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5697.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5698.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5700.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\路环徒步\IMG_5704.jpg" style="max-width: 50%; max-height: 50%;">
-</div>
-]]></content>
-      <categories>
-        <category>运动</category>
-      </categories>
-      <tags>
-        <tag>澳门</tag>
-        <tag>徒步</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>澳门10公里</title>
-    <url>/2023/03/20/%E6%BE%B3%E9%97%A810%E5%85%AC%E9%87%8C/</url>
-    <content><![CDATA[<p>昨天参加了澳门金沙的10公里比赛，这是我第一次正儿八经地跑10公里，阳康后训练了一个多月，感觉跑的不错，比较轻松地完成了比赛。一些老爷爷老太太真有活力，也很热情。比赛途中我就看到了那位拿假蛋挞的女士，当时好想问她那个能不能吃，笑死。</p>
-<span id="more"></span>
-<div>
-  <img src="\images\macau_10k\1.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\macau_10k\2.jpg" style="max-width: 50%; max-height: 50%;"/>
-  <img src="\images\macau_10k\3.jpg" style="max-width: 50%; max-height: 50%;"/>
-  <img src="\images\macau_10k\4.jpg" style="max-width: 50%; max-height: 50%;"/>
-  <img src="\images\macau_10k\6.jpg" style="max-width: 50%; max-height: 50%;"/>
-  <img src="\images\macau_10k\5.jpg" style="max-width: 50%; max-height: 50%;"/>
-</div>
-
-
-
-]]></content>
-      <categories>
-        <category>运动</category>
-      </categories>
-      <tags>
-        <tag>澳门</tag>
-        <tag>跑步</tag>
       </tags>
   </entry>
   <entry>
@@ -219,7 +167,6 @@
   <img src="\images\东北\IMG_6290.jpg" style="max-width: 70%; max-height: 70%;">
   <img src="\images\东北\IMG_6291.jpg" style="max-width: 70%; max-height: 70%;">
 </div>
-
 <p>从沈阳出发先去了延吉，吃了冷面，逛了下朝鲜民俗风情园。这个园子完全被拍照的女士们占领了，延吉那么热的天，她们还穿长袖裙子拍照，真是佩服。摄影师一个个也都是黢黑黢黑的，没少晒。</p>
 <div>
   <img src="\images\东北\yanji.png" style="max-width: 70%; max-height: 70%;">
@@ -229,8 +176,7 @@
   <img src="\images\东北\IMG_6302.jpg" style="max-width: 70%; max-height: 70%;">
   <img src="\images\东北\IMG_6304.jpg" style="max-width: 70%; max-height: 70%;">
 </div>
-
-<p>延吉吃了午饭和晚饭后就动身前往长白山，山下一个小镇的居民，都把自己家改造成了旅店饭店。第二天上长白山，运气非常好，遇上了晴天，看到了天池，在这前几天和几天后，都是有雨的日子。美中不足的是没有赶上上长白山的第一班大巴，这导致了我们北坡有个景点（谷底森林）没看，其余景点除了天池，看的比较急。 </p>
+<p>延吉吃了午饭和晚饭后就动身前往长白山，山下一个小镇的居民，都把自己家改造成了旅店饭店。第二天上长白山，运气非常好，遇上了晴天，看到了天池，在这前几天和几天后，都是有雨的日子。美中不足的是没有赶上上长白山的第一班大巴，这导致了我们北坡有个景点（谷底森林）没看，其余景点除了天池，看的比较急。</p>
 <div>
   <img src="\images\东北\IMG_6321.jpg" style="max-width: 70%; max-height: 70%;">
   <img src="\images\东北\IMG_6322.jpg" style="max-width: 70%; max-height: 70%;">
@@ -245,7 +191,6 @@
   <img src="\images\东北\IMG_6360.jpg" style="max-width: 70%; max-height: 70%;">
   <img src="\images\东北\IMG_6363.jpg" style="max-width: 70%; max-height: 70%;">
 </div>
-
 <p>当天下了长白山就坐火车去大连了，中途在长春换乘，这是比较痛苦的时候。白天爬了山，晚上凌晨2点的火车，在火车站按摩椅上躺了会。晚上9:30左右到的长春，我们在市区吃了饭，顺便走了走，真是非常破旧，完全不像市区的样子，仿佛还在上个世纪。</p>
 <p>我们在大连待了两天，这两天主要吃了不少东西，喜鼎的海胆水饺真是非常不错，很香。还尝试了海星，很难吃，绿色的看着也没有食欲，吃了几口就扔了，晚饭尝试了生腌，生腌螃蟹挺好吃，其他一些海螺鲍鱼比较一般，还吃了凉拌象拔蚌。大连感觉比沈阳啊，长春要新，更加热闹繁华。第二天去了旅顺博物馆，晚上吃了海鲜，吃的真爽，我们两个人点了3到4人套餐，最后没吃完，实在是太多了。另外可能是这些天饮食不规律，没休息好，再加上吃的太多了。我搞的上吐下泻，无福享受更多美食，不过好在旅行也进行了尾声。</p>
 <div>
@@ -264,7 +209,6 @@
   <img src="\images\东北\IMG_6418.jpg" style="max-width: 70%; max-height: 70%;">
   <img src="\images\东北\IMG_6419.jpg" style="max-width: 70%; max-height: 70%;">
 </div>
-
 <p>最后一天回到了沈阳，看了长安三万里，真是很棒，特别是李白将进酒那一段，画面意象俱佳。由于肠胃问题，中午去吃了潮汕牛肉火锅，还不错。晚上去按摩，结束后发现开店的只有火锅烧烤了，于是不得不去吃了烧烤，按理是不应该吃这样的。</p>
 <p>在东北的这一周体验很不错，吃到了很多美食，东北菜就是量大管饱非常适合我哈哈。这次从北坡上的长白山，基本全程坐车，此外还有南坡和西坡两条路线，以后要是有机会再去。大连海鲜不错，比较便宜，不过住宿挺贵。</p>
 ]]></content>
@@ -279,27 +223,132 @@
       </tags>
   </entry>
   <entry>
+    <title>澳门10公里</title>
+    <url>/2023/03/20/%E6%BE%B3%E9%97%A810%E5%85%AC%E9%87%8C/</url>
+    <content><![CDATA[<p>昨天参加了澳门金沙的10公里比赛，这是我第一次正儿八经地跑10公里，阳康后训练了一个多月，感觉跑的不错，比较轻松地完成了比赛。一些老爷爷老太太真有活力，也很热情。比赛途中我就看到了那位拿假蛋挞的女士，当时好想问她那个能不能吃，笑死。</p>
+<span id="more"></span>
+<div>
+  <img src="\images\macau_10k\1.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\macau_10k\2.jpg" style="max-width: 50%; max-height: 50%;"/>
+  <img src="\images\macau_10k\3.jpg" style="max-width: 50%; max-height: 50%;"/>
+  <img src="\images\macau_10k\4.jpg" style="max-width: 50%; max-height: 50%;"/>
+  <img src="\images\macau_10k\6.jpg" style="max-width: 50%; max-height: 50%;"/>
+  <img src="\images\macau_10k\5.jpg" style="max-width: 50%; max-height: 50%;"/>
+</div>
+]]></content>
+      <categories>
+        <category>运动</category>
+      </categories>
+      <tags>
+        <tag>澳门</tag>
+        <tag>跑步</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>澳门路环徒步</title>
+    <url>/2023/05/17/%E6%BE%B3%E9%97%A8%E8%B7%AF%E7%8E%AF%E5%BE%92%E6%AD%A5/</url>
+    <content><![CDATA[<p>昨天天气不错，临时起意不去学校了。决定去路环逛逛，一直没有去过，最想去的就是龙爪角，看到别人发，觉得风景不错。</p>
+<p>到了路环，先去安德鲁蛋挞那买了两个蛋挞。路环这个店还是很原始的样子，没有过多装换，没啥游客，几乎都是本地人在购买，店里非常朴素，做蛋挞蛋糕的地方都是开放的，没有隔档。</p>
+<span id="more"></span>
+<div>
+  <img src="\images\路环徒步\IMG_5627.jpg" style="max-width: 50%; max-height: 50%;">
+</div>
+<p>安德鲁蛋挞对面是卫生站，一个粉色的房子，看起来很温馨。</p>
+<div>
+  <img src="\images\路环徒步\IMG_5629.jpg" style="max-width: 50%; max-height: 50%;">
+</div>
+<p>从卫生站往左边走，可以走到码头，非常近，靠海的那一侧房子都是用瓦楞搭起来的，不少人家往海的方向对房子进行了扩展，在陆地上的只有很小一部分。码头附近还有几家卖海鲜干货的。午餐选了一家海景不错的，也是比较大的一家店。</p>
+<div>
+  <img src="\images\路环徒步\IMG_5636.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5638.jpg" style="max-width: 50%; max-height: 50%;">
+</div>
+<p>吃完饭走到十月初五马路，发现这边吃的更多哈哈哈，有一家人特别多，后来搜了路环美食，发现这家叫雅憩，做葡国菜的，中午我从那路过，看外面的桌子都坐满了。十月初五马路很多房子彩色的，很适合拍照。</p>
+<div>
+  <img src="\images\路环徒步\IMG_5645.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5647.jpg" style="max-width: 50%; max-height: 50%;">
+</div>
+<p>沿着十月初五马路一直走就走到山上去了，有些路段没有人行道，就只能走马路，不过车辆不多，山上是警察的射击训练营。走在这个山路上，都感觉不到这是澳门，脱离了往日繁华热闹的印象。</p>
+<div>
+  <img src="\images\路环徒步\IMG_5651.jpg" style="max-width: 50%; max-height: 50%;">
+</div>
+<p>走到竹湾海滩那边，可以在海里游泳，沙滩上有人躺着晒太阳，澳门冬泳协会也在这，广东这带的冬天那么短，感觉都游不了几天冬泳。从十月初五马路上山到乡村马路后，沿途都有巴士站，不想走路还可以坐巴士，蛮方便的。美中不足的就是有些马路没有人行道，还是不太安全。</p>
+<p>到了龙爪角，有很多人翻出护栏钓鱼。这个海滨步道依托原始的地形修建，几乎没有太多改动，就加了一些石梯，铺筑了路面，在比较平整的地方就没有人工改动，直接走在山体的石头上。有些路段还有山上的泉水留下。大概中途的位置有一个观海亭，风还挺大的。</p>
+<div>
+  <img src="\images\路环徒步\IMG_5658.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5663.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5678.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5682.jpg" style="max-width: 50%; max-height: 50%;">
+</div>
+<p>从龙爪角出来就是黑沙海滩，之后我就前往石排湾郊野公园，走的山上的步道，上去的时候倒是挺累人的，好在山不是很高，在山里几乎都是平路。山里岔路很多，很容易走错方向。到了公园，有个地形图，发现这个路环这些山都是连着的。公园养了一些动物，熊猫馆里人挺多，两只熊猫活动空间很大。</p>
+<div>
+  <img src="\images\路环徒步\IMG_5690.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5697.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5698.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5700.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\路环徒步\IMG_5704.jpg" style="max-width: 50%; max-height: 50%;">
+</div>
+]]></content>
+      <categories>
+        <category>运动</category>
+      </categories>
+      <tags>
+        <tag>澳门</tag>
+        <tag>徒步</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>跑步训练与提高</title>
     <url>/2023/02/19/%E8%B7%91%E6%AD%A5%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8F%90%E9%AB%98/</url>
-    <content><![CDATA[<h1 id="力量训练"><a href="#力量训练" class="headerlink" title="力量训练"></a>力量训练</h1><h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><h3 id="基础核心训练"><a href="#基础核心训练" class="headerlink" title="基础核心训练"></a>基础核心训练</h3><h4 id="核心力量训练"><a href="#核心力量训练" class="headerlink" title="核心力量训练"></a>核心力量训练</h4><p>上腹肌（即六块腹肌中靠上的部分）：卷腹。<br>下腹肌：仰卧举腿、仰卧踩单车。<br>躯干侧前方（腹内外斜肌）：侧卷腹、卷腹摸脚踝、曲腿刮雨器。<br>躯干两侧（腰方肌：控制骨盆）：侧卧起、曲腿侧卧起、侧卧并腿。<br>躯干后方肌肉（竖脊肌：保持躯干挺直，防止腰痛）：仰卧挺身。</p>
+    <content><![CDATA[<h1>力量训练</h1>
+<h2 id="核心">核心</h2>
+<h3 id="基础核心训练">基础核心训练</h3>
+<h4 id="核心力量训练">核心力量训练</h4>
+<p>上腹肌（即六块腹肌中靠上的部分）：卷腹。<br>
+下腹肌：仰卧举腿、仰卧踩单车。<br>
+躯干侧前方（腹内外斜肌）：侧卷腹、卷腹摸脚踝、曲腿刮雨器。<br>
+躯干两侧（腰方肌：控制骨盆）：侧卧起、曲腿侧卧起、侧卧并腿。<br>
+躯干后方肌肉（竖脊肌：保持躯干挺直，防止腰痛）：仰卧挺身。</p>
 <span id="more"></span>
-<h4 id="核心稳定性训练（锻炼深层肌肉）"><a href="#核心稳定性训练（锻炼深层肌肉）" class="headerlink" title="核心稳定性训练（锻炼深层肌肉）"></a>核心稳定性训练（锻炼深层肌肉）</h4><p>俯桥（平板支撑）、侧桥、仰桥（臀桥）。</p>
-<h3 id="专项核心训练"><a href="#专项核心训练" class="headerlink" title="专项核心训练"></a>专项核心训练</h3><p>平板支撑体位交替曲腿、俯桥提膝后摆腿、侧桥位单侧模拟跑步、单腿臀桥、臀桥接提膝。完成上述动作时应注意保持核心稳定。</p>
-<h2 id="臀部和大腿"><a href="#臀部和大腿" class="headerlink" title="臀部和大腿"></a>臀部和大腿</h2><h3 id="中级（提高力量）"><a href="#中级（提高力量）" class="headerlink" title="中级（提高力量）"></a>中级（提高力量）</h3><p>弓箭步、单腿上训练凳、保加尼亚剪蹲、单腿硬拉、单腿臀桥、弓箭步跳（爆发力训练）。</p>
-<h3 id="高级（增加神经肌肉协调性、进一步强化关键肌肉）"><a href="#高级（增加神经肌肉协调性、进一步强化关键肌肉）" class="headerlink" title="高级（增加神经肌肉协调性、进一步强化关键肌肉）"></a>高级（增加神经肌肉协调性、进一步强化关键肌肉）</h3><p>单腿上训练凳接高抬腿、平板支撑体位交替曲腿、侧桥位单侧模拟跑步、单腿硬拉接提膝、弓箭步接高抬腿跳起（爆发力训练）。</p>
-<h2 id="臀中肌（保持跑步稳定的关键肌肉、保持骨盆和膝关节稳定）"><a href="#臀中肌（保持跑步稳定的关键肌肉、保持骨盆和膝关节稳定）" class="headerlink" title="臀中肌（保持跑步稳定的关键肌肉、保持骨盆和膝关节稳定）"></a>臀中肌（保持跑步稳定的关键肌肉、保持骨盆和膝关节稳定）</h2><p>髋部提拉、单腿外摆、单腿浅蹲后外摆、侧卧腿外摆、侧卧贝壳式（下落时双腿膝盖不相碰）、跪姿侧桥接上摆腿、俯卧四点支撑腿外摆。练习时注意骨盆稳定，不要翻转。</p>
-<h2 id="小腿（提供缓冲和支撑）"><a href="#小腿（提供缓冲和支撑）" class="headerlink" title="小腿（提供缓冲和支撑）"></a>小腿（提供缓冲和支撑）</h2><h3 id="力量练习"><a href="#力量练习" class="headerlink" title="力量练习"></a>力量练习</h3><p>勾脚尖练习（前侧肌肉）、提踵（单腿站立练习）。</p>
-<h3 id="稳定性练习（提高脚踝稳定性）"><a href="#稳定性练习（提高脚踝稳定性）" class="headerlink" title="稳定性练习（提高脚踝稳定性）"></a>稳定性练习（提高脚踝稳定性）</h3><p>（闭眼）抱胸单腿站立。</p>
-<h3 id="缓冲练习"><a href="#缓冲练习" class="headerlink" title="缓冲练习"></a>缓冲练习</h3><p>单腿下落缓冲（前脚掌落地、落地声越轻越好）。</p>
-<h3 id="爆发力训练"><a href="#爆发力训练" class="headerlink" title="爆发力训练"></a>爆发力训练</h3><p>单脚原地跳（落地后迅速跳起，缩短触地时间）、双脚前后跳（脚跟尽量不要触地，减少触地时间）、单脚前后跳。</p>
-<h2 id="深层小肌肉（让动作更加精准）"><a href="#深层小肌肉（让动作更加精准）" class="headerlink" title="深层小肌肉（让动作更加精准）"></a>深层小肌肉（让动作更加精准）</h2><p>所有动作都用训练带辅助。贝壳式（臀中肌）、臀桥（臀大肌、臀中肌）、下蹲（臀大肌、臀中肌）、横向跨步（臀中肌）、前后跨步（训练膝盖正对脚尖的能力，减少膝盖内扣）、单腿后外展（臀中肌）、侧卧直腿抬高（要点是上腿的后撤，臀中肌）、单腿提膝（髂腰肌）。</p>
-<h1 id="跑法训练（训练强度8-1-1，一切以心率为准）"><a href="#跑法训练（训练强度8-1-1，一切以心率为准）" class="headerlink" title="跑法训练（训练强度8:1:1，一切以心率为准）"></a>跑法训练（训练强度8:1:1，一切以心率为准）</h1><p>轻松跑占8，中等和高强度跑各占1，以跑步里程计算。一个简单测算心率的方法<code>最大心率 = 220 - 年龄</code>，想更精确地知道自己的最大运动心率需要在实际运动中测量。</p>
-<h2 id="LSD"><a href="#LSD" class="headerlink" title="LSD"></a>LSD</h2><p>增强心脏功能、提高肌肉利用氧气能力、让身体适应脂肪供能。LSD控制在1小时左右，心率区间应为最大心率的65% ~ 78%。若以半马为目标，则2小时左右，全马控制在最长2.5小时。在LSD跑末加几组冲刺跑保持肌肉快速收缩能力和无氧系统素质。冲刺跑可重复多组，一周3 ~ 6次，冲刺与间歇时间比1:2 ~ 3。<br><img src="\images\LSD1.png" /><br><img src="\images\LSD2.png" /></p>
-<h2 id="抗乳酸跑"><a href="#抗乳酸跑" class="headerlink" title="抗乳酸跑"></a>抗乳酸跑</h2><p>提升身体耐受乳酸和排出乳酸的能力、提升有氧耐力空间（使得更不容易达到乳酸阀的拐点）、让身体在临界速度下维持更长时间，心率区间应为最大心率的88% ~ 90%。进行该训练时要把握好速度，太快会很快力竭，太慢会处于有氧区间。每周2 ~ 3次，一次跑量不超过周跑量的10%，一般累计奔跑20分钟，训练休息时间比为5:1。<br><img src="\images\乳酸跑.png" /></p>
-<h2 id="间歇跑"><a href="#间歇跑" class="headerlink" title="间歇跑"></a>间歇跑</h2><p>提高最大摄氧量，增强心肺功能、提升跑步经济性、提升机体抗乳酸能力，心率区间应为最大心率的91% ~ 100%。每组训练时间在3 ~ 5分钟，训练间歇时间比1:1，每次跑控制在20 ~ 30分钟。<br><img src="\images\间歇跑.png" /></p>
-<h2 id="MAF180"><a href="#MAF180" class="headerlink" title="MAF180"></a>MAF180</h2><p>训练强度低，适合减肥和LSD训练。</p>
-<h2 id="亚索800（成为精英的必备训练）"><a href="#亚索800（成为精英的必备训练）" class="headerlink" title="亚索800（成为精英的必备训练）"></a>亚索800（成为精英的必备训练）</h2><p>提升最大摄氧量、提升身体耐受乳酸和排出乳酸的能力。一组800米，心率保持在最大心率的95% ~ 100%，每组时间3 ~ 4分钟。训练间歇时间比1:1，一般训练4 ~ 8组，精英可提高到10组。若强度不够则将每组距离增加。</p>
-<h2 id="法特莱克跑"><a href="#法特莱克跑" class="headerlink" title="法特莱克跑"></a>法特莱克跑</h2><p>就是变速跑，可消解跑步的单调乏味。</p>
+<h4 id="核心稳定性训练（锻炼深层肌肉）">核心稳定性训练（锻炼深层肌肉）</h4>
+<p>俯桥（平板支撑）、侧桥、仰桥（臀桥）。</p>
+<h3 id="专项核心训练">专项核心训练</h3>
+<p>平板支撑体位交替曲腿、俯桥提膝后摆腿、侧桥位单侧模拟跑步、单腿臀桥、臀桥接提膝。完成上述动作时应注意保持核心稳定。</p>
+<h2 id="臀部和大腿">臀部和大腿</h2>
+<h3 id="中级（提高力量）">中级（提高力量）</h3>
+<p>弓箭步、单腿上训练凳、保加尼亚剪蹲、单腿硬拉、单腿臀桥、弓箭步跳（爆发力训练）。</p>
+<h3 id="高级（增加神经肌肉协调性、进一步强化关键肌肉）">高级（增加神经肌肉协调性、进一步强化关键肌肉）</h3>
+<p>单腿上训练凳接高抬腿、平板支撑体位交替曲腿、侧桥位单侧模拟跑步、单腿硬拉接提膝、弓箭步接高抬腿跳起（爆发力训练）。</p>
+<h2 id="臀中肌（保持跑步稳定的关键肌肉、保持骨盆和膝关节稳定）">臀中肌（保持跑步稳定的关键肌肉、保持骨盆和膝关节稳定）</h2>
+<p>髋部提拉、单腿外摆、单腿浅蹲后外摆、侧卧腿外摆、侧卧贝壳式（下落时双腿膝盖不相碰）、跪姿侧桥接上摆腿、俯卧四点支撑腿外摆。练习时注意骨盆稳定，不要翻转。</p>
+<h2 id="小腿（提供缓冲和支撑）">小腿（提供缓冲和支撑）</h2>
+<h3 id="力量练习">力量练习</h3>
+<p>勾脚尖练习（前侧肌肉）、提踵（单腿站立练习）。</p>
+<h3 id="稳定性练习（提高脚踝稳定性）">稳定性练习（提高脚踝稳定性）</h3>
+<p>（闭眼）抱胸单腿站立。</p>
+<h3 id="缓冲练习">缓冲练习</h3>
+<p>单腿下落缓冲（前脚掌落地、落地声越轻越好）。</p>
+<h3 id="爆发力训练">爆发力训练</h3>
+<p>单脚原地跳（落地后迅速跳起，缩短触地时间）、双脚前后跳（脚跟尽量不要触地，减少触地时间）、单脚前后跳。</p>
+<h2 id="深层小肌肉（让动作更加精准）">深层小肌肉（让动作更加精准）</h2>
+<p>所有动作都用训练带辅助。贝壳式（臀中肌）、臀桥（臀大肌、臀中肌）、下蹲（臀大肌、臀中肌）、横向跨步（臀中肌）、前后跨步（训练膝盖正对脚尖的能力，减少膝盖内扣）、单腿后外展（臀中肌）、侧卧直腿抬高（要点是上腿的后撤，臀中肌）、单腿提膝（髂腰肌）。</p>
+<h1>跑法训练（训练强度8:1:1，一切以心率为准）</h1>
+<p>轻松跑占8，中等和高强度跑各占1，以跑步里程计算。一个简单测算心率的方法<code>最大心率 = 220 - 年龄</code>，想更精确地知道自己的最大运动心率需要在实际运动中测量。</p>
+<h2 id="LSD">LSD</h2>
+<p>增强心脏功能、提高肌肉利用氧气能力、让身体适应脂肪供能。LSD控制在1小时左右，心率区间应为最大心率的65% ~ 78%。若以半马为目标，则2小时左右，全马控制在最长2.5小时。在LSD跑末加几组冲刺跑保持肌肉快速收缩能力和无氧系统素质。冲刺跑可重复多组，一周3 ~ 6次，冲刺与间歇时间比1:2 ~ 3。<br>
+<img src="\images\LSD1.png" /><br>
+<img src="\images\LSD2.png" /></p>
+<h2 id="抗乳酸跑">抗乳酸跑</h2>
+<p>提升身体耐受乳酸和排出乳酸的能力、提升有氧耐力空间（使得更不容易达到乳酸阀的拐点）、让身体在临界速度下维持更长时间，心率区间应为最大心率的88% ~ 90%。进行该训练时要把握好速度，太快会很快力竭，太慢会处于有氧区间。每周2 ~ 3次，一次跑量不超过周跑量的10%，一般累计奔跑20分钟，训练休息时间比为5:1。<br>
+<img src="\images\乳酸跑.png" /></p>
+<h2 id="间歇跑">间歇跑</h2>
+<p>提高最大摄氧量，增强心肺功能、提升跑步经济性、提升机体抗乳酸能力，心率区间应为最大心率的91% ~ 100%。每组训练时间在3 ~ 5分钟，训练间歇时间比1:1，每次跑控制在20 ~ 30分钟。<br>
+<img src="\images\间歇跑.png" /></p>
+<h2 id="MAF180">MAF180</h2>
+<p>训练强度低，适合减肥和LSD训练。</p>
+<h2 id="亚索800（成为精英的必备训练）">亚索800（成为精英的必备训练）</h2>
+<p>提升最大摄氧量、提升身体耐受乳酸和排出乳酸的能力。一组800米，心率保持在最大心率的95% ~ 100%，每组时间3 ~ 4分钟。训练间歇时间比1:1，一般训练4 ~ 8组，精英可提高到10组。若强度不够则将每组距离增加。</p>
+<h2 id="法特莱克跑">法特莱克跑</h2>
+<p>就是变速跑，可消解跑步的单调乏味。</p>
 ]]></content>
       <categories>
         <category>运动</category>
