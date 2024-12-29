@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2024/09/14/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start">Quick Start</h2>
-<h3 id="Create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>能够复原大多数魔方的解法</title>
     <url>/2023/02/19/cube_solution/</url>
     <content><![CDATA[<p>多年前看到过一个视频，讲述了对于结构对称的魔方的通用解法。在此结合原视频和魔方吧里的帖子记录一下以作存档。</p>
@@ -223,28 +203,6 @@
       </tags>
   </entry>
   <entry>
-    <title>澳门10公里</title>
-    <url>/2023/03/20/%E6%BE%B3%E9%97%A810%E5%85%AC%E9%87%8C/</url>
-    <content><![CDATA[<p>昨天参加了澳门金沙的10公里比赛，这是我第一次正儿八经地跑10公里，阳康后训练了一个多月，感觉跑的不错，比较轻松地完成了比赛。一些老爷爷老太太真有活力，也很热情。比赛途中我就看到了那位拿假蛋挞的女士，当时好想问她那个能不能吃，笑死。</p>
-<span id="more"></span>
-<div>
-  <img src="\images\macau_10k\1.jpg" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\macau_10k\2.jpg" style="max-width: 50%; max-height: 50%;"/>
-  <img src="\images\macau_10k\3.jpg" style="max-width: 50%; max-height: 50%;"/>
-  <img src="\images\macau_10k\4.jpg" style="max-width: 50%; max-height: 50%;"/>
-  <img src="\images\macau_10k\6.jpg" style="max-width: 50%; max-height: 50%;"/>
-  <img src="\images\macau_10k\5.jpg" style="max-width: 50%; max-height: 50%;"/>
-</div>
-]]></content>
-      <categories>
-        <category>运动</category>
-      </categories>
-      <tags>
-        <tag>澳门</tag>
-        <tag>跑步</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>澳门路环徒步</title>
     <url>/2023/05/17/%E6%BE%B3%E9%97%A8%E8%B7%AF%E7%8E%AF%E5%BE%92%E6%AD%A5/</url>
     <content><![CDATA[<p>昨天天气不错，临时起意不去学校了。决定去路环逛逛，一直没有去过，最想去的就是龙爪角，看到别人发，觉得风景不错。</p>
@@ -294,6 +252,48 @@
       <tags>
         <tag>澳门</tag>
         <tag>徒步</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2024/09/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start">Quick Start</h2>
+<h3 id="Create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>澳门10公里</title>
+    <url>/2023/03/20/%E6%BE%B3%E9%97%A810%E5%85%AC%E9%87%8C/</url>
+    <content><![CDATA[<p>昨天参加了澳门金沙的10公里比赛，这是我第一次正儿八经地跑10公里，阳康后训练了一个多月，感觉跑的不错，比较轻松地完成了比赛。一些老爷爷老太太真有活力，也很热情。比赛途中我就看到了那位拿假蛋挞的女士，当时好想问她那个能不能吃，笑死。</p>
+<span id="more"></span>
+<div>
+  <img src="\images\macau_10k\1.jpg" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\macau_10k\2.jpg" style="max-width: 50%; max-height: 50%;"/>
+  <img src="\images\macau_10k\3.jpg" style="max-width: 50%; max-height: 50%;"/>
+  <img src="\images\macau_10k\4.jpg" style="max-width: 50%; max-height: 50%;"/>
+  <img src="\images\macau_10k\6.jpg" style="max-width: 50%; max-height: 50%;"/>
+  <img src="\images\macau_10k\5.jpg" style="max-width: 50%; max-height: 50%;"/>
+</div>
+]]></content>
+      <categories>
+        <category>运动</category>
+      </categories>
+      <tags>
+        <tag>澳门</tag>
+        <tag>跑步</tag>
       </tags>
   </entry>
   <entry>
