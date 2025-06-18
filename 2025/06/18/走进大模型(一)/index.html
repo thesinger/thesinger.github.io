@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"thesinger.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本文将以nano-gpt为例，讲讲大模型的整个推理过程。帮助初学者快速了解大模型，对其有一个宏观认识。本文的讲解内容大部分来源于该网站LLM Visualization，该网站将大模型做了可视化。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="走进大模型(一)">
+<meta property="og:url" content="https://thesinger.github.io/2025/06/18/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%80)/index.html">
+<meta property="og:site_name" content="bob的个人空间">
+<meta property="og:description" content="本文将以nano-gpt为例，讲讲大模型的整个推理过程。帮助初学者快速了解大模型，对其有一个宏观认识。本文的讲解内容大部分来源于该网站LLM Visualization，该网站将大模型做了可视化。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/20250530205048.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/20250530213103.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/20250530213116.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/20250604211338.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/20250604212158.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/20250604222614.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/20250607092019.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/%E5%8A%A8%E7%94%BB.gif">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/attention.gif">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/20250607132532.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/v_output.gif">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/20250607141607.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/20250607143845.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/20250607144210.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/20250607145628.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm1/20250607150053.png">
+<meta property="article:published_time" content="2025-06-18T12:11:07.000Z">
+<meta property="article:modified_time" content="2025-06-18T12:24:40.379Z">
+<meta property="article:author" content="bob">
+<meta property="article:tag" content="大模型">
+<meta property="article:tag" content="nano-gpt">
+<meta property="article:tag" content="llm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://thesinger.github.io/images/llm1/20250530205048.png">
+
+<link rel="canonical" href="https://thesinger.github.io/2025/06/18/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%80)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>走进大模型(一) | bob的个人空间</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bob的个人空间</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-关于本站">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于本站</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/message_board/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2025/06/18/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%80)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="bob">
+      <meta itemprop="description" content="邮箱：1633748848@qq.com，记录生活和成长的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bob的个人空间">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          走进大模型(一)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-06-18 20:11:07 / 修改时间：20:24:40" itemprop="dateCreated datePublished" datetime="2025-06-18T20:11:07+08:00">2025-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/llm%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">llm技术</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/06/18/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%80)/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/06/18/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%80)/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文将以nano-gpt为例，讲讲大模型的整个推理过程。帮助初学者快速了解大模型，对其有一个宏观认识。本文的讲解内容大部分来源于该网站<a target="_blank" rel="noopener" href="https://bbycroft.net/llm">LLM Visualization</a>，该网站将大模型做了可视化。</p>
+<span id="more"></span>
+<div>
+  <img src="\images\llm1\20250530205048.png" style="max-width: 50%; max-height: 50%;">
+</div>
+上面的图片展示从输入到输出的整个流程，中间LLM部分即为nano-gpt的简易结构图
+## 1.Tokenization And Embedding
+首先，模型的输入是一个句子，然而模型是无法直接处理字符的，它只是处理数字类型，所以要先将文字转换为数字，文字到数字的这个过程叫做tokenization。那么这个过程是如何实现的呢？答案很简单，首先将输入的句子进行分词，完整的句子被分为多块，分块后的文字叫做token。通过查表的方法，看每个token对应的数字是多少。这个表键为文字（也就是token），值为数字。因此，输入一个句子，查表后，可以得到句子所对应的一串数字。在中文情况下，一个token可能是一个字，也可能是若干个字；英文场景下，一个token可能是一个单词，也可能只是某个单词一部分。
+
+<p>下面的图展示了英文和中文进行分词后的结果，以及转换成的数字。相同颜色的区域是同一个块，可以看到sophisticated被分成了3块，是3个token。我来自中国这句话也是3个token，”来自“被算为一个token。token对应的数字称为token索引，</p>
+<div>
+  <img src="\images\llm1\20250530213103.png" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\llm1\20250530213116.png" style="max-width: 50%; max-height: 50%;">
+</div>
+
+<p>由token索引，从token Embed向量取token index对应的列向量，从position Embed向量中，取出token在整个输入中位置索引对应的列向量，将两个向量相加，得到该token对应的Input Embed。token Embed的shape为(C， n_vocab)，position Embed的shape为(C， T)。C是向量维度或者称为特征数，通道数，T是token数量，同时也代表了时间，例如索引0代表0时刻，索引1代表1时刻。n_vocab是词汇表token数量。</p>
+<div>
+  <img src="\images\llm1\20250604211338.png" style="max-width: 50%; max-height: 50%;">
+</div>
+
+<p>如上图所示，CBABBC是输入，每个单词代表一个token，第4个字母B，其token索引为1，所以取token Embed中第一列，B本身所在输入中索引为3，所以取position Embed中的第4列向量，两个向量相加，得到token B对应的Input Embed。token Embed和position Embed通过训练获得。对输入的每个token做同样的操作，得到完整的Input Embed，shape为（C， T）。</p>
+<div>
+  <img src="\images\llm1\20250604212158.png" style="max-width: 50%; max-height: 50%;">
+</div>
+
+<h2 id="2-LayerNorm"><a href="#2-LayerNorm" class="headerlink" title="2.LayerNorm"></a>2.LayerNorm</h2><p>得到Input Embed后，会进行normalization操作，将其变为均值为0，标准差为1的向量。首先按列求出输入每一列的均值和标准差，分别记为μ和α。</p>
+<p>对Input Embed中每列的每个元素减去均值μ，除以标准差α。标准差根号下加ε，防止分母为0。再乘β，加γ。得到Layer Norm。β和γl均由模型训练得到，Layer Norm会作为self-attention模块的输入。</p>
+<div>
+  <img src="\images\llm1\20250604222614.png" style="max-width: 50%; max-height: 50%;">
+</div>
+
+<h2 id="3-Self-Attention"><a href="#3-Self-Attention" class="headerlink" title="3.Self Attention"></a>3.Self Attention</h2><p>self-attenrion有多个注意力头，下面以一个头为例，每个头计算一样。在这一阶段，输入为上一阶段的Layer Norm,我们要用q,k,v权重及其对应的bias,计算得到对应的q,k,v向量。q,k,v权重及其对应的bias均为训练获得。Q&#x2F;K&#x2F;V_Weights的shape为（A， C），C即token的维度，A为token维度 &#x2F; 注意力头数。</p>
+<div>
+  <img src="\images\llm1\20250607092019.png" style="max-width: 50%; max-height: 50%;">
+</div>
+
+<p>Q_Weights矩阵与Layer Norm矩阵相乘，再与Q_Bias相加，得到Q_vectors。K_vectors和V_vectors计算同理。三个矩阵shape为（A， T）。</p>
+<div>
+  <img src="\images\llm1\动画.gif" style="max-width: 50%; max-height: 50%;">
+</div>
+下面，将Q_vectors的列向量与K_vectors的列向量进行点乘（就是Q矩阵乘K矩阵的转置），点乘后，除以$\sqrt{A}$，A为Q/K/V_vectors的维度。除以维度的开方，是为了softmax数值稳定，避免有极大值。结果储存在Attention Matrix中。Q_vectors的第t列与K_vectors中的所有列点乘后，得到Attention Matrix的t这一行。Attention Matrix shape为（T， T）。Attention Matrix的第t行，代表了第t个query分别与每个key的相似度，点乘结果越大，表示相似度越高。
+<div>
+  <img src="\images\llm1\attention.gif" style="max-width: 50%; max-height: 50%;">
+</div>
+接着对Attention Matrix每一行进行softmax运算，得到Attn Matrix Softmax，其每一行累加和为1。
+<div>
+  <img src="\images\llm1\20250607132532.png" style="max-width: 50%; max-height: 50%;">
+</div>
+
+<p>Attn Matrix Softmax的第t行中的每个元素，与V_vectors的每一列相乘，再累加。得到V_Output的第t列。重复上述计算，得到完整的V_Output，shape为（A， T）。</p>
+<div>
+  <img src="\images\llm1\v_output.gif" style="max-width: 50%; max-height: 50%;">
+</div>
+
+<p>每个注意力头都会计算得到一个V_Output，我们将这些V_Output按行拼接，得到一个shape（C， T）的矩阵。前面提到，A等于token的维度除以主力头数，所以将每个注意力头的output拼接后，维度又恢复为C。Projection Weights与拼接后的V_Output相乘再加Projection Bias,得到Attention Output。</p>
+<div>
+  <img src="\images\llm1\20250607141607.png" style="max-width: 50%; max-height: 50%;">
+</div>
+
+<p>Attention Ouptut会与前面得到Input Embed相加，得到Attention Residual矩阵，shape为（C， T）。</p>
+<h2 id="4-MLP"><a href="#4-MLP" class="headerlink" title="4.MLP"></a>4.MLP</h2><p>上一步得到的Attention Residual，会和第2小节一样，进行LayerNorm。接着，MLP Weights与LayerNorm矩阵相乘，再加MLP Bias，然后GELU激活函数激活，得到MLP Activation矩阵。MLP Weights shape为（C*4， C）。</p>
+<div>
+  <img src="\images\llm1\20250607143845.png" style="max-width: 50%; max-height: 50%;">
+</div>
+
+<p>然后，MLP Projection Weights与转置后的MLP Activation矩阵相乘，再加MLP Projection Bias，得到MLP Result，shape恢复为（C， T）。</p>
+<div>
+  <img src="\images\llm1\20250607144210.png" style="max-width: 50%; max-height: 50%;">
+</div>
+MLP Result会和Attention Residual相加，得到MLP Residual。
+## 5.FinalOuput
+MLP Residual同样会进行LayerNorm运算。
+<div>
+  <img src="\images\llm1\20250607145628.png" style="max-width: 50%; max-height: 50%;">
+</div>
+LM Head Weights（shape为（C， n_vocab））与LayerNorm矩阵相乘，得到Logits矩阵，shape为（T， n_vocab）。Logits按列进行softmax计算，得到Logits Softmax，shape为（T， n_vocab）。从Logits Softmax中，我们可以得知每个时刻，各个token出现的概率。不同的采样算法决定了模型的输出，例如可以直接选择概率最大的token，也可以根据概率分布随机抽取token。此外，还可以通过temperature参数来控制概率分布情况，在得到Logits后，将其除以temperature，再进行softmax计算。可以想到，temperature越高，那么概率分布会越平均，最后的输出随机性越强。
+<div>
+  <img src="\images\llm1\20250607150053.png" style="max-width: 50%; max-height: 50%;">
+</div>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>bob
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://thesinger.github.io/2025/06/18/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%80)/" title="走进大模型(一)">https://thesinger.github.io/2025/06/18/走进大模型(一)/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag"># 大模型</a>
+              <a href="/tags/nano-gpt/" rel="tag"># nano-gpt</a>
+              <a href="/tags/llm/" rel="tag"># llm</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/07/28/%E4%B8%9C%E5%8C%97%E4%B9%8B%E6%97%85/" rel="prev" title="东北之旅">
+      <i class="fa fa-chevron-left"></i> 东北之旅
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-LayerNorm"><span class="nav-number">1.</span> <span class="nav-text">2.LayerNorm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Self-Attention"><span class="nav-number">2.</span> <span class="nav-text">3.Self Attention</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-MLP"><span class="nav-number">3.</span> <span class="nav-text">4.MLP</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bob"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">bob</p>
+  <div class="site-description" itemprop="description">邮箱：1633748848@qq.com，记录生活和成长的点滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bob</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">9k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">9 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'vXf6tPpOJHmmCIHQpCxiwQBK-gzGzoHsz',
+      appKey     : 'if29cHbMXf80WhuGZU3ENwFL',
+      placeholder: "欢迎留下你的评论",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
