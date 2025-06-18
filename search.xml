@@ -20,86 +20,6 @@
       </tags>
   </entry>
   <entry>
-    <title>博客美化</title>
-    <url>/2023/02/09/hexo%E7%BE%8E%E5%8C%96/</url>
-    <content><![CDATA[<h1>Next主题配置文件修改</h1>
-<p>参考<a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/DATA-FILES.md">官方的修改意见</a>，不要直接修改next原始配置文件，避免更新主题时文件冲突。本博客新建了<code>source/_data/next.yml</code>，并将next.yml的override字段改为true，之后所有修改都在该文件进行，修改会覆盖原始配置文件。</p>
-<h1>图片插入</h1>
-<p>不需要下载hexo-asset-image,将hexo<code>_config.yml</code>配置文件中post_asset_folder的值改为true。输入指令<code>hexo new &quot;My New Post&quot;</code>，新建md文件及同名文件夹，将图片放入该文件夹内。文章中插入<code>&#123;% asset_img example.jpg %&#125;</code>,即可正常显示图片。</p>
-<span id="more"></span>
-<p>或者将post_asset_folder改为false，在source目录下新建images文件夹，图片放在这个文件夹内。<code>![](/images/test.png)</code>引用图片，也可以用HTML标签<code>&lt;img src=&quot;/images/test.png&quot; height=&quot;500&quot; width=&quot;500&quot; /&gt;</code>。</p>
-<h1>统计网站运行时间,字数,访客</h1>
-<h2 id="运行时间">运行时间</h2>
-<p>修改<code>\themes\next\layout\_partials\footer.swig</code>,添加以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!--《添加网站运行时间 --&gt;</span><br><span class="line">&lt;!--&lt;br/&gt;--&gt;</span><br><span class="line">&lt;span id=&quot;timeDate&quot;&gt;载入天数...&lt;/span&gt;&lt;span id=&quot;times&quot;&gt;载入时分秒...&lt;/span&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var now = new Date();</span><br><span class="line"></span><br><span class="line">    function createtime() &#123;</span><br><span class="line">        var grt = new Date(&quot;02/08/2023 18:42:36&quot;); //此处修改你的建站时间或者网站上线时间 </span><br><span class="line">        now.setTime(now.getTime() + 250);</span><br><span class="line">        days = (now - grt) / 1000 / 60 / 60 / 24;</span><br><span class="line">        dnum = Math.floor(days);</span><br><span class="line">        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);</span><br><span class="line">        hnum = Math.floor(hours);</span><br><span class="line">        if (String(hnum).length == 1) &#123;</span><br><span class="line">            hnum = &quot;0&quot; + hnum;</span><br><span class="line">        &#125;</span><br><span class="line">        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);</span><br><span class="line">        mnum = Math.floor(minutes);</span><br><span class="line">        if (String(mnum).length == 1) &#123;</span><br><span class="line">            mnum = &quot;0&quot; + mnum;</span><br><span class="line">        &#125;</span><br><span class="line">        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);</span><br><span class="line">        snum = Math.round(seconds);</span><br><span class="line">        if (String(snum).length == 1) &#123;</span><br><span class="line">            snum = &quot;0&quot; + snum;</span><br><span class="line">        &#125;</span><br><span class="line">        document.getElementById(&quot;timeDate&quot;).innerHTML = &quot; | 本站已安全运行 &quot; + dnum + &quot; 天 &quot;;</span><br><span class="line">        document.getElementById(&quot;times&quot;).innerHTML = hnum + &quot; 小时 &quot; + mnum + &quot; 分 &quot; + snum + &quot; 秒&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    setInterval(&quot;createtime()&quot;, 250);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;!-- 添加网站运行时间》 --&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="字数">字数</h2>
-<p>安装插件<code>npm install hexo-symbols-count-time --save</code>,修改hexo<code>_config.yml</code>配置文件中以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">symbols_count_time:</span><br><span class="line">  symbols: true                # 文章字数统计</span><br><span class="line">  time: true                   # 文章阅读时长</span><br><span class="line">  total_symbols: true          # 站点总字数统计</span><br><span class="line">  total_time: true             # 站点总阅读时长</span><br><span class="line">  exclude_codeblock: true     # 排除代码字数统计</span><br></pre></td></tr></table></figure>
-<p>修改主题配置文件<code>_config.yml</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">symbols_count_time:</span><br><span class="line">  separated_meta: true    # 是否另起一行（true的话不和发表时间等同一行）</span><br><span class="line">  item_text_post: true    # 首页文章统计数量前是否显示文字描述（本文字数、阅读时长）</span><br><span class="line">  item_text_total: true   # 页面底部统计数量前是否显示文字描述（站点总字数、站点阅读时长</span><br></pre></td></tr></table></figure>
-<h2 id="访客">访客</h2>
-<p>打开主题配置文件即themes\next下的_config.yml，找到busuanzi_count，改为true</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">busuanzi_count:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
-<p>打开\themes\next\layout_partials\footer.swig，添加如下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if theme.busuanzi_count.enable %&#125;</span><br><span class="line">    &lt;script async src=&quot;//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">    &lt;span id=&quot;busuanzi_container_site_pv&quot;&gt;总访问量&lt;span id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;次&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">    &lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;总访客数&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;人&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&lt;!-- 不蒜子计数初始值纠正 --&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(document).ready(function() &#123;</span><br><span class="line"></span><br><span class="line">    var int = setInterval(fixCount, 50);  // 50ms周期检测函数</span><br><span class="line">    var countOffset = 0;  // 初始化首次数据</span><br><span class="line"></span><br><span class="line">    function fixCount() &#123;            </span><br><span class="line">       if (document.getElementById(&quot;busuanzi_container_site_pv&quot;).style.display != &quot;none&quot;)</span><br><span class="line">        &#123;</span><br><span class="line">            $(&quot;#busuanzi_value_site_pv&quot;).html(parseInt($(&quot;#busuanzi_value_site_pv&quot;).html()) + countOffset); </span><br><span class="line">            clearInterval(int);</span><br><span class="line">        &#125;                  </span><br><span class="line">        if ($(&quot;#busuanzi_container_site_pv&quot;).css(&quot;display&quot;) != &quot;none&quot;)</span><br><span class="line">        &#123;</span><br><span class="line">            $(&quot;#busuanzi_value_site_uv&quot;).html(parseInt($(&quot;#busuanzi_value_site_uv&quot;).html()) + countOffset); // 加上初始数据 </span><br><span class="line">            clearInterval(int); // 停止检测</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">       	</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt; </span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
-<p>删除themes\next\layout_third-party\statistics\busuanzi-counter.swig文件的<code>&lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</code>,否则访客统计下会多出一条竖线。</p>
-<h1>设置网站背景图片</h1>
-<p>打开主题配置文件即themes\next下的_config.yml，将 <code>style: source/_data/styles.styl</code> 取消注释：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">custom_file_path:</span><br><span class="line">  style: source/_data/styles.styl</span><br></pre></td></tr></table></figure>
-<p>打开根目录Blog\source创建文件_data\styles.styl，添加以下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">      background: url(../images/background.png);//自己喜欢的图片地址</span><br><span class="line">      background-size: cover;</span><br><span class="line">      background-repeat: no-repeat;</span><br><span class="line">      background-attachment: fixed;</span><br><span class="line">      background-position: 50% 50%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>将图片改名为background.png，保存到\根目录\source\images文件夹下。</p>
-<h1>评论留言</h1>
-<p>本博客使用了基于<a href="https://www.leancloud.cn/">LeanCould</a>的Valine评论系统，首先在LeanCloud官网注册账号并创建应用。修改next主题配置文件中Valine部分代码,enable改为true，复制appid和appkey填入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">valine:</span><br><span class="line">  enable: false</span><br><span class="line">  appid: # Your leancloud application appid</span><br><span class="line">  appkey: # Your leancloud application appkey</span><br><span class="line">  notify: false # Mail notifier</span><br><span class="line">  verify: false # Verification code</span><br><span class="line">  placeholder: Just go go # Comment box placeholder</span><br><span class="line">  avatar: mm # Gravatar style</span><br><span class="line">  guest_info: nick,mail,link # Custom comment header</span><br><span class="line">  pageSize: 10 # Pagination size</span><br><span class="line">  language: # Language, available values: en, zh-cn</span><br><span class="line">  visitor: false # Article reading statistic</span><br><span class="line">  comment_count: true # If false, comment count will only be displayed in post page, not in home page</span><br><span class="line">  recordIP: false # Whether to record the commenter IP</span><br><span class="line">  serverURLs: # When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)</span><br><span class="line">  #post_meta_order: 0</span><br></pre></td></tr></table></figure>
-<p>hexo默认在所有页面开启评论，可通过修改md文件中<code>comments: false</code>属性值关闭或开启评论。</p>
-<h1>设置博文内链接为蓝色</h1>
-<p>打开themes/next/source/css/_common/components/post/post.styl文件，将下面的代码复制到文件最后：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.post-body p a&#123;</span><br><span class="line">    color: #0593d3;</span><br><span class="line">    border-bottom: none;</span><br><span class="line">    &amp;:hover &#123;</span><br><span class="line">      color: #0477ab;</span><br><span class="line">      text-decoration: underline;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>next</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>tmux常用指令</title>
-    <url>/2023/03/09/tmux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h1>启动与退出</h1>
-<p>输入<code>tmux</code>，进入tmux,按<code>Ctlr + d</code>或者输入<code>exit</code>，退出tmux窗口。退出后该对话将不存在。</p>
-<h1>查看tmux窗口历史输出</h1>
-<p>先进入tmux会话，然后按<code>Ctlr + b</code>，接着按<code>[</code>，即可进入查看模式，方向键滚动显示。按<code>q</code>退出查看模式。</p>
-<h1>会话管理</h1>
-<h2 id="新建会话">新建会话</h2>
-<p>第一个启动的 Tmux 窗口，编号是0，第二个窗口的编号是1，以此类推。以下指令可新建会话并为会话起名。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tmux new -s &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<h2 id="分离会话">分离会话</h2>
-<p>在 Tmux 窗口中，按下<code>Ctrl+b d</code>或者输入<code>tmux detach</code>命令，就会将当前会话与窗口分离。命令执行后，就会退出当前 Tmux 窗口，但是会话和里面的进程仍然在后台运行。<br>
-<code>tmux ls</code>命令可以查看当前所有的 Tmux 会话。</p>
-<h2 id="接入会话">接入会话</h2>
-<p><code>tmux attach</code>命令用于重新接入某个已存在的会话。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux attach -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux attach -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="杀死会话">杀死会话</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux kill-session -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux kill-session -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="切换会话">切换会话</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux switch -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">$ tmux switch -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="重命名会话">重命名会话</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将0号会话重命名</span><br><span class="line">tmux rename-session -t 0 &lt;new-name&gt;</span><br></pre></td></tr></table></figure>
-<h1>参考链接</h1>
-<p><a href="https://www.ruanyifeng.com/blog/2019/10/tmux.html">https://www.ruanyifeng.com/blog/2019/10/tmux.html</a></p>
-]]></content>
-      <categories>
-        <category>指令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>tmux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>东北之旅</title>
     <url>/2023/07/28/%E4%B8%9C%E5%8C%97%E4%B9%8B%E6%97%85/</url>
     <content><![CDATA[<p>前几天去东北找同学玩了一趟，体验了东北搓澡和烧烤。在沈阳的几天去了大帅府，在商业区逛了逛，还是挺繁华的。不过某些区域也比较破败了。总体生活成本比南方低多了。</p>
@@ -165,6 +85,51 @@
       </tags>
   </entry>
   <entry>
+    <title>博客美化</title>
+    <url>/2023/02/09/hexo%E7%BE%8E%E5%8C%96/</url>
+    <content><![CDATA[<h1>Next主题配置文件修改</h1>
+<p>参考<a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/DATA-FILES.md">官方的修改意见</a>，不要直接修改next原始配置文件，避免更新主题时文件冲突。本博客新建了<code>source/_data/next.yml</code>，并将next.yml的override字段改为true，之后所有修改都在该文件进行，修改会覆盖原始配置文件。</p>
+<h1>图片插入</h1>
+<p>不需要下载hexo-asset-image,将hexo<code>_config.yml</code>配置文件中post_asset_folder的值改为true。输入指令<code>hexo new &quot;My New Post&quot;</code>，新建md文件及同名文件夹，将图片放入该文件夹内。文章中插入<code>&#123;% asset_img example.jpg %&#125;</code>,即可正常显示图片。</p>
+<span id="more"></span>
+<p>或者将post_asset_folder改为false，在source目录下新建images文件夹，图片放在这个文件夹内。<code>![](/images/test.png)</code>引用图片，也可以用HTML标签<code>&lt;img src=&quot;/images/test.png&quot; height=&quot;500&quot; width=&quot;500&quot; /&gt;</code>。</p>
+<h1>统计网站运行时间,字数,访客</h1>
+<h2 id="运行时间">运行时间</h2>
+<p>修改<code>\themes\next\layout\_partials\footer.swig</code>,添加以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!--《添加网站运行时间 --&gt;</span><br><span class="line">&lt;!--&lt;br/&gt;--&gt;</span><br><span class="line">&lt;span id=&quot;timeDate&quot;&gt;载入天数...&lt;/span&gt;&lt;span id=&quot;times&quot;&gt;载入时分秒...&lt;/span&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var now = new Date();</span><br><span class="line"></span><br><span class="line">    function createtime() &#123;</span><br><span class="line">        var grt = new Date(&quot;02/08/2023 18:42:36&quot;); //此处修改你的建站时间或者网站上线时间 </span><br><span class="line">        now.setTime(now.getTime() + 250);</span><br><span class="line">        days = (now - grt) / 1000 / 60 / 60 / 24;</span><br><span class="line">        dnum = Math.floor(days);</span><br><span class="line">        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);</span><br><span class="line">        hnum = Math.floor(hours);</span><br><span class="line">        if (String(hnum).length == 1) &#123;</span><br><span class="line">            hnum = &quot;0&quot; + hnum;</span><br><span class="line">        &#125;</span><br><span class="line">        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);</span><br><span class="line">        mnum = Math.floor(minutes);</span><br><span class="line">        if (String(mnum).length == 1) &#123;</span><br><span class="line">            mnum = &quot;0&quot; + mnum;</span><br><span class="line">        &#125;</span><br><span class="line">        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);</span><br><span class="line">        snum = Math.round(seconds);</span><br><span class="line">        if (String(snum).length == 1) &#123;</span><br><span class="line">            snum = &quot;0&quot; + snum;</span><br><span class="line">        &#125;</span><br><span class="line">        document.getElementById(&quot;timeDate&quot;).innerHTML = &quot; | 本站已安全运行 &quot; + dnum + &quot; 天 &quot;;</span><br><span class="line">        document.getElementById(&quot;times&quot;).innerHTML = hnum + &quot; 小时 &quot; + mnum + &quot; 分 &quot; + snum + &quot; 秒&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    setInterval(&quot;createtime()&quot;, 250);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;!-- 添加网站运行时间》 --&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="字数">字数</h2>
+<p>安装插件<code>npm install hexo-symbols-count-time --save</code>,修改hexo<code>_config.yml</code>配置文件中以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">symbols_count_time:</span><br><span class="line">  symbols: true                # 文章字数统计</span><br><span class="line">  time: true                   # 文章阅读时长</span><br><span class="line">  total_symbols: true          # 站点总字数统计</span><br><span class="line">  total_time: true             # 站点总阅读时长</span><br><span class="line">  exclude_codeblock: true     # 排除代码字数统计</span><br></pre></td></tr></table></figure>
+<p>修改主题配置文件<code>_config.yml</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">symbols_count_time:</span><br><span class="line">  separated_meta: true    # 是否另起一行（true的话不和发表时间等同一行）</span><br><span class="line">  item_text_post: true    # 首页文章统计数量前是否显示文字描述（本文字数、阅读时长）</span><br><span class="line">  item_text_total: true   # 页面底部统计数量前是否显示文字描述（站点总字数、站点阅读时长</span><br></pre></td></tr></table></figure>
+<h2 id="访客">访客</h2>
+<p>打开主题配置文件即themes\next下的_config.yml，找到busuanzi_count，改为true</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">busuanzi_count:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
+<p>打开\themes\next\layout_partials\footer.swig，添加如下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if theme.busuanzi_count.enable %&#125;</span><br><span class="line">    &lt;script async src=&quot;//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">    &lt;span id=&quot;busuanzi_container_site_pv&quot;&gt;总访问量&lt;span id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;次&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">    &lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;总访客数&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;人&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&lt;!-- 不蒜子计数初始值纠正 --&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(document).ready(function() &#123;</span><br><span class="line"></span><br><span class="line">    var int = setInterval(fixCount, 50);  // 50ms周期检测函数</span><br><span class="line">    var countOffset = 0;  // 初始化首次数据</span><br><span class="line"></span><br><span class="line">    function fixCount() &#123;            </span><br><span class="line">       if (document.getElementById(&quot;busuanzi_container_site_pv&quot;).style.display != &quot;none&quot;)</span><br><span class="line">        &#123;</span><br><span class="line">            $(&quot;#busuanzi_value_site_pv&quot;).html(parseInt($(&quot;#busuanzi_value_site_pv&quot;).html()) + countOffset); </span><br><span class="line">            clearInterval(int);</span><br><span class="line">        &#125;                  </span><br><span class="line">        if ($(&quot;#busuanzi_container_site_pv&quot;).css(&quot;display&quot;) != &quot;none&quot;)</span><br><span class="line">        &#123;</span><br><span class="line">            $(&quot;#busuanzi_value_site_uv&quot;).html(parseInt($(&quot;#busuanzi_value_site_uv&quot;).html()) + countOffset); // 加上初始数据 </span><br><span class="line">            clearInterval(int); // 停止检测</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">       	</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt; </span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+<p>删除themes\next\layout_third-party\statistics\busuanzi-counter.swig文件的<code>&lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</code>,否则访客统计下会多出一条竖线。</p>
+<h1>设置网站背景图片</h1>
+<p>打开主题配置文件即themes\next下的_config.yml，将 <code>style: source/_data/styles.styl</code> 取消注释：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">custom_file_path:</span><br><span class="line">  style: source/_data/styles.styl</span><br></pre></td></tr></table></figure>
+<p>打开根目录Blog\source创建文件_data\styles.styl，添加以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">      background: url(../images/background.png);//自己喜欢的图片地址</span><br><span class="line">      background-size: cover;</span><br><span class="line">      background-repeat: no-repeat;</span><br><span class="line">      background-attachment: fixed;</span><br><span class="line">      background-position: 50% 50%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将图片改名为background.png，保存到\根目录\source\images文件夹下。</p>
+<h1>评论留言</h1>
+<p>本博客使用了基于<a href="https://www.leancloud.cn/">LeanCould</a>的Valine评论系统，首先在LeanCloud官网注册账号并创建应用。修改next主题配置文件中Valine部分代码,enable改为true，复制appid和appkey填入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">valine:</span><br><span class="line">  enable: false</span><br><span class="line">  appid: # Your leancloud application appid</span><br><span class="line">  appkey: # Your leancloud application appkey</span><br><span class="line">  notify: false # Mail notifier</span><br><span class="line">  verify: false # Verification code</span><br><span class="line">  placeholder: Just go go # Comment box placeholder</span><br><span class="line">  avatar: mm # Gravatar style</span><br><span class="line">  guest_info: nick,mail,link # Custom comment header</span><br><span class="line">  pageSize: 10 # Pagination size</span><br><span class="line">  language: # Language, available values: en, zh-cn</span><br><span class="line">  visitor: false # Article reading statistic</span><br><span class="line">  comment_count: true # If false, comment count will only be displayed in post page, not in home page</span><br><span class="line">  recordIP: false # Whether to record the commenter IP</span><br><span class="line">  serverURLs: # When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)</span><br><span class="line">  #post_meta_order: 0</span><br></pre></td></tr></table></figure>
+<p>hexo默认在所有页面开启评论，可通过修改md文件中<code>comments: false</code>属性值关闭或开启评论。</p>
+<h1>设置博文内链接为蓝色</h1>
+<p>打开themes/next/source/css/_common/components/post/post.styl文件，将下面的代码复制到文件最后：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.post-body p a&#123;</span><br><span class="line">    color: #0593d3;</span><br><span class="line">    border-bottom: none;</span><br><span class="line">    &amp;:hover &#123;</span><br><span class="line">      color: #0477ab;</span><br><span class="line">      text-decoration: underline;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>next</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>博物馆--钢琴博物馆</title>
     <url>/2023/02/26/%E5%8D%9A%E7%89%A9%E9%A6%86-%E9%92%A2%E7%90%B4%E5%8D%9A%E7%89%A9%E9%A6%86/</url>
     <content><![CDATA[<p>打算记录整理一下以前去过的有特色的一些博物馆。一直以来都很喜欢去博物馆，每每看到藏品，我都不禁会想这件藏品后有着怎么的故事，藏品曾经的主人有什么样的人生。一件物品跨越时空呈现在我眼前，让我觉得很不可思议，想想这中间几百上千年要经历多少事。历经岁月后它被我看到，透过它我觉得我与千百年前的人、时代产生了联系，这对我来说就像奇迹一般，我被这种沧桑感，宏大感所吸引。</p>
@@ -200,6 +165,41 @@
       <tags>
         <tag>钢琴</tag>
         <tag>古典音乐</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>tmux常用指令</title>
+    <url>/2023/03/09/tmux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h1>启动与退出</h1>
+<p>输入<code>tmux</code>，进入tmux,按<code>Ctlr + d</code>或者输入<code>exit</code>，退出tmux窗口。退出后该对话将不存在。</p>
+<h1>查看tmux窗口历史输出</h1>
+<p>先进入tmux会话，然后按<code>Ctlr + b</code>，接着按<code>[</code>，即可进入查看模式，方向键滚动显示。按<code>q</code>退出查看模式。</p>
+<h1>会话管理</h1>
+<h2 id="新建会话">新建会话</h2>
+<p>第一个启动的 Tmux 窗口，编号是0，第二个窗口的编号是1，以此类推。以下指令可新建会话并为会话起名。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tmux new -s &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h2 id="分离会话">分离会话</h2>
+<p>在 Tmux 窗口中，按下<code>Ctrl+b d</code>或者输入<code>tmux detach</code>命令，就会将当前会话与窗口分离。命令执行后，就会退出当前 Tmux 窗口，但是会话和里面的进程仍然在后台运行。<br>
+<code>tmux ls</code>命令可以查看当前所有的 Tmux 会话。</p>
+<h2 id="接入会话">接入会话</h2>
+<p><code>tmux attach</code>命令用于重新接入某个已存在的会话。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux attach -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux attach -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="杀死会话">杀死会话</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux kill-session -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">tmux kill-session -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="切换会话">切换会话</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用会话编号</span><br><span class="line">tmux switch -t 0</span><br><span class="line"></span><br><span class="line">使用会话名称</span><br><span class="line">$ tmux switch -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="重命名会话">重命名会话</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将0号会话重命名</span><br><span class="line">tmux rename-session -t 0 &lt;new-name&gt;</span><br></pre></td></tr></table></figure>
+<h1>参考链接</h1>
+<p><a href="https://www.ruanyifeng.com/blog/2019/10/tmux.html">https://www.ruanyifeng.com/blog/2019/10/tmux.html</a></p>
+]]></content>
+      <categories>
+        <category>指令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>tmux</tag>
       </tags>
   </entry>
   <entry>
@@ -277,6 +277,91 @@
       </tags>
   </entry>
   <entry>
+    <title>走进大模型(一)</title>
+    <url>/2025/06/18/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%80)/</url>
+    <content><![CDATA[<p>本文将以nano-gpt为例，讲讲大模型的整个推理过程。帮助初学者快速了解大模型，对其有一个宏观认识。本文的讲解内容大部分来源于该网站<a href="https://bbycroft.net/llm">LLM Visualization</a>，该网站将大模型做了可视化。</p>
+<span id="more"></span>
+<div>
+  <img src="\images\llm1\20250530205048.png" style="max-width: 50%; max-height: 50%;">
+</div>
+上面的图片展示从输入到输出的整个流程，中间LLM部分即为nano-gpt的简易结构图
+## 1.Tokenization And Embedding
+首先，模型的输入是一个句子，然而模型是无法直接处理字符的，它只是处理数字类型，所以要先将文字转换为数字，文字到数字的这个过程叫做tokenization。那么这个过程是如何实现的呢？答案很简单，首先将输入的句子进行分词，完整的句子被分为多块，分块后的文字叫做token。通过查表的方法，看每个token对应的数字是多少。这个表键为文字（也就是token），值为数字。因此，输入一个句子，查表后，可以得到句子所对应的一串数字。在中文情况下，一个token可能是一个字，也可能是若干个字；英文场景下，一个token可能是一个单词，也可能只是某个单词一部分。
+<p>下面的图展示了英文和中文进行分词后的结果，以及转换成的数字。相同颜色的区域是同一个块，可以看到sophisticated被分成了3块，是3个token。我来自中国这句话也是3个token，”来自“被算为一个token。token对应的数字称为token索引，</p>
+<div>
+  <img src="\images\llm1\20250530213103.png" style="max-width: 50%; max-height: 50%;">
+  <img src="\images\llm1\20250530213116.png" style="max-width: 50%; max-height: 50%;">
+</div>
+<p>由token索引，从token Embed向量取token index对应的列向量，从position Embed向量中，取出token在整个输入中位置索引对应的列向量，将两个向量相加，得到该token对应的Input Embed。token Embed的shape为(C， n_vocab)，position Embed的shape为(C， T)。C是向量维度或者称为特征数，通道数，T是token数量，同时也代表了时间，例如索引0代表0时刻，索引1代表1时刻。n_vocab是词汇表token数量。</p>
+<div>
+  <img src="\images\llm1\20250604211338.png" style="max-width: 50%; max-height: 50%;">
+</div>
+<p>如上图所示，CBABBC是输入，每个单词代表一个token，第4个字母B，其token索引为1，所以取token Embed中第一列，B本身所在输入中索引为3，所以取position Embed中的第4列向量，两个向量相加，得到token B对应的Input Embed。token Embed和position Embed通过训练获得。对输入的每个token做同样的操作，得到完整的Input Embed，shape为（C， T）。</p>
+<div>
+  <img src="\images\llm1\20250604212158.png" style="max-width: 50%; max-height: 50%;">
+</div>
+<h2 id="2-LayerNorm">2.LayerNorm</h2>
+<p>得到Input Embed后，会进行normalization操作，将其变为均值为0，标准差为1的向量。首先按列求出输入每一列的均值和标准差，分别记为μ和α。</p>
+<p>对Input Embed中每列的每个元素减去均值μ，除以标准差α。标准差根号下加ε，防止分母为0。再乘β，加γ。得到Layer Norm。β和γl均由模型训练得到，Layer Norm会作为self-attention模块的输入。</p>
+<div>
+  <img src="\images\llm1\20250604222614.png" style="max-width: 50%; max-height: 50%;">
+</div>
+<h2 id="3-Self-Attention">3.Self Attention</h2>
+<p>self-attenrion有多个注意力头，下面以一个头为例，每个头计算一样。在这一阶段，输入为上一阶段的Layer Norm,我们要用q,k,v权重及其对应的bias,计算得到对应的q,k,v向量。q,k,v权重及其对应的bias均为训练获得。Q/K/V_Weights的shape为（A， C），C即token的维度，A为token维度 / 注意力头数。</p>
+<div>
+  <img src="\images\llm1\20250607092019.png" style="max-width: 50%; max-height: 50%;">
+</div>
+<p>Q_Weights矩阵与Layer Norm矩阵相乘，再与Q_Bias相加，得到Q_vectors。K_vectors和V_vectors计算同理。三个矩阵shape为（A， T）。</p>
+<div>
+  <img src="\images\llm1\动画.gif" style="max-width: 50%; max-height: 50%;">
+</div>
+下面，将Q_vectors的列向量与K_vectors的列向量进行点乘（就是Q矩阵乘K矩阵的转置），点乘后，除以$\sqrt{A}$，A为Q/K/V_vectors的维度。除以维度的开方，是为了softmax数值稳定，避免有极大值。结果储存在Attention Matrix中。Q_vectors的第t列与K_vectors中的所有列点乘后，得到Attention Matrix的t这一行。Attention Matrix shape为（T， T）。Attention Matrix的第t行，代表了第t个query分别与每个key的相似度，点乘结果越大，表示相似度越高。
+<div>
+  <img src="\images\llm1\attention.gif" style="max-width: 50%; max-height: 50%;">
+</div>
+接着对Attention Matrix每一行进行softmax运算，得到Attn Matrix Softmax，其每一行累加和为1。
+<div>
+  <img src="\images\llm1\20250607132532.png" style="max-width: 50%; max-height: 50%;">
+</div>
+<p>Attn Matrix Softmax的第t行中的每个元素，与V_vectors的每一列相乘，再累加。得到V_Output的第t列。重复上述计算，得到完整的V_Output，shape为（A， T）。</p>
+<div>
+  <img src="\images\llm1\v_output.gif" style="max-width: 50%; max-height: 50%;">
+</div>
+<p>每个注意力头都会计算得到一个V_Output，我们将这些V_Output按行拼接，得到一个shape（C， T）的矩阵。前面提到，A等于token的维度除以主力头数，所以将每个注意力头的output拼接后，维度又恢复为C。Projection Weights与拼接后的V_Output相乘再加Projection Bias,得到Attention Output。</p>
+<div>
+  <img src="\images\llm1\20250607141607.png" style="max-width: 50%; max-height: 50%;">
+</div>
+<p>Attention Ouptut会与前面得到Input Embed相加，得到Attention Residual矩阵，shape为（C， T）。</p>
+<h2 id="4-MLP">4.MLP</h2>
+<p>上一步得到的Attention Residual，会和第2小节一样，进行LayerNorm。接着，MLP Weights与LayerNorm矩阵相乘，再加MLP Bias，然后GELU激活函数激活，得到MLP Activation矩阵。MLP Weights shape为（C*4， C）。</p>
+<div>
+  <img src="\images\llm1\20250607143845.png" style="max-width: 50%; max-height: 50%;">
+</div>
+<p>然后，MLP Projection Weights与转置后的MLP Activation矩阵相乘，再加MLP Projection Bias，得到MLP Result，shape恢复为（C， T）。</p>
+<div>
+  <img src="\images\llm1\20250607144210.png" style="max-width: 50%; max-height: 50%;">
+</div>
+MLP Result会和Attention Residual相加，得到MLP Residual。
+<h2 id="5-FinalOuput">5.FinalOuput</h2>
+<p>MLP Residual同样会进行LayerNorm运算。</p>
+<div>
+  <img src="\images\llm1\20250607145628.png" style="max-width: 50%; max-height: 50%;">
+</div>
+LM Head Weights（shape为（C， n_vocab））与LayerNorm矩阵相乘，得到Logits矩阵，shape为（T， n_vocab）。Logits按列进行softmax计算，得到Logits Softmax，shape为（T， n_vocab）。从Logits Softmax中，我们可以得知每个时刻，各个token出现的概率。不同的采样算法决定了模型的输出，例如可以直接选择概率最大的token，也可以根据概率分布随机抽取token。此外，还可以通过temperature参数来控制概率分布情况，在得到Logits后，将其除以temperature，再进行softmax计算。可以想到，temperature越高，那么概率分布会越平均，最后的输出随机性越强。
+<div>
+  <img src="\images\llm1\20250607150053.png" style="max-width: 50%; max-height: 50%;">
+</div>
+]]></content>
+      <categories>
+        <category>llm技术</category>
+      </categories>
+      <tags>
+        <tag>大模型</tag>
+        <tag>nano-gpt</tag>
+        <tag>llm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>跑步训练与提高</title>
     <url>/2023/02/19/%E8%B7%91%E6%AD%A5%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8F%90%E9%AB%98/</url>
     <content><![CDATA[<h1>力量训练</h1>
@@ -336,98 +421,6 @@
       <tags>
         <tag>跑步</tag>
         <tag>腿部训练</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>走进大模型(一)</title>
-    <url>/2025/06/18/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%80)/</url>
-    <content><![CDATA[<p>本文将以nano-gpt为例，讲讲大模型的整个推理过程。帮助初学者快速了解大模型，对其有一个宏观认识。本文的讲解内容大部分来源于该网站<a href="https://bbycroft.net/llm">LLM Visualization</a>，该网站将大模型做了可视化。</p>
-<span id="more"></span>
-<div>
-  <img src="\images\llm1\20250530205048.png" style="max-width: 50%; max-height: 50%;">
-</div>
-上面的图片展示从输入到输出的整个流程，中间LLM部分即为nano-gpt的简易结构图
-## 1.Tokenization And Embedding
-首先，模型的输入是一个句子，然而模型是无法直接处理字符的，它只是处理数字类型，所以要先将文字转换为数字，文字到数字的这个过程叫做tokenization。那么这个过程是如何实现的呢？答案很简单，首先将输入的句子进行分词，完整的句子被分为多块，分块后的文字叫做token。通过查表的方法，看每个token对应的数字是多少。这个表键为文字（也就是token），值为数字。因此，输入一个句子，查表后，可以得到句子所对应的一串数字。在中文情况下，一个token可能是一个字，也可能是若干个字；英文场景下，一个token可能是一个单词，也可能只是某个单词一部分。
-
-<p>下面的图展示了英文和中文进行分词后的结果，以及转换成的数字。相同颜色的区域是同一个块，可以看到sophisticated被分成了3块，是3个token。我来自中国这句话也是3个token，”来自“被算为一个token。token对应的数字称为token索引，</p>
-<div>
-  <img src="\images\llm1\20250530213103.png" style="max-width: 50%; max-height: 50%;">
-  <img src="\images\llm1\20250530213116.png" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>由token索引，从token Embed向量取token index对应的列向量，从position Embed向量中，取出token在整个输入中位置索引对应的列向量，将两个向量相加，得到该token对应的Input Embed。token Embed的shape为(C， n_vocab)，position Embed的shape为(C， T)。C是向量维度或者称为特征数，通道数，T是token数量，同时也代表了时间，例如索引0代表0时刻，索引1代表1时刻。n_vocab是词汇表token数量。</p>
-<div>
-  <img src="\images\llm1\20250604211338.png" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>如上图所示，CBABBC是输入，每个单词代表一个token，第4个字母B，其token索引为1，所以取token Embed中第一列，B本身所在输入中索引为3，所以取position Embed中的第4列向量，两个向量相加，得到token B对应的Input Embed。token Embed和position Embed通过训练获得。对输入的每个token做同样的操作，得到完整的Input Embed，shape为（C， T）。</p>
-<div>
-  <img src="\images\llm1\20250604212158.png" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<h2 id="2-LayerNorm"><a href="#2-LayerNorm" class="headerlink" title="2.LayerNorm"></a>2.LayerNorm</h2><p>得到Input Embed后，会进行normalization操作，将其变为均值为0，标准差为1的向量。首先按列求出输入每一列的均值和标准差，分别记为μ和α。</p>
-<p>对Input Embed中每列的每个元素减去均值μ，除以标准差α。标准差根号下加ε，防止分母为0。再乘β，加γ。得到Layer Norm。β和γl均由模型训练得到，Layer Norm会作为self-attention模块的输入。</p>
-<div>
-  <img src="\images\llm1\20250604222614.png" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<h2 id="3-Self-Attention"><a href="#3-Self-Attention" class="headerlink" title="3.Self Attention"></a>3.Self Attention</h2><p>self-attenrion有多个注意力头，下面以一个头为例，每个头计算一样。在这一阶段，输入为上一阶段的Layer Norm,我们要用q,k,v权重及其对应的bias,计算得到对应的q,k,v向量。q,k,v权重及其对应的bias均为训练获得。Q&#x2F;K&#x2F;V_Weights的shape为（A， C），C即token的维度，A为token维度 &#x2F; 注意力头数。</p>
-<div>
-  <img src="\images\llm1\20250607092019.png" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>Q_Weights矩阵与Layer Norm矩阵相乘，再与Q_Bias相加，得到Q_vectors。K_vectors和V_vectors计算同理。三个矩阵shape为（A， T）。</p>
-<div>
-  <img src="\images\llm1\动画.gif" style="max-width: 50%; max-height: 50%;">
-</div>
-下面，将Q_vectors的列向量与K_vectors的列向量进行点乘（就是Q矩阵乘K矩阵的转置），点乘后，除以$\sqrt{A}$，A为Q/K/V_vectors的维度。除以维度的开方，是为了softmax数值稳定，避免有极大值。结果储存在Attention Matrix中。Q_vectors的第t列与K_vectors中的所有列点乘后，得到Attention Matrix的t这一行。Attention Matrix shape为（T， T）。Attention Matrix的第t行，代表了第t个query分别与每个key的相似度，点乘结果越大，表示相似度越高。
-<div>
-  <img src="\images\llm1\attention.gif" style="max-width: 50%; max-height: 50%;">
-</div>
-接着对Attention Matrix每一行进行softmax运算，得到Attn Matrix Softmax，其每一行累加和为1。
-<div>
-  <img src="\images\llm1\20250607132532.png" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>Attn Matrix Softmax的第t行中的每个元素，与V_vectors的每一列相乘，再累加。得到V_Output的第t列。重复上述计算，得到完整的V_Output，shape为（A， T）。</p>
-<div>
-  <img src="\images\llm1\v_output.gif" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>每个注意力头都会计算得到一个V_Output，我们将这些V_Output按行拼接，得到一个shape（C， T）的矩阵。前面提到，A等于token的维度除以主力头数，所以将每个注意力头的output拼接后，维度又恢复为C。Projection Weights与拼接后的V_Output相乘再加Projection Bias,得到Attention Output。</p>
-<div>
-  <img src="\images\llm1\20250607141607.png" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>Attention Ouptut会与前面得到Input Embed相加，得到Attention Residual矩阵，shape为（C， T）。</p>
-<h2 id="4-MLP"><a href="#4-MLP" class="headerlink" title="4.MLP"></a>4.MLP</h2><p>上一步得到的Attention Residual，会和第2小节一样，进行LayerNorm。接着，MLP Weights与LayerNorm矩阵相乘，再加MLP Bias，然后GELU激活函数激活，得到MLP Activation矩阵。MLP Weights shape为（C*4， C）。</p>
-<div>
-  <img src="\images\llm1\20250607143845.png" style="max-width: 50%; max-height: 50%;">
-</div>
-
-<p>然后，MLP Projection Weights与转置后的MLP Activation矩阵相乘，再加MLP Projection Bias，得到MLP Result，shape恢复为（C， T）。</p>
-<div>
-  <img src="\images\llm1\20250607144210.png" style="max-width: 50%; max-height: 50%;">
-</div>
-MLP Result会和Attention Residual相加，得到MLP Residual。
-## 5.FinalOuput
-MLP Residual同样会进行LayerNorm运算。
-<div>
-  <img src="\images\llm1\20250607145628.png" style="max-width: 50%; max-height: 50%;">
-</div>
-LM Head Weights（shape为（C， n_vocab））与LayerNorm矩阵相乘，得到Logits矩阵，shape为（T， n_vocab）。Logits按列进行softmax计算，得到Logits Softmax，shape为（T， n_vocab）。从Logits Softmax中，我们可以得知每个时刻，各个token出现的概率。不同的采样算法决定了模型的输出，例如可以直接选择概率最大的token，也可以根据概率分布随机抽取token。此外，还可以通过temperature参数来控制概率分布情况，在得到Logits后，将其除以temperature，再进行softmax计算。可以想到，temperature越高，那么概率分布会越平均，最后的输出随机性越强。
-<div>
-  <img src="\images\llm1\20250607150053.png" style="max-width: 50%; max-height: 50%;">
-</div>
-]]></content>
-      <categories>
-        <category>llm技术</category>
-      </categories>
-      <tags>
-        <tag>大模型</tag>
-        <tag>nano-gpt</tag>
-        <tag>llm</tag>
       </tags>
   </entry>
 </search>
