@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://thesinger.github.io/images/llm1/20250607145628.png">
 <meta property="og:image" content="https://thesinger.github.io/images/llm1/20250607150053.png">
 <meta property="article:published_time" content="2025-06-18T12:11:07.000Z">
-<meta property="article:modified_time" content="2025-06-18T13:13:48.292Z">
+<meta property="article:modified_time" content="2025-06-18T13:21:55.685Z">
 <meta property="article:author" content="bob">
 <meta property="article:tag" content="大模型">
 <meta property="article:tag" content="nano-gpt">
@@ -242,7 +242,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-06-18 20:11:07 / 修改时间：21:13:48" itemprop="dateCreated datePublished" datetime="2025-06-18T20:11:07+08:00">2025-06-18</time>
+              <time title="创建时间：2025-06-18 20:11:07 / 修改时间：21:21:55" itemprop="dateCreated datePublished" datetime="2025-06-18T20:11:07+08:00">2025-06-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -300,43 +300,38 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本文将以nano-gpt为例，讲讲大模型的整个推理过程。帮助初学者快速了解大模型，对其有一个宏观认识。本文的讲解内容大部分来源于该网站<a target="_blank" rel="noopener" href="https://bbycroft.net/llm">LLM Visualization</a>，该网站将大模型做了可视化。
-<span id="more"></span></p>
+        <p>本文将以nano-gpt为例，讲讲大模型的整个推理过程。帮助初学者快速了解大模型，对其有一个宏观认识。本文的讲解内容大部分来源于该网站<a target="_blank" rel="noopener" href="https://bbycroft.net/llm">LLM Visualization</a>，该网站将大模型做了可视化。</p>
+<span id="more"></span>
 <div>
   <img src="\images\llm1\20250530205048.png" style="max-width: 50%; max-height: 50%;">
 </div>
-上面的图片展示从输入到输出的整个流程，中间LLM部分即为nano-gpt的简易结构图。
-
-## 1.Tokenization And Embedding
-首先，模型的输入是一个句子，然而模型是无法直接处理字符的，它只是处理数字类型，所以要先将文字转换为数字，文字到数字的这个过程叫做tokenization。那么这个过程是如何实现的呢？答案很简单，首先将输入的句子进行分词，完整的句子被分为多块，分块后的文字叫做token。通过查表的方法，看每个token对应的数字是多少。这个表键为文字（也就是token），值为数字。因此，输入一个句子，查表后，可以得到句子所对应的一串数字。在中文情况下，一个token可能是一个字，也可能是若干个字；英文场景下，一个token可能是一个单词，也可能只是某个单词一部分。
-
-下面的图展示了英文和中文进行分词后的结果，以及转换成的数字。相同颜色的区域是同一个块，可以看到sophisticated被分成了3块，是3个token。我来自中国这句话也是3个token，”来自“被算为一个token。token对应的数字称为token索引，
+<p>上面的图片展示从输入到输出的整个流程，中间LLM部分即为nano-gpt的简易结构图。</p>
+<h2 id="1-Tokenization-And-Embedding">1.Tokenization And Embedding</h2>
+<p>首先，模型的输入是一个句子，然而模型是无法直接处理字符的，它只是处理数字类型，所以要先将文字转换为数字，文字到数字的这个过程叫做tokenization。那么这个过程是如何实现的呢？答案很简单，首先将输入的句子进行分词，完整的句子被分为多块，分块后的文字叫做token。通过查表的方法，看每个token对应的数字是多少。这个表键为文字（也就是token），值为数字。因此，输入一个句子，查表后，可以得到句子所对应的一串数字。在中文情况下，一个token可能是一个字，也可能是若干个字；英文场景下，一个token可能是一个单词，也可能只是某个单词一部分。</p>
+<p>下面的图展示了英文和中文进行分词后的结果，以及转换成的数字。相同颜色的区域是同一个块，可以看到sophisticated被分成了3块，是3个token。我来自中国这句话也是3个token，”来自“被算为一个token。token对应的数字称为token索引，</p>
 <div>
   <img src="\images\llm1\20250530213103.png" style="max-width: 50%; max-height: 50%;">
   <img src="\images\llm1\20250530213116.png" style="max-width: 50%; max-height: 50%;">
 </div>
-
 <p>由token索引，从token Embed向量取token index对应的列向量，从position Embed向量中，取出token在整个输入中位置索引对应的列向量，将两个向量相加，得到该token对应的Input Embed。token Embed的shape为(C， n_vocab)，position Embed的shape为(C， T)。C是向量维度或者称为特征数，通道数，T是token数量，同时也代表了时间，例如索引0代表0时刻，索引1代表1时刻。n_vocab是词汇表token数量。</p>
 <div>
   <img src="\images\llm1\20250604211338.png" style="max-width: 50%; max-height: 50%;">
 </div>
-
 <p>如上图所示，CBABBC是输入，每个单词代表一个token，第4个字母B，其token索引为1，所以取token Embed中第一列，B本身所在输入中索引为3，所以取position Embed中的第4列向量，两个向量相加，得到token B对应的Input Embed。token Embed和position Embed通过训练获得。对输入的每个token做同样的操作，得到完整的Input Embed，shape为（C， T）。</p>
 <div>
   <img src="\images\llm1\20250604212158.png" style="max-width: 50%; max-height: 50%;">
 </div>
-
-<h2><a name="2-layernorm" class="anchor" href="#2-layernorm"><span class="header-link"></span></a>2.LayerNorm</h2><p>得到Input Embed后，会进行normalization操作，将其变为均值为0，标准差为1的向量。首先按列求出输入每一列的均值和标准差，分别记为μ和α。</p>
+<h2 id="2-LayerNorm">2.LayerNorm</h2>
+<p>得到Input Embed后，会进行normalization操作，将其变为均值为0，标准差为1的向量。首先按列求出输入每一列的均值和标准差，分别记为μ和α。</p>
 <p>对Input Embed中每列的每个元素减去均值μ，除以标准差α。标准差根号下加ε，防止分母为0。再乘β，加γ。得到Layer Norm。β和γl均由模型训练得到，Layer Norm会作为self-attention模块的输入。</p>
 <div>
   <img src="\images\llm1\20250604222614.png" style="max-width: 50%; max-height: 50%;">
 </div>
-
-<h2><a name="3-self-attention" class="anchor" href="#3-self-attention"><span class="header-link"></span></a>3.Self Attention</h2><p>self-attenrion有多个注意力头，下面以一个头为例，每个头计算一样。在这一阶段，输入为上一阶段的Layer Norm,我们要用q,k,v权重及其对应的bias,计算得到对应的q,k,v向量。q,k,v权重及其对应的bias均为训练获得。Q/K/V_Weights的shape为（A， C），C即token的维度，A为token维度 / 注意力头数。</p>
+<h2 id="3-Self-Attention">3.Self Attention</h2>
+<p>self-attenrion有多个注意力头，下面以一个头为例，每个头计算一样。在这一阶段，输入为上一阶段的Layer Norm,我们要用q,k,v权重及其对应的bias,计算得到对应的q,k,v向量。q,k,v权重及其对应的bias均为训练获得。Q/K/V_Weights的shape为（A， C），C即token的维度，A为token维度 / 注意力头数。</p>
 <div>
   <img src="\images\llm1\20250607092019.png" style="max-width: 50%; max-height: 50%;">
 </div>
-
 <p>Q_Weights矩阵与Layer Norm矩阵相乘，再与Q_Bias相加，得到Q_vectors。K_vectors和V_vectors计算同理。三个矩阵shape为（A， T）。</p>
 <div>
   <img src="\images\llm1\动画.gif" style="max-width: 50%; max-height: 50%;">
@@ -349,31 +344,27 @@
 <div>
   <img src="\images\llm1\20250607132532.png" style="max-width: 50%; max-height: 50%;">
 </div>
-
 <p>Attn Matrix Softmax的第t行中的每个元素，与V_vectors的每一列相乘，再累加。得到V_Output的第t列。重复上述计算，得到完整的V_Output，shape为（A， T）。</p>
 <div>
   <img src="\images\llm1\v_output.gif" style="max-width: 50%; max-height: 50%;">
 </div>
-
 <p>每个注意力头都会计算得到一个V_Output，我们将这些V_Output按行拼接，得到一个shape（C， T）的矩阵。前面提到，A等于token的维度除以主力头数，所以将每个注意力头的output拼接后，维度又恢复为C。Projection Weights与拼接后的V_Output相乘再加Projection Bias,得到Attention Output。</p>
 <div>
   <img src="\images\llm1\20250607141607.png" style="max-width: 50%; max-height: 50%;">
 </div>
-
 <p>Attention Ouptut会与前面得到Input Embed相加，得到Attention Residual矩阵，shape为（C， T）。</p>
-<h2><a name="4-mlp" class="anchor" href="#4-mlp"><span class="header-link"></span></a>4.MLP</h2><p>上一步得到的Attention Residual，会和第2小节一样，进行LayerNorm。接着，MLP Weights与LayerNorm矩阵相乘，再加MLP Bias，然后GELU激活函数激活，得到MLP Activation矩阵。MLP Weights shape为（C*4， C）。</p>
+<h2 id="4-MLP">4.MLP</h2>
+<p>上一步得到的Attention Residual，会和第2小节一样，进行LayerNorm。接着，MLP Weights与LayerNorm矩阵相乘，再加MLP Bias，然后GELU激活函数激活，得到MLP Activation矩阵。MLP Weights shape为（C*4， C）。</p>
 <div>
   <img src="\images\llm1\20250607143845.png" style="max-width: 50%; max-height: 50%;">
 </div>
-
 <p>然后，MLP Projection Weights与转置后的MLP Activation矩阵相乘，再加MLP Projection Bias，得到MLP Result，shape恢复为（C， T）。</p>
 <div>
   <img src="\images\llm1\20250607144210.png" style="max-width: 50%; max-height: 50%;">
 </div>
 MLP Result会和Attention Residual相加，得到MLP Residual。
-
-## 5.FinalOuput
-MLP Residual同样会进行LayerNorm运算。
+<h2 id="5-FinalOuput">5.FinalOuput</h2>
+<p>MLP Residual同样会进行LayerNorm运算。</p>
 <div>
   <img src="\images\llm1\20250607145628.png" style="max-width: 50%; max-height: 50%;">
 </div>
@@ -481,7 +472,7 @@ LM Head Weights（shape为（C， n_vocab））与LayerNorm矩阵相乘，得到
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">2.LayerNorm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">3.Self Attention</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">4.MLP</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Tokenization-And-Embedding"><span class="nav-number">1.</span> <span class="nav-text">1.Tokenization And Embedding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-LayerNorm"><span class="nav-number">2.</span> <span class="nav-text">2.LayerNorm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Self-Attention"><span class="nav-number">3.</span> <span class="nav-text">3.Self Attention</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-MLP"><span class="nav-number">4.</span> <span class="nav-text">4.MLP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-FinalOuput"><span class="nav-number">5.</span> <span class="nav-text">5.FinalOuput</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
