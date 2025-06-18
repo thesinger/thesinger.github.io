@@ -54,7 +54,8 @@ hexo默认在所有页面开启评论，可通过修改md文件中<code>comments
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.post-body p a&#123;</span><br><span class="line">    color: #0593d3;</span><br><span class="line">    border-bottom: none;</span><br><span class="line">    &amp;:hover &#123;</span><br><span class="line">      color: #0477ab;</span><br><span class="line">      text-decoration: underline;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="渲染公式">渲染公式</h1>
 <p>参考<a
-href="https://theme-next.js.org/docs/third-party-services/math-equations.html#mjx-eqn%3Aeq1">官方方式</a>。首先卸载hexo-renderer-marked，然后安装hexo-renderer-pandoc。
+href="https://theme-next.js.org/docs/third-party-services/math-equations.html#mjx-eqn%3Aeq1">官方方式</a>。首先卸载hexo-renderer-marked，然后安装hexo-renderer-pandoc。hexo-renderer-pandoc依赖于pandoc,所以还需要<a
+href="https://github.com/jgm/pandoc/blob/main/INSTALL.md">安装pandoc</a>,然后将其加入环境变量。
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm un hexo-renderer-marked</span><br><span class="line">npm i hexo-renderer-pandoc</span><br></pre></td></tr></table></figure>
 如果hexo-renderer-pandoc的版本大于等于5.0.0，则需要在hexo的配置文件_config.yml中加入
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pandoc:</span><br><span class="line">  args:</span><br><span class="line">    - --mathjax</span><br></pre></td></tr></table></figure>
