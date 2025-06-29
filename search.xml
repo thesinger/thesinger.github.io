@@ -474,4 +474,112 @@ id="跑法训练训练强度811一切以心率为准">跑法训练（训练强�
         <tag>腿部训练</tag>
       </tags>
   </entry>
+  <entry>
+    <title>走进大模型（二）</title>
+    <url>/2025/06/29/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%BA%8C)/</url>
+    <content><![CDATA[<p>上一篇讲了nano-gpt的结构，这篇讲讲nano-gpt的代码实现，项目来源于<a
+href="https://github.com/karpathy/nanoGPT">karpathy/nanoGPT: The
+simplest, fastest repository for training/finetuning medium-sized
+GPTs.</a>。这个项目结构不复杂，作者也给了详细的注释，非常适合新手入门。</p>
+<h2 id="quick-start">1. quick start</h2>
+<p>将项目clone到本地后，只需4条指令，即可实现nano-gpt的训练和推理。
+首先安装项目依赖： <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install torch numpy transformers datasets tiktoken wandb tqdm</span><br></pre></td></tr></table></figure>
+然后运行prepare.py文件，生成训练数据(train.bin)和测试数据（val.bin），同时还会生成meta.pkl文件，帮助对数据编码与解码。
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python data/shakespeare_char/prepare.py</span><br></pre></td></tr></table></figure> 接下来就是训练： <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python train.py config/train_shakespeare_char.py</span><br></pre></td></tr></table></figure> 最后进行推理：
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python sample.py --out_dir=out-shakespeare-char</span><br></pre></td></tr></table></figure> 下面的章节依次讲讲prepare.py， train.py，
+sample.py三个文件。prepare.py在项目中有多个，在data目录不同的文件夹下，实现思路和目的都是类似的，只是针对不同的数据集，处理有些不一样，本文提到的prepare.py指data/shakespeare_char路径下的。</p>
+<h2 id="数据准备">2. 数据准备</h2>
+来看prepare.py文件，实现很简单，首先下载莎士比亚的诗歌，然后输出字母数量。
+<div>
+<p><img src="\images\llm2\20250620210102.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+统计诗歌中出现过多少种字符，并打印。然后编写字符的编码和接码函数，一个字符对应一个数字，同理，一个数字对应一个字符，两者一一对应。encode其实就是将输入token化的过程，只不过这里是每个字符作为一个token。
+<div>
+<p><img src="\images\llm2\20250620210804.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+往下是划分训练集和测试集，训练集默认90%，测试集10%，并保存划分好的数据集。
+<div>
+<p><img src="\images\llm2\20250620210944.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+最后保存meta
+data,meta.pkl由三部分组分，一个是词表大小，一个是数字到字符的映射，一个是字符到数字的映射。
+<div>
+<p><img src="\images\llm2\20250620211016.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+<p>到这里，prepare.py就结束了。</p>
+<h2 id="训练">3.训练</h2>
+train.py脚本支持分布式训练，由于作者是单卡，所以代码中涉及分布式的部分就略过。代码开头定义了一些超参和训练相关参数。若命令行输入了配置文件<code>config/train_shakespeare_char.py</code>，则<code>exec(open('configurator.py').read())</code>语句会用<code>config/train_shakespeare_char.py</code>中定义的变量值覆盖train中的同名全局变量值。没有命令行没有输入，则使用train中的定义的值。代码中的ddp变量标识是否使用分布式训练。
+<div>
+<p><img src="\images\llm2\file-20250620223144684.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+<div>
+<p><img src="\images\llm2\file-20250620223205951.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+<div>
+<p><img src="\images\llm2\file-20250623224131156.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+<code>train_shakespeare_char.py</code>文件包含了训练相关参数，代码内容如下:
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># train a miniature character-level shakespeare model</span><br><span class="line"></span><br><span class="line"># good for debugging and playing on macbooks and such</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">out_dir = &#x27;out-shakespeare-char&#x27;</span><br><span class="line"></span><br><span class="line">eval_interval = 250 # keep frequent because we&#x27;ll overfit</span><br><span class="line"></span><br><span class="line">eval_iters = 200</span><br><span class="line"></span><br><span class="line">log_interval = 10 # don&#x27;t print too too often</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"># we expect to overfit on this small dataset, so only save when val improves</span><br><span class="line"></span><br><span class="line">always_save_checkpoint = False</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">wandb_log = False # override via command line if you like</span><br><span class="line"></span><br><span class="line">wandb_project = &#x27;shakespeare-char&#x27;</span><br><span class="line"></span><br><span class="line">wandb_run_name = &#x27;mini-gpt&#x27;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">dataset = &#x27;shakespeare_char&#x27;</span><br><span class="line"></span><br><span class="line">gradient_accumulation_steps = 1</span><br><span class="line"></span><br><span class="line">batch_size = 64</span><br><span class="line"></span><br><span class="line">block_size = 256 # context of up to 256 previous characters</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"># baby GPT model :)</span><br><span class="line"></span><br><span class="line">n_layer = 6</span><br><span class="line"></span><br><span class="line">n_head = 6</span><br><span class="line"></span><br><span class="line">n_embd = 384</span><br><span class="line"></span><br><span class="line">dropout = 0.2</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">learning_rate = 1e-3 # with baby networks can afford to go a bit higher</span><br><span class="line"></span><br><span class="line">max_iters = 5000</span><br><span class="line"></span><br><span class="line">lr_decay_iters = 5000 # make equal to max_iters usually</span><br><span class="line"></span><br><span class="line">min_lr = 1e-4 # learning_rate / 10 usually</span><br><span class="line"></span><br><span class="line">beta2 = 0.99 # make a bit bigger because number of tokens per iter is small</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">warmup_iters = 100 # not super necessary potentially</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"># on macbook also add</span><br><span class="line"></span><br><span class="line"># device = &#x27;cpu&#x27;  # run on cpu only</span><br><span class="line"></span><br><span class="line">compile = False # do not torch compile the model</span><br></pre></td></tr></table></figure>
+往下定义了get_batch函数，用于获取数据，进行训练，x是input，y是label，block_size控制句子长度。label内容即为x中每个token的下一位token。例如完整句子token为1
+2 3 4. 那么x可能为1 2 3, y就为2 3 4。
+<div>
+<p><img src="\images\llm2\file-20250623224257069.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+接着初始化迭代轮次和val_loss，读取meta,pkl输出数据的基本信息，meta仅在此处使用，后续代码没有用到。
+<div>
+<p><img src="\images\llm2\file-20250623224949982.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+然后进行模型加载和初始化，训练支持加载已有权重继续训练，也可以从头训练。
+<div>
+<p><img src="\images\llm2\file-20250623225300706.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+下面定义了梯度缩放，主要解决float16训练时梯度下溢问题。定义了optimizer，是否使用torch2.0的新特性，编译模型，以及是否将模型复制到多个GPU上分布式训练模型。
+<div>
+<p><img src="\images\llm2\file-20250623225647993.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+随后是两个函数，一个是用于计算loss，一个是更新学习率。
+<div>
+<p><img src="\images\llm2\file-20250624210406160.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+下面是训练时log和训练前的初始化。mfu（model flops
+utilization）衡量计算效率，model.py中定义了<code>estimate_mfu</code>函数。
+<div>
+<p><img src="\images\llm2\file-20250624210457443.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+以下就是训练的主体代码，训练过程中开启wanbd的话，会记录下模型的loss,lr,mfu,iter等信息，并且训练中保存val
+loss最低的模型。随后就是前向推理，反向传播更新梯度。最后计算mfu。到此，整个train.py就结束了。
+<div>
+<p><img src="\images\llm2\file-20250624210958717.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+<div>
+<p><img src="\images\llm2\file-20250624211017256.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+下面看模型的前向传播，首先根据输入idx,得到token embedding和position
+embedding。将两个向量相加，并应用dropout正则化，随机将某些维度置零。随后x进入循环，依次进入每个block。每一个block其实就是四个部分，分别是LayerNorm，CausalSelfAttention，LayerNorm，以及MLP。遍历计算完所有block，计算logits,求交叉熵损失。返回logits和loss。
+<div>
+<p><img src="\images\llm2\file-20250624212008467.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+<h2 id="推理">4.推理</h2>
+推理部分比较简单，首先设置推理时的相关参数，读取模型。
+<div>
+<p><img src="\images\llm2\file-20250625190728962.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+然后读取meta.pkl，对输入进行编码，对输出解码。最后调用generate函数进行推理。
+<div>
+<p><img src="\images\llm2\file-20250625191001759.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+以下是generate的定义，max_new_tokens表示依次可生成的最大token数，self.config.block_size控制上下文长度，idx_cond进行模型，进行推理，输出logits。logits除以温度，然后取top_k个token，接着对logits进行softmax计算，得到概率。最后对probs进行随机采样，得到下一个token，并将下一个token加到输入尾部，再次循环进行以上操作，直到达到设置的最大token数（max_new_tokens）。
+<div>
+<p><img src="\images\llm2\file-20250625191145138.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+]]></content>
+      <categories>
+        <category>llm技术</category>
+      </categories>
+      <tags>
+        <tag>大模型</tag>
+        <tag>nano-gpt</tag>
+        <tag>llm</tag>
+      </tags>
+  </entry>
 </search>

@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"thesinger.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="上一篇讲了nano-gpt的结构，这篇讲讲nano-gpt的代码实现，项目来源于karpathy&#x2F;nanoGPT: The simplest, fastest repository for training&#x2F;finetuning medium-sized GPTs.。这个项目结构不复杂，作者也给了详细的注释，非常适合新手入门。 1. quick start 将项目clone到本地后，只需4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="走进大模型（二）">
+<meta property="og:url" content="https://thesinger.github.io/2025/06/29/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%BA%8C)/index.html">
+<meta property="og:site_name" content="bob的个人空间">
+<meta property="og:description" content="上一篇讲了nano-gpt的结构，这篇讲讲nano-gpt的代码实现，项目来源于karpathy&#x2F;nanoGPT: The simplest, fastest repository for training&#x2F;finetuning medium-sized GPTs.。这个项目结构不复杂，作者也给了详细的注释，非常适合新手入门。 1. quick start 将项目clone到本地后，只需4">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/20250620210102.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/20250620210804.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/20250620210944.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/20250620211016.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/file-20250620223144684.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/file-20250620223205951.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/file-20250623224131156.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/file-20250623224257069.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/file-20250623224949982.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/file-20250623225300706.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/file-20250623225647993.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/file-20250624210406160.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/file-20250624210457443.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/file-20250624210958717.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/file-20250624211017256.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/file-20250624212008467.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/file-20250625190728962.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/file-20250625191001759.png">
+<meta property="og:image" content="https://thesinger.github.io/images/llm2/file-20250625191145138.png">
+<meta property="article:published_time" content="2025-06-29T01:47:13.000Z">
+<meta property="article:modified_time" content="2025-06-29T01:51:31.950Z">
+<meta property="article:author" content="bob">
+<meta property="article:tag" content="大模型">
+<meta property="article:tag" content="nano-gpt">
+<meta property="article:tag" content="llm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://thesinger.github.io/images/llm2/20250620210102.png">
+
+<link rel="canonical" href="https://thesinger.github.io/2025/06/29/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%BA%8C)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>走进大模型（二） | bob的个人空间</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bob的个人空间</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-关于本站">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于本站</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/message_board/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2025/06/29/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%BA%8C)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="bob">
+      <meta itemprop="description" content="邮箱：1633748848@qq.com，记录生活和成长的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bob的个人空间">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          走进大模型（二）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-06-29 09:47:13 / 修改时间：09:51:31" itemprop="dateCreated datePublished" datetime="2025-06-29T09:47:13+08:00">2025-06-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/llm%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">llm技术</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/06/29/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%BA%8C)/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/06/29/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%BA%8C)/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>上一篇讲了nano-gpt的结构，这篇讲讲nano-gpt的代码实现，项目来源于<a
+target="_blank" rel="noopener" href="https://github.com/karpathy/nanoGPT">karpathy/nanoGPT: The
+simplest, fastest repository for training/finetuning medium-sized
+GPTs.</a>。这个项目结构不复杂，作者也给了详细的注释，非常适合新手入门。</p>
+<h2 id="quick-start">1. quick start</h2>
+<p>将项目clone到本地后，只需4条指令，即可实现nano-gpt的训练和推理。
+首先安装项目依赖： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torch numpy transformers datasets tiktoken wandb tqdm</span><br></pre></td></tr></table></figure>
+然后运行prepare.py文件，生成训练数据(train.bin)和测试数据（val.bin），同时还会生成meta.pkl文件，帮助对数据编码与解码。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python data/shakespeare_char/prepare.py</span><br></pre></td></tr></table></figure> 接下来就是训练： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py config/train_shakespeare_char.py</span><br></pre></td></tr></table></figure> 最后进行推理：
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sample.py --out_dir=out-shakespeare-char</span><br></pre></td></tr></table></figure> 下面的章节依次讲讲prepare.py， train.py，
+sample.py三个文件。prepare.py在项目中有多个，在data目录不同的文件夹下，实现思路和目的都是类似的，只是针对不同的数据集，处理有些不一样，本文提到的prepare.py指data/shakespeare_char路径下的。</p>
+<h2 id="数据准备">2. 数据准备</h2>
+来看prepare.py文件，实现很简单，首先下载莎士比亚的诗歌，然后输出字母数量。
+<div>
+<p><img src="\images\llm2\20250620210102.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+统计诗歌中出现过多少种字符，并打印。然后编写字符的编码和接码函数，一个字符对应一个数字，同理，一个数字对应一个字符，两者一一对应。encode其实就是将输入token化的过程，只不过这里是每个字符作为一个token。
+<div>
+<p><img src="\images\llm2\20250620210804.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+往下是划分训练集和测试集，训练集默认90%，测试集10%，并保存划分好的数据集。
+<div>
+<p><img src="\images\llm2\20250620210944.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+最后保存meta
+data,meta.pkl由三部分组分，一个是词表大小，一个是数字到字符的映射，一个是字符到数字的映射。
+<div>
+<p><img src="\images\llm2\20250620211016.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+<p>到这里，prepare.py就结束了。</p>
+<h2 id="训练">3.训练</h2>
+train.py脚本支持分布式训练，由于作者是单卡，所以代码中涉及分布式的部分就略过。代码开头定义了一些超参和训练相关参数。若命令行输入了配置文件<code>config/train_shakespeare_char.py</code>，则<code>exec(open('configurator.py').read())</code>语句会用<code>config/train_shakespeare_char.py</code>中定义的变量值覆盖train中的同名全局变量值。没有命令行没有输入，则使用train中的定义的值。代码中的ddp变量标识是否使用分布式训练。
+<div>
+<p><img src="\images\llm2\file-20250620223144684.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+<div>
+<p><img src="\images\llm2\file-20250620223205951.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+<div>
+<p><img src="\images\llm2\file-20250623224131156.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+<code>train_shakespeare_char.py</code>文件包含了训练相关参数，代码内容如下:
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"># train a miniature character-level shakespeare model</span><br><span class="line"></span><br><span class="line"># good for debugging and playing on macbooks and such</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">out_dir = &#x27;out-shakespeare-char&#x27;</span><br><span class="line"></span><br><span class="line">eval_interval = 250 # keep frequent because we&#x27;ll overfit</span><br><span class="line"></span><br><span class="line">eval_iters = 200</span><br><span class="line"></span><br><span class="line">log_interval = 10 # don&#x27;t print too too often</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"># we expect to overfit on this small dataset, so only save when val improves</span><br><span class="line"></span><br><span class="line">always_save_checkpoint = False</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">wandb_log = False # override via command line if you like</span><br><span class="line"></span><br><span class="line">wandb_project = &#x27;shakespeare-char&#x27;</span><br><span class="line"></span><br><span class="line">wandb_run_name = &#x27;mini-gpt&#x27;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">dataset = &#x27;shakespeare_char&#x27;</span><br><span class="line"></span><br><span class="line">gradient_accumulation_steps = 1</span><br><span class="line"></span><br><span class="line">batch_size = 64</span><br><span class="line"></span><br><span class="line">block_size = 256 # context of up to 256 previous characters</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"># baby GPT model :)</span><br><span class="line"></span><br><span class="line">n_layer = 6</span><br><span class="line"></span><br><span class="line">n_head = 6</span><br><span class="line"></span><br><span class="line">n_embd = 384</span><br><span class="line"></span><br><span class="line">dropout = 0.2</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">learning_rate = 1e-3 # with baby networks can afford to go a bit higher</span><br><span class="line"></span><br><span class="line">max_iters = 5000</span><br><span class="line"></span><br><span class="line">lr_decay_iters = 5000 # make equal to max_iters usually</span><br><span class="line"></span><br><span class="line">min_lr = 1e-4 # learning_rate / 10 usually</span><br><span class="line"></span><br><span class="line">beta2 = 0.99 # make a bit bigger because number of tokens per iter is small</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">warmup_iters = 100 # not super necessary potentially</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"># on macbook also add</span><br><span class="line"></span><br><span class="line"># device = &#x27;cpu&#x27;  # run on cpu only</span><br><span class="line"></span><br><span class="line">compile = False # do not torch compile the model</span><br></pre></td></tr></table></figure>
+往下定义了get_batch函数，用于获取数据，进行训练，x是input，y是label，block_size控制句子长度。label内容即为x中每个token的下一位token。例如完整句子token为1
+2 3 4. 那么x可能为1 2 3, y就为2 3 4。
+<div>
+<p><img src="\images\llm2\file-20250623224257069.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+接着初始化迭代轮次和val_loss，读取meta,pkl输出数据的基本信息，meta仅在此处使用，后续代码没有用到。
+<div>
+<p><img src="\images\llm2\file-20250623224949982.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+然后进行模型加载和初始化，训练支持加载已有权重继续训练，也可以从头训练。
+<div>
+<p><img src="\images\llm2\file-20250623225300706.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+下面定义了梯度缩放，主要解决float16训练时梯度下溢问题。定义了optimizer，是否使用torch2.0的新特性，编译模型，以及是否将模型复制到多个GPU上分布式训练模型。
+<div>
+<p><img src="\images\llm2\file-20250623225647993.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+随后是两个函数，一个是用于计算loss，一个是更新学习率。
+<div>
+<p><img src="\images\llm2\file-20250624210406160.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+下面是训练时log和训练前的初始化。mfu（model flops
+utilization）衡量计算效率，model.py中定义了<code>estimate_mfu</code>函数。
+<div>
+<p><img src="\images\llm2\file-20250624210457443.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+以下就是训练的主体代码，训练过程中开启wanbd的话，会记录下模型的loss,lr,mfu,iter等信息，并且训练中保存val
+loss最低的模型。随后就是前向推理，反向传播更新梯度。最后计算mfu。到此，整个train.py就结束了。
+<div>
+<p><img src="\images\llm2\file-20250624210958717.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+<div>
+<p><img src="\images\llm2\file-20250624211017256.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+下面看模型的前向传播，首先根据输入idx,得到token embedding和position
+embedding。将两个向量相加，并应用dropout正则化，随机将某些维度置零。随后x进入循环，依次进入每个block。每一个block其实就是四个部分，分别是LayerNorm，CausalSelfAttention，LayerNorm，以及MLP。遍历计算完所有block，计算logits,求交叉熵损失。返回logits和loss。
+<div>
+<p><img src="\images\llm2\file-20250624212008467.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+<h2 id="推理">4.推理</h2>
+推理部分比较简单，首先设置推理时的相关参数，读取模型。
+<div>
+<p><img src="\images\llm2\file-20250625190728962.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+然后读取meta.pkl，对输入进行编码，对输出解码。最后调用generate函数进行推理。
+<div>
+<p><img src="\images\llm2\file-20250625191001759.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+以下是generate的定义，max_new_tokens表示依次可生成的最大token数，self.config.block_size控制上下文长度，idx_cond进行模型，进行推理，输出logits。logits除以温度，然后取top_k个token，接着对logits进行softmax计算，得到概率。最后对probs进行随机采样，得到下一个token，并将下一个token加到输入尾部，再次循环进行以上操作，直到达到设置的最大token数（max_new_tokens）。
+<div>
+<p><img src="\images\llm2\file-20250625191145138.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>bob
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://thesinger.github.io/2025/06/29/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%BA%8C)/" title="走进大模型（二）">https://thesinger.github.io/2025/06/29/走进大模型(二)/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag"># 大模型</a>
+              <a href="/tags/nano-gpt/" rel="tag"># nano-gpt</a>
+              <a href="/tags/llm/" rel="tag"># llm</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/06/18/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%80)/" rel="prev" title="走进大模型(一)">
+      <i class="fa fa-chevron-left"></i> 走进大模型(一)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#quick-start"><span class="nav-number">1.</span> <span class="nav-text">1. quick start</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">2. 数据准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">3.</span> <span class="nav-text">3.训练</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">4.推理</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bob"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">bob</p>
+  <div class="site-description" itemprop="description">邮箱：1633748848@qq.com，记录生活和成长的点滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bob</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">12k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">11 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'vXf6tPpOJHmmCIHQpCxiwQBK-gzGzoHsz',
+      appKey     : 'if29cHbMXf80WhuGZU3ENwFL',
+      placeholder: "欢迎留下你的评论",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
