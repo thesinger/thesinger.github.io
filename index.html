@@ -195,6 +195,198 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2025/07/05/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%89)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="bob">
+      <meta itemprop="description" content="邮箱：1633748848@qq.com，记录生活和成长的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bob的个人空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/05/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%89)/" class="post-title-link" itemprop="url">走进大模型(三)——attention</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-07-05 21:16:53 / 修改时间：21:26:06" itemprop="dateCreated datePublished" datetime="2025-07-05T21:16:53+08:00">2025-07-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/llm%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">llm技术</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/07/05/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%89)/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/07/05/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%89)/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          这篇主要讲attention机制诞生的背景，为了解决什么问题而被发明，以及如何理解self-attention的计算。
+# 1.序列模型
+在attention发明以前，对自然语言进行处理往往采用序列模型，如RNN，LSTM等。序列模型有两个问题，一个是信息丢失，一个是遗忘问题，也可以称为长距离依赖问题。信息丢失体现为编码器会将输入序列压缩为一个固定长度的向量，这个向量再传递给解码器进行解码，可想而知，当输入承载的信息超过向量能够承载的信息时，编码时就会丢失信息。第二个遗忘问题，RNN和LSTM是马尔可夫链式的结构，当前状态依赖前一步的状态，当前状态无法直接和前一步之前的信息进行交互。反向传播时，梯度从最后一个状态反向传播到第一个状态，梯度反传涉及连乘，随着输入长度的增加，很容易发生梯度爆炸或梯度消失，因此早期时的信息在传递过程中会逐渐衰减，导致模型难以捕捉远距离的依赖关系。
+# 2.attention的发明 attention机制最早出现在Bahdanau等人的论文<a
+target="_blank" rel="noopener" href="https://arxiv.org/pdf/1409.0473.pdf">“Neural machine translation
+by jointly learning to align and
+translate.”</a>中，用于翻译任务。输入记为x，长度为n，输出记为y，长度为m。
+<div>
+<p><img src="\images\llm3\file-20250702223554461.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+编码器为一个双向RNN，计算输入的前向隐藏状态和反向隐藏状态，最后将前向和反向的状态拼接，作为位置i的隐藏状态。
+<div>
+<p><img src="\images\llm3\file-20250702223651256.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+解码器同样也会使用RNN计算输出的隐藏状态<span
+class="math inline">\(s_t\)</span>，作为输出位置t的隐藏状态。同时，还会计算<span
+class="math inline">\(c_t\)</span>和<span
+class="math inline">\(α_{\text{t,i}}\)</span>，<span
+class="math inline">\(c_t\)</span>是context vector，<span
+class="math inline">\(α_{\text{t,i}}\)</span>是输出位置t与输入位置i之间的alignment
+score。两者计算公式如下：
+<div>
+<p><img src="\images\llm3\file-20250704184946455.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+<p>score(<span class="math inline">\(s_{\text{t-1}}\)</span>, <span
+class="math inline">\(h_i\)</span>)由一个一层的前馈神经网络算出。Bahdanau等人的注意力机制通过计算context
+vector，解决了信息丢失问题，可以较好地表示输入信息。传统序列模型将输入序列编码为固定长度向量，而Bahdanau等人对编码器所有隐藏状态进行加权求和，动态生成context
+vector。同时alignment
+score引入了对齐机制，提升了翻译任务的准确度。然而，因为结构上还存在RNN，所以遗忘问题仍然存在。
+从Bahdanau的注意力诞生到self-attention的出现，中间还出现了其他注意力机制，这里略过。
+# 3.self-attetion 2017年，大名鼎鼎的self-attention（<a
+target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">[1706.03762] Attention Is All
+You
+Need</a>）出现了。谷歌的人员提出了一种名为transformer的网络架构，其中self-attention对输入经过线性变换生成Q(query)，K(key)，V(value)三个矩阵，用这三个矩阵来计算注意力矩阵，<span
+class="math inline">\(d_k\)</span>是矩阵k的维度，为公式如下：</p>
+<p><span class="math display">\[
+\text{Attention}(Q, K, V) = \text{softmax}\left(
+\frac{QK^\top}{\sqrt{d_k}} \right) V
+\]</span></p>
+<p>为增强模型的表达能力，论文使用多个头进行注意力计算，计算完后再将多个头的结果拼接。如何理解这三个矩阵的运算呢，这样相乘的意义是什么，我看了3Blue1Brown的视频，觉得讲得很好，有兴趣的可以观看原视频（<a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1TZ421j7Ke/?spm_id_from=333.1387.upload.video_card.click&amp;vd_source=2f63917659c87b2e9377cefd1e9fc1c2">【官方双语】直观解释注意力机制，Transformer的核心
+|
+【深度学习第6章】_哔哩哔哩_bilibili</a>）。本小节使用的图片均来自于该视频。</p>
+transformer首先将输入转换为向量，这些向量在高维空间中指向的方向代表了各自的语义，如图所示：
+<div>
+<p><img src="\images\llm3\file-20250705085812458.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+在这个高维空间中，词与词之间具有什么样的关系呢？假设当前有4个向量，分别是aunt,uncle,woman,man。在这个高维空间中，woman向量减去man向量得到的黄色向量，约等于aunt向量减去uncle向量。可以看到，向量在高维空间中经过线性变换，可以得到具有其他语义的向量。注意力就是这么一个通过线性变换，结合上下文来更新向量的机制，通过self-attention，每个向量在高维空间中会指向尽可能精确代表它自身语义的方向。
+<div>
+<p><img src="\images\llm3\file-20250705090015020.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+下面来看self-attention机制是如何实现在高维空间中更新向量的。输入向量记为x,shape为（C，
+T），C为向量维度，T为token数量。x与q_weights相乘再加bias得到Q矩阵，Q
+shape为（A， T），A为token维度 /
+注意力头数，T同样代表token数量。x与k_weights相乘再加bias得到K矩阵,K
+shape也为（A，
+T）。Q可以视为对当前token的查询，Q想从整个输入中找到其他token与当前token的关系，以一个具体的例子来看：
+<div>
+<p><img src="\images\llm3\file-20250705132437529.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+creature位置的token，想通过Q查询前面有没有形容词，用来形容creature，该句子中也就是fluffy和blue。这里所说的查询前面是否有形容词只是一方面，实际上，模型想要查询的信息可能不止这些。x通过q_weights进行线性变换，该查询被编码为向量（针对单个token来看），针对每个token的查询，组成了Q矩阵。K则可以视为对Q的回复，x通过k_weights进行线性变换，fluffy和blue对应的向量会被映射到与creature向量高度一致的方向上，方向一致意味着相关度高，更加匹配。
+<div>
+<p><img src="\images\llm3\file-20250705133518218.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+<span
+class="math inline">\(\frac{QK^\top}{\sqrt{d_k}}\)</span>得到注意力矩阵，shape为（T，
+T）。这个矩阵由Q的列向量与K的列向量点乘算得。点乘结果越大，表示相似度越高，图中以圆圈大小表示相似度，圆越大，表示点乘结果越大。
+<div>
+<p><img src="\images\llm3\file-20250705133914351.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+注意，transformer推理和训练是逐token进行的，每预测一个token，新token加入输出序列，然后根据输出序列又预测下一个token。为了不让序列中的未来信息泄露，即后面的词不能影响前面的词，注意力矩阵的上三角部分会被填充为负无穷（以行的视角来看）。如果以列视角来看，就是下三角部分被填充为负无穷。因为注意力矩阵shape是（T，
+T），所以从哪个视角来看都行。填充后，对注意力矩阵按行进行softmax，使得每行总和为1。
+<div>
+<p><img src="\images\llm3\file-20250705135014770.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+前面提到，self-attention机制要做到在高维空间中更新向量，使其指向最能代表其语义的方向。将注意力矩阵与V矩阵相乘，我们可以达成这个目标。V矩阵由x通过v_weights线性变换得到。shape为（A，
+T），代表输入token的语义。橙色向量代表creature，是V中的一个列向量，经过self-attention计算后，它会变为蓝色向量（蓝色向量语义为fluffy
+blue creature），creature向量的方向精确指向了它在该句中（the fluffy blue
+creature roamed the verdant forest）的含义，它是如何变换为蓝色向量的呢？
+<div>
+<p><img src="\images\llm3\file-20250705140427696.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+答案就是注意力矩阵与V矩阵相乘，结果相当于V矩阵的加权和，权重体现了输入中每个token与该token的相关度。在下图中，是以列视角出发，对注意力矩阵按列进行softmax。对V矩阵的每一列求加权和（如果以行视角看，权重为注意力矩阵的行向量，以列视角看，权重为注意力矩阵中的列向量），得到self-attention的最终输出，这个输出再与原始的输入向量相加（残差结构）。每一个token在高维空间中都由了精确表示，下图中就是creature最终指向了fluffy
+blue creature的方向。
+<div>
+<p><img src="\images\llm3\file-20250705142045129.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+上面所说的是单头注意力的计算，transformer是多头注意力，每一个注意力头都会进行上述的计算。最后将每个注意力头的结果按行拼接。在上面的例子中，我们关注的是形容词（fluffy，blue）如何影响名词（creature），关注点聚焦于语法层面。然而，上下文影响词义的方式是多样的，具体例子可以看下图：
+<div>
+<p><img src="\images\llm3\file-20250705143957973.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+这个例子中车的结构发生了改变。
+<div>
+<p><img src="\images\llm3\file-20250705144158659.png" style="max-width: 50%; max-height: 50%;"></p>
+</div>
+<p>这个例子中，根据上下文不同，Harry代表的含义也不相同，一个表示哈利波特，一个表示哈利王子。多头注意力正是为了捕获不同的注意力模式，实际上，我觉得注意力头捕获的模式非常抽象，难以解释和描述，上面几个具体的例子只是为了说明上下文可以有不同的关注模式。模型的每个注意力头实际上捕获的模式可能是杂糅的，人类无法理解的。</p>
+<p>到这，做一个总结，self-attention的发明解决了信息丢失和长序列的遗忘问题，通过注意力矩阵显示地对每一个token根据上下文计算注意力分数，或称为权重。多头注意力可以学习不同的表示模式，概念。此外，多个注意力头可以并行训练（序列模型因为当前状态依赖前一个状态，因此无法并行训练），使得计算效率提高，模型规模扩大较为容易，使后面的大语言模型出现成为可能。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2025/06/29/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%BA%8C)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1155,121 +1347,11 @@ Visualization</a>，该网站将大模型做了可视化。
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2023/02/09/hexo%E7%BE%8E%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="bob">
-      <meta itemprop="description" content="邮箱：1633748848@qq.com，记录生活和成长的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="bob的个人空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/02/09/hexo%E7%BE%8E%E5%8C%96/" class="post-title-link" itemprop="url">博客美化</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-02-09 19:02:25" itemprop="dateCreated datePublished" datetime="2023-02-09T19:02:25+08:00">2023-02-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-18 23:01:27" itemprop="dateModified" datetime="2025-06-18T23:01:27+08:00">2025-06-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">博客</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/02/09/hexo%E7%BE%8E%E5%8C%96/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/09/hexo%E7%BE%8E%E5%8C%96/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="next主题配置文件修改">Next主题配置文件修改</h1>
-<p>参考<a
-target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/DATA-FILES.md">官方的修改意见</a>，不要直接修改next原始配置文件，避免更新主题时文件冲突。本博客新建了<code>source/_data/next.yml</code>，并将next.yml的override字段改为true，之后所有修改都在该文件进行，修改会覆盖原始配置文件。</p>
-<h1 id="图片插入">图片插入</h1>
-<p>不需要下载hexo-asset-image,将hexo<code>_config.yml</code>配置文件中post_asset_folder的值改为true。输入指令<code>hexo new "My New Post"</code>，新建md文件及同名文件夹，将图片放入该文件夹内。文章中插入<code>&#123;% asset_img example.jpg %&#125;</code>,即可正常显示图片。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/02/09/hexo%E7%BE%8E%E5%8C%96/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
 
@@ -1336,7 +1418,7 @@ target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-ne
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1349,7 +1431,7 @@ target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-ne
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1386,13 +1468,13 @@ target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-ne
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">12k</span>
+    <span title="站点总字数">16k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">11 分钟</span>
+    <span title="站点阅读时长">14 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
