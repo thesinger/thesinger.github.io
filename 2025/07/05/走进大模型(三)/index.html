@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"thesinger.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="这篇主要讲attention机制诞生的背景，为了解决什么问题而被发明，以及如何理解self-attention的计算。 # 1.序列模型 在attention发明以前，对自然语言进行处理往往采用序列模型，如RNN，LSTM等。序列模型有两个问题，一个是信息丢失，一个是遗忘问题，也可以称为长距离依赖问题。信息丢失体现为编码器会将输入序列压缩为一个固定长度的向量，这个向量再传递给解码器进行解码，可">
+  <meta name="description" content="这篇主要讲attention机制诞生的背景，为了解决什么问题而被发明，以及如何理解self-attention的计算。 1.序列模型 在attention发明以前，对自然语言进行处理往往采用序列模型，如RNN，LSTM等。序列模型有两个问题，一个是信息丢失，一个是遗忘问题，也可以称为长距离依赖问题。信息丢失体现为编码器会将输入序列压缩为一个固定长度的向量，这个向量再传递给解码器进行解码，可想而">
 <meta property="og:type" content="article">
 <meta property="og:title" content="走进大模型(三)——attention">
 <meta property="og:url" content="https://thesinger.github.io/2025/07/05/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%89)/index.html">
 <meta property="og:site_name" content="bob的个人空间">
-<meta property="og:description" content="这篇主要讲attention机制诞生的背景，为了解决什么问题而被发明，以及如何理解self-attention的计算。 # 1.序列模型 在attention发明以前，对自然语言进行处理往往采用序列模型，如RNN，LSTM等。序列模型有两个问题，一个是信息丢失，一个是遗忘问题，也可以称为长距离依赖问题。信息丢失体现为编码器会将输入序列压缩为一个固定长度的向量，这个向量再传递给解码器进行解码，可">
+<meta property="og:description" content="这篇主要讲attention机制诞生的背景，为了解决什么问题而被发明，以及如何理解self-attention的计算。 1.序列模型 在attention发明以前，对自然语言进行处理往往采用序列模型，如RNN，LSTM等。序列模型有两个问题，一个是信息丢失，一个是遗忘问题，也可以称为长距离依赖问题。信息丢失体现为编码器会将输入序列压缩为一个固定长度的向量，这个向量再传递给解码器进行解码，可想而">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://thesinger.github.io/images/llm3/file-20250702223554461.png">
 <meta property="og:image" content="https://thesinger.github.io/images/llm3/file-20250702223651256.png">
@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://thesinger.github.io/images/llm3/file-20250705143957973.png">
 <meta property="og:image" content="https://thesinger.github.io/images/llm3/file-20250705144158659.png">
 <meta property="article:published_time" content="2025-07-05T13:16:53.000Z">
-<meta property="article:modified_time" content="2025-07-05T13:26:06.505Z">
+<meta property="article:modified_time" content="2025-07-05T13:28:24.570Z">
 <meta property="article:author" content="bob">
 <meta property="article:tag" content="大模型">
 <meta property="article:tag" content="llm">
@@ -240,7 +240,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-07-05 21:16:53 / 修改时间：21:26:06" itemprop="dateCreated datePublished" datetime="2025-07-05T21:16:53+08:00">2025-07-05</time>
+              <time title="创建时间：2025-07-05 21:16:53 / 修改时间：21:28:24" itemprop="dateCreated datePublished" datetime="2025-07-05T21:16:53+08:00">2025-07-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -298,10 +298,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        这篇主要讲attention机制诞生的背景，为了解决什么问题而被发明，以及如何理解self-attention的计算。
-# 1.序列模型
-在attention发明以前，对自然语言进行处理往往采用序列模型，如RNN，LSTM等。序列模型有两个问题，一个是信息丢失，一个是遗忘问题，也可以称为长距离依赖问题。信息丢失体现为编码器会将输入序列压缩为一个固定长度的向量，这个向量再传递给解码器进行解码，可想而知，当输入承载的信息超过向量能够承载的信息时，编码时就会丢失信息。第二个遗忘问题，RNN和LSTM是马尔可夫链式的结构，当前状态依赖前一步的状态，当前状态无法直接和前一步之前的信息进行交互。反向传播时，梯度从最后一个状态反向传播到第一个状态，梯度反传涉及连乘，随着输入长度的增加，很容易发生梯度爆炸或梯度消失，因此早期时的信息在传递过程中会逐渐衰减，导致模型难以捕捉远距离的依赖关系。
-# 2.attention的发明 attention机制最早出现在Bahdanau等人的论文<a
+        <p>这篇主要讲attention机制诞生的背景，为了解决什么问题而被发明，以及如何理解self-attention的计算。</p>
+<h1 id="序列模型">1.序列模型</h1>
+<p>在attention发明以前，对自然语言进行处理往往采用序列模型，如RNN，LSTM等。序列模型有两个问题，一个是信息丢失，一个是遗忘问题，也可以称为长距离依赖问题。信息丢失体现为编码器会将输入序列压缩为一个固定长度的向量，这个向量再传递给解码器进行解码，可想而知，当输入承载的信息超过向量能够承载的信息时，编码时就会丢失信息。第二个遗忘问题，RNN和LSTM是马尔可夫链式的结构，当前状态依赖前一步的状态，当前状态无法直接和前一步之前的信息进行交互。反向传播时，梯度从最后一个状态反向传播到第一个状态，梯度反传涉及连乘，随着输入长度的增加，很容易发生梯度爆炸或梯度消失，因此早期时的信息在传递过程中会逐渐衰减，导致模型难以捕捉远距离的依赖关系。
+<span id="more"></span></p>
+<h1 id="attention的发明">2.attention的发明</h1>
+attention机制最早出现在Bahdanau等人的论文<a
 target="_blank" rel="noopener" href="https://arxiv.org/pdf/1409.0473.pdf">“Neural machine translation
 by jointly learning to align and
 translate.”</a>中，用于翻译任务。输入记为x，长度为n，输出记为y，长度为m。
@@ -327,8 +329,9 @@ class="math inline">\(h_i\)</span>)由一个一层的前馈神经网络算出。
 vector，解决了信息丢失问题，可以较好地表示输入信息。传统序列模型将输入序列编码为固定长度向量，而Bahdanau等人对编码器所有隐藏状态进行加权求和，动态生成context
 vector。同时alignment
 score引入了对齐机制，提升了翻译任务的准确度。然而，因为结构上还存在RNN，所以遗忘问题仍然存在。
-从Bahdanau的注意力诞生到self-attention的出现，中间还出现了其他注意力机制，这里略过。
-# 3.self-attetion 2017年，大名鼎鼎的self-attention（<a
+从Bahdanau的注意力诞生到self-attention的出现，中间还出现了其他注意力机制，这里略过。</p>
+<h1 id="self-attetion">3.self-attetion</h1>
+<p>2017年，大名鼎鼎的self-attention（<a
 target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">[1706.03762] Attention Is All
 You
 Need</a>）出现了。谷歌的人员提出了一种名为transformer的网络架构，其中self-attention对输入经过线性变换生成Q(query)，K(key)，V(value)三个矩阵，用这三个矩阵来计算注意力矩阵，<span
@@ -496,6 +499,7 @@ blue creature的方向。
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">1.序列模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#attention%E7%9A%84%E5%8F%91%E6%98%8E"><span class="nav-number">2.</span> <span class="nav-text">2.attention的发明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#self-attetion"><span class="nav-number">3.</span> <span class="nav-text">3.self-attetion</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -572,6 +576,38 @@ blue creature的方向。
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
+<!--《添加网站运行时间 -->
+<!--<br/>-->
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+
+    function createtime() {
+        var grt = new Date("02/08/2023 18:42:36"); //此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if (String(hnum).length == 1) {
+            hnum = "0" + hnum;
+        }
+        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if (String(mnum).length == 1) {
+            mnum = "0" + mnum;
+        }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if (String(snum).length == 1) {
+            snum = "0" + snum;
+        }
+        document.getElementById("timeDate").innerHTML = " | 本站已安全运行 " + dnum + " 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()", 250);
+</script>
+<!-- 添加网站运行时间》 -->
         
 <div class="busuanzi-count">
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>

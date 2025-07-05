@@ -585,10 +585,12 @@ embedding。将两个向量相加，并应用dropout正则化，随机将某些�
   <entry>
     <title>走进大模型(三)——attention</title>
     <url>/2025/07/05/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%89)/</url>
-    <content><![CDATA[这篇主要讲attention机制诞生的背景，为了解决什么问题而被发明，以及如何理解self-attention的计算。
-# 1.序列模型
-在attention发明以前，对自然语言进行处理往往采用序列模型，如RNN，LSTM等。序列模型有两个问题，一个是信息丢失，一个是遗忘问题，也可以称为长距离依赖问题。信息丢失体现为编码器会将输入序列压缩为一个固定长度的向量，这个向量再传递给解码器进行解码，可想而知，当输入承载的信息超过向量能够承载的信息时，编码时就会丢失信息。第二个遗忘问题，RNN和LSTM是马尔可夫链式的结构，当前状态依赖前一步的状态，当前状态无法直接和前一步之前的信息进行交互。反向传播时，梯度从最后一个状态反向传播到第一个状态，梯度反传涉及连乘，随着输入长度的增加，很容易发生梯度爆炸或梯度消失，因此早期时的信息在传递过程中会逐渐衰减，导致模型难以捕捉远距离的依赖关系。
-# 2.attention的发明 attention机制最早出现在Bahdanau等人的论文<a
+    <content><![CDATA[<p>这篇主要讲attention机制诞生的背景，为了解决什么问题而被发明，以及如何理解self-attention的计算。</p>
+<h1 id="序列模型">1.序列模型</h1>
+<p>在attention发明以前，对自然语言进行处理往往采用序列模型，如RNN，LSTM等。序列模型有两个问题，一个是信息丢失，一个是遗忘问题，也可以称为长距离依赖问题。信息丢失体现为编码器会将输入序列压缩为一个固定长度的向量，这个向量再传递给解码器进行解码，可想而知，当输入承载的信息超过向量能够承载的信息时，编码时就会丢失信息。第二个遗忘问题，RNN和LSTM是马尔可夫链式的结构，当前状态依赖前一步的状态，当前状态无法直接和前一步之前的信息进行交互。反向传播时，梯度从最后一个状态反向传播到第一个状态，梯度反传涉及连乘，随着输入长度的增加，很容易发生梯度爆炸或梯度消失，因此早期时的信息在传递过程中会逐渐衰减，导致模型难以捕捉远距离的依赖关系。
+<span id="more"></span></p>
+<h1 id="attention的发明">2.attention的发明</h1>
+attention机制最早出现在Bahdanau等人的论文<a
 href="https://arxiv.org/pdf/1409.0473.pdf">“Neural machine translation
 by jointly learning to align and
 translate.”</a>中，用于翻译任务。输入记为x，长度为n，输出记为y，长度为m。
@@ -614,8 +616,9 @@ class="math inline">\(h_i\)</span>)由一个一层的前馈神经网络算出。
 vector，解决了信息丢失问题，可以较好地表示输入信息。传统序列模型将输入序列编码为固定长度向量，而Bahdanau等人对编码器所有隐藏状态进行加权求和，动态生成context
 vector。同时alignment
 score引入了对齐机制，提升了翻译任务的准确度。然而，因为结构上还存在RNN，所以遗忘问题仍然存在。
-从Bahdanau的注意力诞生到self-attention的出现，中间还出现了其他注意力机制，这里略过。
-# 3.self-attetion 2017年，大名鼎鼎的self-attention（<a
+从Bahdanau的注意力诞生到self-attention的出现，中间还出现了其他注意力机制，这里略过。</p>
+<h1 id="self-attetion">3.self-attetion</h1>
+<p>2017年，大名鼎鼎的self-attention（<a
 href="https://arxiv.org/abs/1706.03762">[1706.03762] Attention Is All
 You
 Need</a>）出现了。谷歌的人员提出了一种名为transformer的网络架构，其中self-attention对输入经过线性变换生成Q(query)，K(key)，V(value)三个矩阵，用这三个矩阵来计算注意力矩阵，<span
