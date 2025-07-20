@@ -195,6 +195,424 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2025/07/20/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E5%9B%9B)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="bob">
+      <meta itemprop="description" content="邮箱：1633748848@qq.com，记录生活和成长的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bob的个人空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/20/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E5%9B%9B)/" class="post-title-link" itemprop="url">走进大模型（四）——flash-attention</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-07-20 10:52:38 / 修改时间：10:57:19" itemprop="dateCreated datePublished" datetime="2025-07-20T10:52:38+08:00">2025-07-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/llm%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">llm技术</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/07/20/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E5%9B%9B)/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/07/20/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E5%9B%9B)/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          self-attention的计算耗时，同时也需要大量空间，假设输入长度为N，那么空间复杂度和时间复杂度都是<span
+class="math inline">\(N^2\)</span>，所以早期模型的上下文长度一般很有限。而flash-attention的优化，则能把原始attention的空间复杂度缩小为N。本文将细致地讲解flash-attention的实现，做到通俗易懂，对于性能优化零基础的人也能看懂。flash-attention论文链接：<a
+target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.14135">[2205.14135] FlashAttention:
+Fast and Memory-Efficient Exact Attention with IO-Awareness</a>。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/07/20/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E5%9B%9B)/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2025/07/07/test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="bob">
+      <meta itemprop="description" content="邮箱：1633748848@qq.com，记录生活和成长的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bob的个人空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/07/test/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-07-07 21:36:26" itemprop="dateCreated datePublished" datetime="2025-07-07T21:36:26+08:00">2025-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-07-20 10:51:59" itemprop="dateModified" datetime="2025-07-20T10:51:59+08:00">2025-07-20</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/07/07/test/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/07/07/test/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>self-attention的计算耗时，同时也需要大量空间，假设输入长度为N，那么空间复杂度和时间复杂度都是<span
+class="math inline">\(N^2\)</span>，所以早期模型的上下文长度一般很有限。而flash-attention的优化，则能把原始attention的空间复杂度缩小为N。本文将细致地讲解flash-attention的实现，做到通俗易懂，对于性能优化零基础的人也能看懂。flash-attention论文链接：<a
+target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.14135">[2205.14135] FlashAttention:
+Fast and Memory-Efficient Exact Attention with IO-Awareness</a>。 #
+1.总览
+现代计算机基于冯诺依曼架构，如图所示，分为五部分：输入设备、输出设备、存储单元、控制单元、运算单元。
+![[file-20250708212909164.png]]
+完成计算需要先从储存中读出数据，调用计算核心进行计算，再将计算结果写回存储。所以在做性能优化时。往往从两方面考虑，一个是读写数据角度，一个是计算角度。有的计算可能在计算方面耗时多，有的计算可能在读写时耗时，也有的两者兼有。通过屋脊模型，可以量化地衡量某个计算是compute-bound还是memory-bound，关于屋脊模型的讲解，后续我会写一篇文章。对于flash-attention来讲，在数据读写方面很耗时，所以作者的核心思想就是通过减少数据的读写次数来加速计算。具体表现为两点：1.将矩阵分块，在SRAM（Static
+Random-Access Memory）中完成计算，再写回HBM（High Bandwidth
+Memory）。2.不存储中间结果，在反向传播时，通过重新计算中间结果来更新梯度。从下图（来源于论文）可以看到，flash-attention相比普通的attention，速度快了不少。
+![[file-20250708224435562.png]] # 2.原始attention
+我们先来看下原始的attention计算过程，Q，K，V都存在HBM中。三者shape都为（N，
+d）N是输入序列的长度，d是注意力头的维度，一般来说，N远大于d，GPT2中，N为2014，d为64。第一步，从HBM中加载Q，K，计算得到注意力矩阵S，把S写回HBM，再从HBM中读入S，求softmax，得到P，再把P写回HBM，最后从HBM中加载P，V，计算得到最终结果O，写回HBM。
+![[file-20250708221951972.png]]
+HBM相比SRAM来说，存储容量大，读写速度慢。对于储存来说，读写速度一般与其容量呈反比，受限于成本，读写速度快的，容量就小。因此数据反复从HBM读写很耗时。下图反映了不同储存在读写速度和容量方面的差异。
+![[file-20250708223339056.png]] # 3.flash-attention
+flash-attention的优化分为两个方面，一个是分块计算，一个是更新梯度时重计算中间结果，重新计算中间结果的目的是为了不保存空间复杂度为<span
+class="math inline">\(N^2\)</span>的中间结果，减少IO时间。 ## 3.1 Tiling
+我们先看论文里作者给出的flash-attention的分块计算过程，分别对Q，K，V进行分块后，从HBM读出数据到SRAM，计算完成后，在把数据写入HBM。依次对每一个分块进行处理，直到计算完所有分块。
+![[file-20250708224029546.png]]
+论文给出了以上计算过程的详细算法，如下所示，我会对每一步进行讲解。
+![[file-20250708224719815.png]] 第一步，计算分块的行数<span
+class="math inline">\(B_c\)</span>和列数<span
+class="math inline">\(B_r\)</span>，M是SRAM的大小，<span
+class="math inline">\(B_c\)</span>等于<span
+class="math inline">\(\frac{M}{4\mathrm{d}}\)</span>，除4d是要保证SRAM能够装下4个分块，分别是Q，K，V，以及最终结果O。<span
+class="math inline">\(B_r\)</span>在<span
+class="math inline">\(\frac{M}{4\mathrm{d}}\)</span>和d之间取最小值是为了保证SRAM能够装下中间计算用到的所有数据，除了QKVO的分块，还有<span
+class="math inline">\(\tilde{m}_{\text{i,j}}\)</span>，<span
+class="math inline">\(\tilde{p}_{\text{i,j}}\)</span>，<span
+class="math inline">\(\tilde{\ell}_{\text{i,j}}\)</span>等。</p>
+<p>第二步会初始化O，<span
+class="math inline">\({\ell}\)</span>，m，分别为0，0，负无穷。<span
+class="math inline">\({\ell}\)</span>，m是在计算softmax过程中用到的两个统计值，分别代表局部的指数和以及局部最大值。我们回顾一下softmax的计算方法，下图中x为输入向量，<span
+class="math inline">\(m(x)\)</span>为x所有值中的最大值，<span
+class="math inline">\(f(x)\)</span>中的每一项，指数部分减去<span
+class="math inline">\(m(x)\)</span>，是为了保持计算时数值稳定。<span
+class="math inline">\({\ell(x)}\)</span>是<span
+class="math inline">\(f(x)\)</span>的累加和，即softmax的分母。
+![[file-20250712090217340.png | 公式一]]
+由原始的softmax计算可知，得到一个向量的softmax值，需要完整的向量，因为分母求和会用到向量的每一个元素，并且分子指数部分减去最大值，最大值也需要遍历完整向量才能获取。论文对QK分块后，是怎么计算softmax的呢？我们看下图：
+![[file-20250712101937966.png|公式二]] 假设向量x被分为了2块，分别为<span
+class="math inline">\(x^\text{(1)}\)</span>，<span
+class="math inline">\(x^\text{(2)}\)</span>，首先根据公式一计算<span
+class="math inline">\(m(x^\text{(1)})\)</span>，<span
+class="math inline">\(f(x^\text{(1)})\)</span>和<span
+class="math inline">\({\ell(x^\text{(1)})}\)</span>，接下来读取<span
+class="math inline">\(x^\text{(2)}\)</span>，计算<span
+class="math inline">\(m(x)\)</span>，即<span
+class="math inline">\(x^\text{(1)}\)</span>，<span
+class="math inline">\(x^\text{(2)}\)</span>的最大值，<span
+class="math inline">\(m(x)\)</span>就是向量x的最大值，接着就是求softmax的分子部分——<span
+class="math inline">\(f(x)\)</span>，<span
+class="math inline">\(e^{m(x^{(1)}) -
+m(x)}f(x^{(1)})\)</span>怎么理解，其实就是原始softmax的分子部分，向量<span
+class="math inline">\(x^{(1)}\)</span>的每个元素减去向量x中的最大值。把<span
+class="math inline">\(f(x^{(1)}\)</span>展开后，等于<span
+class="math inline">\([e^{x_1 - m(x^{(1)})}···e^{x_B -
+m(x^{(1)})}]\)</span>。<span class="math inline">\(e^{m(x^{(1)}) -
+m(x)}\)</span>和<span
+class="math inline">\(f(x^{(1)}\)</span>相乘，指数部分的<span
+class="math inline">\(m(x^{(1)})\)</span>就没了。<span
+class="math inline">\(e^{m(x^{(2)}) -
+m(x)}f(x^{(2)})\)</span>也是同理，我们就得到了计算softmax所需的分子。分母部分<span
+class="math inline">\(e^{m(x^{(1)}) -
+m(x)}\ell(x^{(1)})\)</span>也是一样的，把<span
+class="math inline">\(\ell(x^{(1)})\)</span>展开，指数部分的<span
+class="math inline">\(m(x^{(1)})\)</span>就被消除了。由此得到分母<span
+class="math inline">\(\ell(x)\)</span>，从而计算出向量x的softmax。分块计算的结果完全等价于对完整的x向量进行softmax计算。</p>
+<p>下面以一个具体的例子来看公式二的计算，公式二是理解flash-attention的关键。算法的第十一步和第十二步都是基于公式二进行。
+我们有两个块： <strong>Block1</strong>:<br />
+<span class="math inline">\(x^{(1)} = [2.0,\ 3.0]\)</span>
+<strong>Block2</strong>:<br />
+<span class="math inline">\(x^{(2)} = [0.0,\ 4.0]\)</span>
+<strong>拼接后的向量为</strong>：<br />
+<span class="math inline">\(x = [2.0,\ 3.0,\ 0.0,\ 4.0]\)</span>
+<strong>块内局部最大值</strong> <span class="math display">\[
+\begin{aligned}
+m^{(1)} &amp;= \max(2.0,\ 3.0) = 3.0 \\
+m^{(2)} &amp;= \max(0.0,\ 4.0) = 4.0 \\
+m(x) &amp;= \max(m^{(1)},\ m^{(2)}) = \max(3.0,\ 4.0) = 4.0
+\end{aligned}
+\]</span><strong>各块的 <span class="math inline">\(f(x^{(i)})\)</span>
+和 <span class="math inline">\(\ell(x^{(i)})\)</span></strong> 对于
+Block1： <span class="math display">\[
+\begin{aligned}
+f(x^{(1)}) = \exp(x^{(1)} - m^{(1)}) &amp;= [e^{2.0 - 3.0},\ e^{3.0 -
+3.0}] = [e^{-1},\ e^0] = [0.3679,\ 1] \\
+\ell(x^{(1)}) &amp;= 0.3679 + 1 = 1.3679 \\
+f(x^{(\text{block}_1)}) &amp;= e^{m^{(1)} - m(x)} \cdot f(x^{(1)}) \\
+&amp;= e^{m^{(1)} - m(x)} \cdot \exp(x^{(1)} - m^{(1)}) \\
+&amp;= e^{-1} \cdot [0.3679,\ 1] = [0.1353,\ 0.3679]
+\end{aligned}
+\]</span></p>
+<p>对于 Block2： <span class="math display">\[
+\begin{aligned}
+f(x^{(2)}) = \exp(x^{(2)} - m^{(2)}) &amp;= [e^{0.0 - 4.0},\ e^{4.0 -
+4.0}] = [e^{-4},\ 1] = [0.0183,\ 1] \\
+\ell(x^{(2)}) &amp;= 0.0183 + 1 = 1.0183 \\
+f(x^{(\text{block}_2)}) &amp;= e^{m^{(2)} - m(x)} \cdot f(x^{(2)}) \\
+&amp;= e^{m^{(2)} - m(x)} \cdot \exp(x^{(2)} - m^{(2)}) \\
+&amp;= e^0 \cdot [0.0183,\ 1] = [0.0183,\ 1]
+\end{aligned}
+\]</span> <strong>合并 <span class="math inline">\(\ell(x)\)</span> 和
+<span class="math inline">\(f(x)\)</span></strong> <span
+class="math display">\[
+\begin{aligned}
+\ell(x) &amp;= e^{m^{(1)} - m(x)} \cdot \ell(x^{(1)}) + e^{m^{(2)} -
+m(x)} \cdot \ell(x^{(2)}) \\
+&amp;= e^{-1} \cdot 1.3679 + e^0 \cdot 1.0183 \\
+&amp;= 0.3679 \cdot 1.3679 + 1.0183 = 0.5034 + 1.0183 = 1.5217
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+f(x) = \begin{bmatrix}
+f(x^{(block_1)}) \\
+f(x^{(block_2)})
+\end{bmatrix}
+= [0.1353,\ 0.3679,\ 0.0183,\ 1.0]
+\]</span></p>
+<p><strong>Softmax输出</strong></p>
+<p>我们使用上面得到的 <span class="math inline">\(\ell(x)\)</span> 和
+<span class="math inline">\(f(x)\)</span> 计算softmax：</p>
+<p><span class="math display">\[
+\text{softmax}(x) = \frac{f(x)}{\ell(x)}
+\]</span></p>
+<p><span class="math display">\[
+\text{softmax}(x) \approx [0.0889,\ 0.2417,\ 0.0120,\ 0.6569]
+\]</span></p>
+<p>第三步把Q按行分为<span class="math inline">\(T_r\)</span>个块，<span
+class="math inline">\(T_r\)</span>的计算方法在图中已给出，每个块shape为（<span
+class="math inline">\(B_r\)</span>， d），K和V也是按行分块，分为<span
+class="math inline">\(T_c\)</span>个块，<span
+class="math inline">\(T_c\)</span>的计算同样在图中已给出，每个块shape为（<span
+class="math inline">\(B_c\)</span>， d）。第四步也是分块，O，<span
+class="math inline">\({\ell}\)</span>，m，都分为<span
+class="math inline">\(T_r\)</span>个块。</p>
+<p>第五步开始就是计算的主体部分，第五第六步按列将分块的K和V从HBM加载到SRAM。第七第八步将分块的Q，O以及两个统计值<span
+class="math inline">\(\ell\)</span>和m按行从HBM加载到SRAM。</p>
+<p>第九步，在SRAM中计算注意力矩阵——<span
+class="math inline">\(S_{ij}\)</span>，<span
+class="math inline">\(S_{ij}\)</span>shape为（<span
+class="math inline">\(B_r\)</span>，<span
+class="math inline">\(B_c\)</span>）。</p>
+<p>第十步，在SRAM中计算<span
+class="math inline">\(S_{ij}\)</span>每一行的最大值<span
+class="math inline">\(\tilde{m}_{\text{i,j}}\)</span>，softmax的分子<span
+class="math inline">\(\tilde{p}_{\text{i,j}}\)</span>，softmax的分母<span
+class="math inline">\(\tilde{\ell}_{\text{i,j}}\)</span>。
+![[file-20250712110454677.png]]</p>
+<p>第十一步，也是在SRAM中计算，在下方附上公式方便查阅。这一步是计算根据读入的分块，计算新的最大值<span
+class="math inline">\(m_{i}^{new}\)</span>，新的指数和<span
+class="math inline">\(\ell_{i}^{new}\)</span>。进行第一次计算时，<span
+class="math inline">\(m_i\)</span>是负无穷（初始化时的值），所以<span
+class="math inline">\(m_{i}^{new}\)</span>等于<span
+class="math inline">\(\tilde{m}_{\text{i,j}}\)</span>，因为<span
+class="math inline">\(\ell_i\)</span>初始化为0，所以<span
+class="math inline">\(\ell_{i}^{new}\)</span>计算公式的第一部分为0，第二部分指数部分为0（因为<span
+class="math inline">\(m_{i}^{new}\)</span>等于<span
+class="math inline">\(\tilde{m}_{\text{i,j}}\)</span>），<span
+class="math inline">\(\ell_{i}^{new}\)</span>等于<span
+class="math inline">\(\tilde{\ell}_{\text{i,j}}\)</span>。往后每一次的更新逻辑，其实和上文提到的公式二是一样的，<span
+class="math inline">\(m_{i}^{new}\)</span>是从开头到当前块的最大值，<span
+class="math inline">\(\ell_{i}^{new}\)</span>是从开头到当前块的指数和。
+![[file-20250712105924118.png]]</p>
+<p>第十二步，在SRAM中计算出<span
+class="math inline">\(O_i\)</span>后，把<span
+class="math inline">\(O_i\)</span>写回HBM，下方附上公式。<span
+class="math inline">\(O_i\)</span>是<span
+class="math inline">\(\text{softmax}\left( QK^\top \right)
+V\)</span>。<span
+class="math inline">\(diag{(\ell_{i}^{new})}^{-1}\)</span>表示将<span
+class="math inline">\(\ell_{i}^{new}\)</span>向量转换为对角矩阵（只有对角线位置有值，其余位置为0），指数-1表示取倒数。<span
+class="math inline">\(diag{(\ell_{i}^{new})}^{-1}\)</span>其实就是做除法。看第一部分红框，第一次计算时，因为<span
+class="math inline">\(\ell_i\)</span>
+为0，所以红框部分为0，绿框部分<span
+class="math inline">\(e^{\tilde{m}_{\text{i,j}} -
+m_{i}^{new}}\tilde{p}_{\text{i,j}}V_j\)</span>，第一次计算时<span
+class="math inline">\(m_{i}^{new}\)</span>等于<span
+class="math inline">\(\tilde{m}_{\text{i,j}}\)</span>，所以只剩<span
+class="math inline">\(\tilde{p}_{\text{i,j}}V_j\)</span>，<span
+class="math inline">\(\tilde{p}_{\text{i,j}}\)</span>是softmax的分子部分。乘<span
+class="math inline">\(V_j\)</span>，除<span
+class="math inline">\(\ell_{i}^{new}\)</span>，得到<span
+class="math inline">\(O_i\)</span>的部分结果。第二次计算时，红框部分乘<span
+class="math inline">\(diag(\ell_i)\)</span>是为了抵消第一次除<span
+class="math inline">\(\ell_{i}^{new}\)</span>，因为在每次计算都是在最外层除<span
+class="math inline">\(\ell_{i}^{new}\)</span>，为了避免多除，所以要乘<span
+class="math inline">\(diag(\ell_i)\)</span>。把<span
+class="math inline">\(O_i\)</span>（该<span
+class="math inline">\(O_i\)</span>为第一次计算而得）展开后为<span
+class="math inline">\(e^{S_{ij} -
+\tilde{m}_{\text{i,j}}}V_j\)</span>，展开的<span
+class="math inline">\(O_i\)</span>乘以<span class="math inline">\(e^{m_i
+- m_{i}^{new}}\)</span>，等于<span class="math inline">\(e^{S_{ij} -
+\tilde{m}_{\text{i,j}}}V_j\)</span>，<span
+class="math inline">\(m_i\)</span>就是<span
+class="math inline">\(\tilde{m}_{\text{i,j}}\)</span>，所以相互抵消了。注意，此处的<span
+class="math inline">\(S_{ij}\)</span>是第一次计算得到的。红框最后结果<span
+class="math inline">\(e^{S_{ij} -
+\tilde{m}_{\text{i,j}}}V_j\)</span>就是当前位置之前的V的加权和。绿框部分把<span
+class="math inline">\(\tilde{p}_{\text{i,j}}\)</span>展开，为<span
+class="math inline">\(e^{S_{ij} -
+\tilde{m}_{\text{i,j}}}\)</span>，绿框最后结果为<span
+class="math inline">\(e^{S_{ij} -
+\tilde{m}_{\text{i,j}}}V_j\)</span>，此处的<span
+class="math inline">\(S_{ij}\)</span>是第二次计算得到的。最后除以最外层的<span
+class="math inline">\(\ell_{i}^{new}\)</span>，也就是softmax的分母。往后的计算也是同样的逻辑，之前算出的<span
+class="math inline">\(O_i\)</span>加上当前块计算得到的绿框部分。当遍历完一行时，<span
+class="math inline">\(O_i\)</span>这一行也就计算完了。
+![[file-20250712112231090.png]]</p>
+<p>第十三步，更新<span class="math inline">\(\ell_i\)</span>和<span
+class="math inline">\(m_i\)</span>，更新后的值写回HBM。返回执行第五和第七步的循环，求得完整的O。</p>
+<h2 id="recomputation">3.2 Recomputation</h2>
+<p>原始的attention在反向传播时，通过S矩阵和P矩阵更新梯度，<span
+class="math inline">\(S = QK^T\)</span>，<span class="math inline">\(P =
+softmax(S)\)</span>，两个矩阵各自都需要<span
+class="math inline">\(N^2\)</span>的空间存储。论文中通过最终结果O，以及之前求的softmax统计量m和<span
+class="math inline">\(\ell\)</span>，在SRAM中重新计算S和P来进行梯度更新。虽然相比原始attention，计算量增加了，但是空间复杂度降低为N（O的shape为（N，
+d）），IO时间大大减少，所以重计算能比原始attention节省时间。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2025/07/05/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%89)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1038,228 +1456,6 @@ Visualization</a>，该网站将大模型做了可视化。
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2023/02/19/%E8%B7%91%E6%AD%A5%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8F%90%E9%AB%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="bob">
-      <meta itemprop="description" content="邮箱：1633748848@qq.com，记录生活和成长的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="bob的个人空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/02/19/%E8%B7%91%E6%AD%A5%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8F%90%E9%AB%98/" class="post-title-link" itemprop="url">跑步训练与提高</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-02-19 16:23:03" itemprop="dateCreated datePublished" datetime="2023-02-19T16:23:03+08:00">2023-02-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-18 20:14:18" itemprop="dateModified" datetime="2025-06-18T20:14:18+08:00">2025-06-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BF%90%E5%8A%A8/" itemprop="url" rel="index"><span itemprop="name">运动</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/02/19/%E8%B7%91%E6%AD%A5%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8F%90%E9%AB%98/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/19/%E8%B7%91%E6%AD%A5%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8F%90%E9%AB%98/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="力量训练">力量训练</h1>
-<h2 id="核心">核心</h2>
-<h3 id="基础核心训练">基础核心训练</h3>
-<h4 id="核心力量训练">核心力量训练</h4>
-<p>上腹肌（即六块腹肌中靠上的部分）：卷腹。
-下腹肌：仰卧举腿、仰卧踩单车。
-躯干侧前方（腹内外斜肌）：侧卷腹、卷腹摸脚踝、曲腿刮雨器。
-躯干两侧（腰方肌：控制骨盆）：侧卧起、曲腿侧卧起、侧卧并腿。
-躯干后方肌肉（竖脊肌：保持躯干挺直，防止腰痛）：仰卧挺身。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/02/19/%E8%B7%91%E6%AD%A5%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8F%90%E9%AB%98/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2023/02/19/cube_solution/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="bob">
-      <meta itemprop="description" content="邮箱：1633748848@qq.com，记录生活和成长的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="bob的个人空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/02/19/cube_solution/" class="post-title-link" itemprop="url">能够复原大多数魔方的解法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-02-19 14:03:18 / 修改时间：16:16:50" itemprop="dateCreated datePublished" datetime="2023-02-19T14:03:18+08:00">2023-02-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/" itemprop="url" rel="index"><span itemprop="name">兴趣爱好</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/02/19/cube_solution/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/19/cube_solution/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>670</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>多年前看到过一个视频，讲述了对于结构对称的魔方的通用解法。在此结合原视频和魔方吧里的帖子记录一下以作存档。</p>
-<p>以3阶魔方为例，只要会复原一层，就可以用这个解法复原整个魔方。复原魔方在于将棱块和角块移到正确的位置，并且色向也正确。如果会复原一层的话，那自然可以任意地移动角块棱块的位置，改变其色向。现在可以构造一个公式，用于某个棱块朝向的翻转。翻转后顶层的其他棱角不受影响，下面两层被打乱了。把翻转公式逆着做一遍，魔方又可以复原到原来的状态。
-<img src="/images/魔方.png" height="500" width="500" />
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/02/19/cube_solution/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1331,7 +1527,7 @@ Visualization</a>，该网站将大模型做了可视化。
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1344,7 +1540,7 @@ Visualization</a>，该网站将大模型做了可视化。
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1381,13 +1577,13 @@ Visualization</a>，该网站将大模型做了可视化。
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">16k</span>
+    <span title="站点总字数">29k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">14 分钟</span>
+    <span title="站点阅读时长">27 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
