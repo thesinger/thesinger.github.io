@@ -926,11 +926,12 @@ d）），IO时间大大减少，所以重计算能比原始attention节省时�
   <entry>
     <title>走进大模型（四）——flash-attention</title>
     <url>/2025/07/20/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E5%9B%9B)/</url>
-    <content><![CDATA[self-attention的计算耗时，同时也需要大量空间，假设输入长度为N，那么空间复杂度和时间复杂度都是<span
+    <content><![CDATA[<p>self-attention的计算耗时，同时也需要大量空间，假设输入长度为N，那么空间复杂度和时间复杂度都是<span
 class="math inline">\(N^2\)</span>，所以早期模型的上下文长度一般很有限。而flash-attention的优化，则能把原始attention的空间复杂度缩小为N。本文将细致地讲解flash-attention的实现，做到通俗易懂，对于性能优化零基础的人也能看懂。flash-attention论文链接：<a
 href="https://arxiv.org/abs/2205.14135">[2205.14135] FlashAttention:
 Fast and Memory-Efficient Exact Attention with IO-Awareness</a>。
-<span id="more"></span> # 1.总览
+<span id="more"></span></p>
+<h1 id="总览">1.总览</h1>
 现代计算机基于冯诺依曼架构，如图所示，分为五部分：输入设备、输出设备、存储单元、控制单元、运算单元。
 <div>
 <p><img src="\images\llm4\file-20250708212909164.png" style="max-width: 50%; max-height: 50%;"></p>
@@ -1016,13 +1017,14 @@ class="math inline">\(\ell(x^{(1)})\)</span>展开，指数部分的<span
 class="math inline">\(m(x^{(1)})\)</span>就被消除了。由此得到分母<span
 class="math inline">\(\ell(x)\)</span>，从而计算出向量x的softmax。分块计算的结果完全等价于对完整的x向量进行softmax计算。</p>
 <p>下面以一个具体的例子来看公式二的计算，公式二是理解flash-attention的关键。算法的第十一步和第十二步都是基于公式二进行。
-我们有两个块： <strong>Block1</strong>:<br />
-<span class="math inline">\(x^{(1)} = [2.0,\ 3.0]\)</span>
-<strong>Block2</strong>:<br />
-<span class="math inline">\(x^{(2)} = [0.0,\ 4.0]\)</span>
-<strong>拼接后的向量为</strong>：<br />
-<span class="math inline">\(x = [2.0,\ 3.0,\ 0.0,\ 4.0]\)</span>
-<strong>块内局部最大值</strong> <span class="math display">\[
+我们有两个块：</p>
+<p><strong>Block1</strong>:<br />
+<span class="math inline">\(x^{(1)} = [2.0,\ 3.0]\)</span></p>
+<p><strong>Block2</strong>:<br />
+<span class="math inline">\(x^{(2)} = [0.0,\ 4.0]\)</span></p>
+<p><strong>拼接后的向量为</strong>：<br />
+<span class="math inline">\(x = [2.0,\ 3.0,\ 0.0,\ 4.0]\)</span></p>
+<p><strong>块内局部最大值</strong> <span class="math display">\[
 \begin{aligned}
 m^{(1)} &amp;= \max(2.0,\ 3.0) = 3.0 \\
 m^{(2)} &amp;= \max(0.0,\ 4.0) = 4.0 \\

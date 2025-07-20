@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://thesinger.github.io/images/llm4/file-20250712105924118.png">
 <meta property="og:image" content="https://thesinger.github.io/images/llm4/file-20250712112231090.png">
 <meta property="article:published_time" content="2025-07-20T02:52:38.000Z">
-<meta property="article:modified_time" content="2025-07-20T02:57:19.249Z">
+<meta property="article:modified_time" content="2025-07-20T03:00:06.326Z">
 <meta property="article:author" content="bob">
 <meta property="article:tag" content="大模型">
 <meta property="article:tag" content="llm">
@@ -237,7 +237,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-07-20 10:52:38 / 修改时间：10:57:19" itemprop="dateCreated datePublished" datetime="2025-07-20T10:52:38+08:00">2025-07-20</time>
+              <time title="创建时间：2025-07-20 10:52:38 / 修改时间：11:00:06" itemprop="dateCreated datePublished" datetime="2025-07-20T10:52:38+08:00">2025-07-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -295,11 +295,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        self-attention的计算耗时，同时也需要大量空间，假设输入长度为N，那么空间复杂度和时间复杂度都是<span
+        <p>self-attention的计算耗时，同时也需要大量空间，假设输入长度为N，那么空间复杂度和时间复杂度都是<span
 class="math inline">\(N^2\)</span>，所以早期模型的上下文长度一般很有限。而flash-attention的优化，则能把原始attention的空间复杂度缩小为N。本文将细致地讲解flash-attention的实现，做到通俗易懂，对于性能优化零基础的人也能看懂。flash-attention论文链接：<a
 target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.14135">[2205.14135] FlashAttention:
 Fast and Memory-Efficient Exact Attention with IO-Awareness</a>。
-<span id="more"></span> # 1.总览
+<span id="more"></span></p>
+<h1 id="总览">1.总览</h1>
 现代计算机基于冯诺依曼架构，如图所示，分为五部分：输入设备、输出设备、存储单元、控制单元、运算单元。
 <div>
 <p><img src="\images\llm4\file-20250708212909164.png" style="max-width: 50%; max-height: 50%;"></p>
@@ -385,13 +386,14 @@ class="math inline">\(\ell(x^{(1)})\)</span>展开，指数部分的<span
 class="math inline">\(m(x^{(1)})\)</span>就被消除了。由此得到分母<span
 class="math inline">\(\ell(x)\)</span>，从而计算出向量x的softmax。分块计算的结果完全等价于对完整的x向量进行softmax计算。</p>
 <p>下面以一个具体的例子来看公式二的计算，公式二是理解flash-attention的关键。算法的第十一步和第十二步都是基于公式二进行。
-我们有两个块： <strong>Block1</strong>:<br />
-<span class="math inline">\(x^{(1)} = [2.0,\ 3.0]\)</span>
-<strong>Block2</strong>:<br />
-<span class="math inline">\(x^{(2)} = [0.0,\ 4.0]\)</span>
-<strong>拼接后的向量为</strong>：<br />
-<span class="math inline">\(x = [2.0,\ 3.0,\ 0.0,\ 4.0]\)</span>
-<strong>块内局部最大值</strong> <span class="math display">\[
+我们有两个块：</p>
+<p><strong>Block1</strong>:<br />
+<span class="math inline">\(x^{(1)} = [2.0,\ 3.0]\)</span></p>
+<p><strong>Block2</strong>:<br />
+<span class="math inline">\(x^{(2)} = [0.0,\ 4.0]\)</span></p>
+<p><strong>拼接后的向量为</strong>：<br />
+<span class="math inline">\(x = [2.0,\ 3.0,\ 0.0,\ 4.0]\)</span></p>
+<p><strong>块内局部最大值</strong> <span class="math display">\[
 \begin{aligned}
 m^{(1)} &amp;= \max(2.0,\ 3.0) = 3.0 \\
 m^{(2)} &amp;= \max(0.0,\ 4.0) = 4.0 \\
@@ -641,7 +643,7 @@ d）），IO时间大大减少，所以重计算能比原始attention节省时�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%A7%8Battention"><span class="nav-number">1.</span> <span class="nav-text">2.原始attention</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flash-attention"><span class="nav-number">2.</span> <span class="nav-text">3.flash-attention</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#recomputation"><span class="nav-number">2.1.</span> <span class="nav-text">3.2 Recomputation</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">1.总览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%A7%8Battention"><span class="nav-number">2.</span> <span class="nav-text">2.原始attention</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flash-attention"><span class="nav-number">3.</span> <span class="nav-text">3.flash-attention</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#recomputation"><span class="nav-number">3.1.</span> <span class="nav-text">3.2 Recomputation</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
