@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://thesinger.github.io/images/llm4/file-20250712105924118.png">
 <meta property="og:image" content="https://thesinger.github.io/images/llm4/file-20250712112231090.png">
 <meta property="article:published_time" content="2025-07-20T02:52:38.000Z">
-<meta property="article:modified_time" content="2025-07-20T03:00:06.326Z">
+<meta property="article:modified_time" content="2025-07-21T14:42:55.060Z">
 <meta property="article:author" content="bob">
 <meta property="article:tag" content="大模型">
 <meta property="article:tag" content="llm">
@@ -235,10 +235,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2025-07-20 10:52:38 / 修改时间：11:00:06" itemprop="dateCreated datePublished" datetime="2025-07-20T10:52:38+08:00">2025-07-20</time>
+              <time title="创建时间：2025-07-20 10:52:38" itemprop="dateCreated datePublished" datetime="2025-07-20T10:52:38+08:00">2025-07-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-07-21 22:42:55" itemprop="dateModified" datetime="2025-07-21T22:42:55+08:00">2025-07-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -303,34 +309,34 @@ Fast and Memory-Efficient Exact Attention with IO-Awareness</a>。
 <h1 id="总览">1.总览</h1>
 现代计算机基于冯诺依曼架构，如图所示，分为五部分：输入设备、输出设备、存储单元、控制单元、运算单元。
 <div>
-<p><img src="\images\llm4\file-20250708212909164.png" style="max-width: 50%; max-height: 50%;"></p>
+<p><img src="\images\llm4\file-20250708212909164.png"></p>
 </div>
 完成计算需要先从储存中读出数据，调用计算核心进行计算，再将计算结果写回存储。所以在做性能优化时。往往从两方面考虑，一个是读写数据角度，一个是计算角度。有的计算可能在计算方面耗时多，有的计算可能在读写时耗时，也有的两者兼有。通过屋脊模型，可以量化地衡量某个计算是compute-bound还是memory-bound，关于屋脊模型的讲解，后续我会写一篇文章。对于flash-attention来讲，在数据读写方面很耗时，所以作者的核心思想就是通过减少数据的读写次数来加速计算。具体表现为两点：1.将矩阵分块，在SRAM（Static
 Random-Access Memory）中完成计算，再写回HBM（High Bandwidth
 Memory）。2.不存储中间结果，在反向传播时，通过重新计算中间结果来更新梯度。从下图（来源于论文）可以看到，flash-attention相比普通的attention，速度快了不少。
 <div>
-<p><img src="\images\llm4\file-20250708224435562.png" style="max-width: 50%; max-height: 50%;"></p>
+<p><img src="\images\llm4\file-20250708224435562.png"></p>
 </div>
 <h1 id="原始attention">2.原始attention</h1>
 我们先来看下原始的attention计算过程，Q，K，V都存在HBM中。三者shape都为（N，
 d）N是输入序列的长度，d是注意力头的维度，一般来说，N远大于d，GPT2中，N为2014，d为64。第一步，从HBM中加载Q，K，计算得到注意力矩阵S，把S写回HBM，再从HBM中读入S，求softmax，得到P，再把P写回HBM，最后从HBM中加载P，V，计算得到最终结果O，写回HBM。
 <div>
-<p><img src="\images\llm4\file-20250708221951972.png" style="max-width: 50%; max-height: 50%;"></p>
+<p><img src="\images\llm4\file-20250708221951972.png"></p>
 </div>
 HBM相比SRAM来说，存储容量大，读写速度慢。对于储存来说，读写速度一般与其容量呈反比，受限于成本，读写速度快的，容量就小。因此数据反复从HBM读写很耗时。下图反映了不同储存在读写速度和容量方面的差异。
 <div>
-<p><img src="\images\llm4\file-20250708223339056.png" style="max-width: 50%; max-height: 50%;"></p>
+<p><img src="\images\llm4\file-20250708223339056.png"></p>
 </div>
 <h1 id="flash-attention">3.flash-attention</h1>
 flash-attention的优化分为两个方面，一个是分块计算，一个是更新梯度时重计算中间结果，重新计算中间结果的目的是为了不保存空间复杂度为<span
 class="math inline">\(N^2\)</span>的中间结果，减少IO时间。 ## 3.1 Tiling
 我们先看论文里作者给出的flash-attention的分块计算过程，分别对Q，K，V进行分块后，从HBM读出数据到SRAM，计算完成后，在把数据写入HBM。依次对每一个分块进行处理，直到计算完所有分块。
 <div>
-<p><img src="\images\llm4\file-20250708224029546.png" style="max-width: 50%; max-height: 50%;"></p>
+<p><img src="\images\llm4\file-20250708224029546.png"></p>
 </div>
 论文给出了以上计算过程的详细算法，如下所示，我会对每一步进行讲解。
 <div>
-<p><img src="\images\llm4\file-20250708224719815.png" style="max-width: 50%; max-height: 50%;"></p>
+<p><img src="\images\llm4\file-20250708224719815.png"></p>
 </div>
 <p>第一步，计算分块的行数<span
 class="math inline">\(B_c\)</span>和列数<span
@@ -351,11 +357,11 @@ class="math inline">\(m(x)\)</span>，是为了保持计算时数值稳定。<sp
 class="math inline">\({\ell(x)}\)</span>是<span
 class="math inline">\(f(x)\)</span>的累加和，即softmax的分母。
 <div>
-<p><img src="\images\llm4\file-20250712090217340.png" style="max-width: 50%; max-height: 50%;"></p>
+<p><img src="\images\llm4\file-20250712090217340.png"></p>
 </div>
 由原始的softmax计算可知，得到一个向量的softmax值，需要完整的向量，因为分母求和会用到向量的每一个元素，并且分子指数部分减去最大值，最大值也需要遍历完整向量才能获取。论文对QK分块后，是怎么计算softmax的呢？我们看下图：
 <div>
-<p><img src="\images\llm4\file-20250712101937966.png" style="max-width: 50%; max-height: 50%;"></p>
+<p><img src="\images\llm4\file-20250712101937966.png"></p>
 </div>
 <p>假设向量x被分为了2块，分别为<span
 class="math inline">\(x^\text{(1)}\)</span>，<span
@@ -467,7 +473,7 @@ class="math inline">\(\tilde{m}_{\text{i,j}}\)</span>，softmax的分子<span
 class="math inline">\(\tilde{p}_{\text{i,j}}\)</span>，softmax的分母<span
 class="math inline">\(\tilde{\ell}_{\text{i,j}}\)</span>。
 <div>
-<p><img src="\images\llm4\file-20250712110454677.png" style="max-width: 50%; max-height: 50%;"></p>
+<p><img src="\images\llm4\file-20250712110454677.png"></p>
 </div>
 第十一步，也是在SRAM中计算，在下方附上公式方便查阅。这一步是计算根据读入的分块，计算新的最大值<span
 class="math inline">\(m_{i}^{new}\)</span>，新的指数和<span
@@ -484,7 +490,7 @@ class="math inline">\(\tilde{\ell}_{\text{i,j}}\)</span>。往后每一次的更
 class="math inline">\(m_{i}^{new}\)</span>是从开头到当前块的最大值，<span
 class="math inline">\(\ell_{i}^{new}\)</span>是从开头到当前块的指数和。
 <div>
-<p><img src="\images\llm4\file-20250712105924118.png" style="max-width: 50%; max-height: 50%;"></p>
+<p><img src="\images\llm4\file-20250712105924118.png"></p>
 </div>
 第十二步，在SRAM中计算出<span
 class="math inline">\(O_i\)</span>后，把<span
@@ -532,7 +538,7 @@ class="math inline">\(\ell_{i}^{new}\)</span>，也就是softmax的分母。往�
 class="math inline">\(O_i\)</span>加上当前块计算得到的绿框部分。当遍历完一行时，<span
 class="math inline">\(O_i\)</span>这一行也就计算完了。
 <div>
-<p><img src="\images\llm4\file-20250712112231090.png" style="max-width: 50%; max-height: 50%;"></p>
+<p><img src="\images\llm4\file-20250712112231090.png"></p>
 </div>
 <p>第十三步，更新<span class="math inline">\(\ell_i\)</span>和<span
 class="math inline">\(m_i\)</span>，更新后的值写回HBM。返回执行第五和第七步的循环，求得完整的O。</p>
@@ -583,7 +589,10 @@ d）），IO时间大大减少，所以重计算能比原始attention节省时�
     <a href="/2025/07/07/test/" rel="prev" title="">
       <i class="fa fa-chevron-left"></i> 
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2025/07/21/roofline-model/" rel="next" title="番外篇——屋脊模型">
+      番外篇——屋脊模型 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -659,20 +668,20 @@ d）），IO时间大大减少，所以重计算能比原始attention节省时�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -709,13 +718,13 @@ d）），IO时间大大减少，所以重计算能比原始attention节省时�
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">29k</span>
+    <span title="站点总字数">25k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">27 分钟</span>
+    <span title="站点阅读时长">22 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
