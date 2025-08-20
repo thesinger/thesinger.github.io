@@ -520,107 +520,6 @@ Fast and Memory-Efficient Exact Attention with IO-Awareness</a>。
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2025/07/07/test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="bob">
-      <meta itemprop="description" content="邮箱：1633748848@qq.com，记录生活和成长的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="bob的个人空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/07/07/test/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-07-07 21:36:26" itemprop="dateCreated datePublished" datetime="2025-07-07T21:36:26+08:00">2025-07-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-07-20 11:02:26" itemprop="dateModified" datetime="2025-07-20T11:02:26+08:00">2025-07-20</time>
-              </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2025/07/07/test/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2025/07/07/test/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>上一篇讲flash-attention的时候提到，self-attention计算耗时主要来源于数据存取过程，这是可以通过实验实际观测到的。有没有一种系统量化的方法去衡量计算的瓶颈呢？有的，屋脊模型（Roofline Model）就是一种用于分析计算性能瓶颈的工具，它可以告诉你一个计算是受限于硬件内存带宽（memory-bound）还是硬件计算能力（compute-bound）。下面结合具体的例子来看看屋脊模型。</p>
-<p>下图就是屋脊模型，是一个分段函数，横轴是计算强度（单位FLOPS/byte），表示搬运1字节的数据，可以完成多少FLOPs计算，简写为$$I$$，$$Intensity = \frac{总计算量}{数据传输量}$$，纵轴是性能（单位GFLOPS）。整个图类似于一个屋顶，所以名为屋脊模型。
-![[file-20250716190930053.png]]
-函数曲线左段斜率为B（Bandwidth），B为硬件理论最大内存带宽。右段斜率为0的水平线，对应的y轴值表示硬件理论峰值计算性能，记为$$P_{peak}$$。某个计算的实际性能记为P，那么：$$P≤min(P_{peak}​, B×I)$$
-也就是说，要是落在函数左段，计算受限于带宽，落在右段，则是受限于硬件计算能力。</p>
-<p>以具体的例子——矩阵乘法，来看怎么使用屋脊模型。设A矩阵shape为M×K，B矩阵shape为K×N，使用 FP32 精度，M，K，N均为1024，两个矩阵相乘得到C矩阵，shape为M×N。硬件为NVIDIA GeForce RTX 3080 GPU，该卡带宽B约为760GB/s，单精度峰值计算次数约为30TFLOPs。</p>
-<p>第一步计算矩阵乘法总计算量，主要涉及乘法和加法，乘法次数为$$M<em>N</em>K$$，加法次数为$$M<em>N</em>(K-1)$$，所以总的FlOPs为$$2<em>M</em>N<em>K$$，带入1024，计算量约为2.15GFLOPs。第二步计算数据传输量，假设总共是3次搬运，读入A，读入B，写回C。总传输量为$$3</em>M<em>N</em>4$$，乘4是因为FP32为4字节。带入1024后约为12.58MB。由此可得计算强度：$$I = \frac{2.15 <em> 10^{9}FLOPs}{12.58</em>10^{20}Byte} ≈ 170.91FLOPs/Byte$$
-硬件的峰值带宽B乘计算强度$$I$$,可得$$B<em>I=760GB/s</em>170.91FLOPs/Byte≈129.89TFLOPs$$
-129.89TFLOPs远高于硬件实际的浮点计算次数30TFLOPs，P取两者最小值$$min(P_{peak}​, B×I)$$。可知，在该例中，矩阵乘法实际受限于硬件的计算能力，想要加速矩阵乘法，应该考虑增加计算资源。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2025/07/05/%E8%B5%B0%E8%BF%9B%E5%A4%A7%E6%A8%A1%E5%9E%8B(%E4%B8%89)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1243,6 +1142,123 @@ Visualization</a>，该网站将大模型做了可视化。
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://thesinger.github.io/2023/03/09/tmux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="bob">
+      <meta itemprop="description" content="邮箱：1633748848@qq.com，记录生活和成长的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bob的个人空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/09/tmux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">tmux常用指令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-09 17:01:35" itemprop="dateCreated datePublished" datetime="2023-03-09T17:01:35+08:00">2023-03-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-20 17:17:59" itemprop="dateModified" datetime="2023-03-20T17:17:59+08:00">2023-03-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">指令</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/03/09/tmux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/03/09/tmux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>428</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="启动与退出">启动与退出</h1>
+<p>输入<code>tmux</code>，进入tmux,按<code>Ctlr + d</code>或者输入<code>exit</code>，退出tmux窗口。退出后该对话将不存在。</p>
+<h1 id="查看tmux窗口历史输出">查看tmux窗口历史输出</h1>
+<p>先进入tmux会话，然后按<code>Ctlr + b</code>，接着按<code>[</code>，即可进入查看模式，方向键滚动显示。按<code>q</code>退出查看模式。</p>
+<h1 id="会话管理">会话管理</h1>
+<h2 id="新建会话">新建会话</h2>
+<p>第一个启动的 Tmux
+窗口，编号是0，第二个窗口的编号是1，以此类推。以下指令可新建会话并为会话起名。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/09/tmux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1314,7 +1330,7 @@ Visualization</a>，该网站将大模型做了可视化。
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1364,13 +1380,13 @@ Visualization</a>，该网站将大模型做了可视化。
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">27k</span>
+    <span title="站点总字数">26k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">25 分钟</span>
+    <span title="站点阅读时长">24 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
